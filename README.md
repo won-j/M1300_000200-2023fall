@@ -1,21 +1,10 @@
-# M1399.000200 Advanced Statistical Computing @ SNU 2021
+# M1399.000200 Advanced Statistical Computing @ SNU 2023
 
-This is the course website for M1399.000200: "Advanced Statistical Computing " at Seoul National University in Fall 2021. Assignments, lecture notes, and open source code will all be available on this website.
+This is the course website for M1399.000200: "Advanced Statistical Computing " at Seoul National University in Fall 2023. Assignments, lecture notes, and open source code will all be available on this website.
 
 ## Announcements
 
-* 2021-11-21: HW3 has been posted. Due is 2021-12-13.
-* 2021-11-13: HW3 Q5 instruction has changed.
-* 2021-11-01: HW3 has been posted. Due is 2021-11-16.
-* 2021-10-16: Lecture notes on eigenvalue decomposition has been updated. Please downloaded the latest version.
-* 2021-10-17: Project instruction has been posted. Proposal due is ~~2021-10-25~~ 2021-10-28.
-* 2021-09-25: Minor errors in lecture notes on Computer Arithmetic has been fixed. Thanks Taeyoung!
-* 2021-09-24: HW2 has been posted. Due is 2021-10-21.
-* 2021-09-23: HW1, Q4 has been clarified. Use the update notebook.
-* 2021-09-22: Lecture notes on Computer Arithmetic and Algorithms have been updated. If you downloaded the notes before, try it again.
-* 2021-09-08: Homework 1 has been posted.
-* 2021-09-07: R package microbenchmark has been installed to the interactive lecture note `Julia Intro 1`. Now you can run all the cells online.
-* 2021-09-01: course will be given online. Mostly real-time, but sometimes pre-recorded.
+TBA
 
 ## Instructor 
 
@@ -23,7 +12,7 @@ Joong-Ho (Johann) Won
 
 **Email**: wonj AT stats DOT snu DOT ac DOT kr
 
-**Class Time**: Mondays/Wednesdays 11:00 - 12:15 @ online
+**Class Time**: T/Th 11:00 - 12:15 @ 25-210
 
 **Office Hours**: By appointment.
 
@@ -65,21 +54,21 @@ The following schedule is tentative, and is subject to change over the course.
 
 | Week | Topic | Assignment | Due Date |
 | --- | --- | --- | --- | 
-| 1 (9/1)      | [Introduction](./lectures/01-intro/intro.html), [Julia Intro I](https://mybinder.org/v2/gh/won-j/M1399_000200-2021fall/master?filepath=lectures/02-juliaintro/juliaintro1.ipynb) [[notebook](./lectures/02-juliaintro/juliaintro1.ipynb)] | [Jupyter](https://mybinder.org/v2/gh/won-j/M1399_000200-2021fall/master?filepath=lectures/02-juliaintro/jupyter.ipynb) [[notebook](./lectures/02-juliaintro/jupyter.ipynb)], [Plotting](https://mybinder.org/v2/gh/won-j/M1399_000200-2021fall/master?filepath=lectures/02-juliaintro/juliaplots.ipynb) [[notebook](./lectures/02-juliaintro/juliaplots.ipynb)]  |  | 
-| 2 (9/6, 9/8)     | [Julia Intro II](https://mybinder.org/v2/gh/won-j/M1399_000200-2021fall/master?filepath=lectures/02-juliaintro/juliaintro2.ipynb) [[notebook](./lectures/02-juliaintro/juliaintro2.ipynb)] | [Homework 1](./hw/hw1/hw01.html) [[notebook](./hw/hw1/hw01.ipynb)] | 2021-09-26 |
-| 3 (9/13, 9/15)    | [Computer Arithmetic](https://mybinder.org/v2/gh/won-j/M1399_000200-2021fall/master?filepath=lectures/03-arith/arith.ipynb) [[notebook](./lectures/03-arith/arith.ipynb)] |  |  |
-| 4 (9/20, 9/22)    | [Computer Arithmetic](https://mybinder.org/v2/gh/won-j/M1399_000200-2021fall/master?filepath=lectures/03-arith/arith.ipynb) [[notebook](./lectures/03-arith/arith.ipynb)], [Algorithm](https://mybinder.org/v2/gh/won-j/M1399_000200-2021fall/master?filepath=lectures/04-algo/algo.ipynb) [[notebook](./lectures/04-algo/algo.ipynb)] |  |  |
-| 5 (9/27, 9/29)    | Numerical Linear Algebra: [intro](https://mybinder.org/v2/gh/won-j/M1399_000200-2021fall/master?filepath=lectures/05-numalgintro/numalgintro.ipynb) [[notebook](./lectures/05-numalgintro/numalgintro.ipynb)], [triangular systems](https://mybinder.org/v2/gh/won-j/M1399_000200-2021fall/master?filepath=lectures/06-trisys/trisys.ipynb) [[notebook](./lectures/06-trisys/trisys.ipynb)] | [Homework 2](./hw/hw2/hw02.html) [[notebook](./hw/hw2/hw02.ipynb)] | 2021-10-21  |
-| 6 (10/4, 10/6)    | [LU decomposition](https://mybinder.org/v2/gh/won-j/M1399_000200-2021fall/master?filepath=lectures/07-gelu/gelu.ipynb) [[notebook](./lectures/07-gelu/gelu.ipynb)] [[example](./lectures/07-gelu/gelu.pdf)], [Cholesky](https://mybinder.org/v2/gh/won-j/M1399_000200-2021fall/master?filepath=lectures/08-chol/chol.ipynb) [[notebook](./lectures/08-chol/chol.ipynb)] |  |  |
-| 7 (10/11, 10/13)  | [QR decomposition](https://mybinder.org/v2/gh/won-j/M1399_000200-2021fall/master?filepath=lectures/09-qr/qr.ipynb) [[notebook](./lectures/09-qr/qr.ipynb)]  | [Final Project Proposal](./project/project.md)  | 2021-10-28  |
-| 8 (10/18, 10/20)  | [Linear regression](https://mybinder.org/v2/gh/won-j/M1399_000200-2021fall/master?filepath=lectures/10-linreg/linreg.ipynb) [[notebook](./lectures/10-linreg/linreg.ipynb)], [Iterative methods](https://mybinder.org/v2/gh/won-j/M1399_000200-2021fall/master?filepath=lectures/11-iterative/iterative.ipynb) [[notebook](./lectures/11-iterative/iterative.ipynb)] |  |  |
-| 9 (10/24, 10/27)  | [Eigenvalue and singular value decompositions](https://mybinder.org/v2/gh/won-j/M1399_000200-2021fall/master?filepath=lectures/13-eigsvd/eigsvd.ipynb) [[notebook](./lectures/13-eigsvd/eigsvd.ipynb)] | [Homework 3](./hw/hw3/hw03.html) [[notebook](./hw/hw3/hw03.ipynb)] | 2021-11-16 |
-| 10 (11/1, 11/3)   | [Introduction to mathematical optimization](./lectures/14-optmintro/optmintro.html), [Optimization in Julia](https://mybinder.org/v2/gh/won-j/M1399_000200-2021fall/master?filepath=lectures/15-juliaopt/juliaopt.ipynb) [[notebook]](./lectures/15-juliaopt/juliaopt.ipynb) |  |  |
-| 11 (11/8, 11/10) | [Linear programming](https://mybinder.org/v2/gh/won-j/M1399_000200-2021fall/master?filepath=lectures/16-lp/lp.ipynb) [[notebook]](./lectures/16-lp/lp.ipynb) |  |  |
-| 12 (11/15, 11/17) | [Quadratic programming](https://mybinder.org/v2/gh/won-j/M1399_000200-2021fall/master?filepath=lectures/17-qp/qp.ipynb) [[notebook]](./lectures/17-qp/qp.ipynb), [Second-order cone programming](https://mybinder.org/v2/gh/won-j/M1399_000200-2021fall/master?filepath=lectures/18-socp/socp.ipynb) [[notebook]](./lectures/18-socp/socp.ipynb), [Semidefinite programming](https://mybinder.org/v2/gh/won-j/M1399_000200-2021fall/master?filepath=lectures/19-sdp/sdp.ipynb) [[notebook]](./lectures/19-sdp/sdp.ipynb) |  |  |
-| 13 (11/22, 11/24) | [Geometric programming](https://mybinder.org/v2/gh/won-j/M1399_000200-2021fall/master?filepath=lectures/20-gp/gp.ipynb) [[notebook]](./lectures/20-gp/gp.ipynb), [KKT conditions](./lectures/21-kkt/kkt.html) | [Homework 4](./hw/hw4/hw04.html) [[notebook](./hw/hw4/hw04.ipynb)] [[corrupted image]](./hw/hw4/barbara128noisy.png) | 2021-12-13 |
-| 14 (11/29, 12/1)   | [Newton's method I](https://mybinder.org/v2/gh/won-j/M1399_000200-2021fall/master?filepath=lectures/22-newton/newton.ipynb) [[notebook]](./lectures/22-newton/newton.ipynb), [MM algorithms](./lectures/24-mm/mm.html), [First-order methods](./lectures/23-first/first.html) |  |  |
-| 15 (12/6, 12/8)  | [Newton's method II](./lectures/22-newton/newton_constr.html), Final Projects      |  |  |
-| 16 (12/13)  | Final Projects      |  |  |
+| 1 (9/5, 9/7)      | [Introduction](./lectures/01-intro/intro.html), [Julia Intro I]<!--(https://mybinder.org/v2/gh/won-j/M1399_000200-2023fall/master?filepath=lectures/02-juliaintro/juliaintro1.ipynb)--> <!--[[notebook](./lectures/02-juliaintro/juliaintro1.ipynb)]--> | [Jupyter]<!--(https://mybinder.org/v2/gh/won-j/M1399_000200-2023fall/master?filepath=lectures/02-juliaintro/jupyter.ipynb)--> <!--[[notebook](./lectures/02-juliaintro/jupyter.ipynb)]-->, [Plotting]<!--(https://mybinder.org/v2/gh/won-j/M1399_000200-2023fall/master?filepath=lectures/02-juliaintro/juliaplots.ipynb)--> <!--[[notebook](./lectures/02-juliaintro/juliaplots.ipynb)]-->  |  | 
+| 2 (9/12, 9/14)    | [Computer Arithmetic]<!--(https://mybinder.org/v2/gh/won-j/M1399_000200-2023fall/master?filepath=lectures/03-arith/arith.ipynb)--> <!--[[notebook](./lectures/03-arith/arith.ipynb)]--> | [Homework 1]<!--(./hw/hw1/hw01.html)--> <!--[[notebook](./hw/hw1/hw01.ipynb)]--> |  |
+| 3 (9/19, 9/21)    | [Computer Arithmetic]<!--(https://mybinder.org/v2/gh/won-j/M1399_000200-2023fall/master?filepath=lectures/03-arith/arith.ipynb)--> <!--[[notebook](./lectures/03-arith/arith.ipynb)]-->, [Algorithm]<!--(https://mybinder.org/v2/gh/won-j/M1399_000200-2023fall/master?filepath=lectures/04-algo/algo.ipynb)--> <!--[[notebook](./lectures/04-algo/algo.ipynb)]--> |  |  |
+| 4 (9/26, ~~9/28~~)    | Numerical Linear Algebra: [intro]<!--(https://mybinder.org/v2/gh/won-j/M1399_000200-2023fall/master?filepath=lectures/05-numalgintro/numalgintro.ipynb)--> <!--[[notebook](./lectures/05-numalgintro/numalgintro.ipynb)]-->, [triangular systems]<!--(https://mybinder.org/v2/gh/won-j/M1399_000200-2023fall/master?filepath=lectures/06-trisys/trisys.ipynb)--> <!--[[notebook](./lectures/06-trisys/trisys.ipynb)]--> | [Homework 2]<!--(./hw/hw2/hw02.html)--> <!--[[notebook](./hw/hw2/hw02.ipynb)]--> | 2023-10-20  |
+| 5 (~~10/3~~, 10/5)    | [LU decomposition]<!--(https://mybinder.org/v2/gh/won-j/M1399_000200-2023fall/master?filepath=lectures/07-gelu/gelu.ipynb)--> <!--[[notebook](./lectures/07-gelu/gelu.ipynb)]--> [[example]<!--(./lectures/07-gelu/gelu.pdf)]-->, [Cholesky]<!--(https://mybinder.org/v2/gh/won-j/M1399_000200-2023fall/master?filepath=lectures/08-chol/chol.ipynb)--> <!--[[notebook](./lectures/08-chol/chol.ipynb)]--> |  |  |
+| 6 (10/10, 10/12)  | [QR decomposition]<!--(https://mybinder.org/v2/gh/won-j/M1399_000200-2023fall/master?filepath=lectures/09-qr/qr.ipynb)--> <!--[[notebook](./lectures/09-qr/qr.ipynb)]-->  | [Final Project Proposal]<!--(./project/project.md)-->  | 2023-10-27  |
+| 7 (10/17, 10/19)  | [Linear regression]<!--(https://mybinder.org/v2/gh/won-j/M1399_000200-2023fall/master?filepath=lectures/10-linreg/linreg.ipynb)--> <!--[[notebook](./lectures/10-linreg/linreg.ipynb)]-->, [Iterative methods]<!--(https://mybinder.org/v2/gh/won-j/M1399_000200-2023fall/master?filepath=lectures/11-iterative/iterative.ipynb)--> <!--[[notebook](./lectures/11-iterative/iterative.ipynb)]--> |  |  |
+| 8 (10/24, 10/26)  | [Eigenvalue and singular value decompositions]<!--(https://mybinder.org/v2/gh/won-j/M1399_000200-2023fall/master?filepath=lectures/13-eigsvd/eigsvd.ipynb)--> <!--[[notebook](./lectures/13-eigsvd/eigsvd.ipynb)]--> | [Homework 3]<!--(./hw/hw3/hw03.html)--> <!--[[notebook](./hw/hw3/hw03.ipynb)]--> | 2023-11-15 |
+| 9 (10/31, 11/2)   | [Introduction to mathematical optimization]<!--(./lectures/14-optmintro/optmintro.html)-->, [Optimization in Julia]<!--(https://mybinder.org/v2/gh/won-j/M1399_000200-2023fall/master?filepath=lectures/15-juliaopt/juliaopt.ipynb)--> <!--[[notebook](./lectures/15-juliaopt/juliaopt.ipynb)--> |  |  |
+| 10 (11/7, 11/9) | [Linear programming]<!--(https://mybinder.org/v2/gh/won-j/M1399_000200-2023fall/master?filepath=lectures/16-lp/lp.ipynb)--> <!--[[notebook](./lectures/16-lp/lp.ipynb)--> |  |  |
+| 11 (11/14, 11/16) | [Quadratic programming]<!--(https://mybinder.org/v2/gh/won-j/M1399_000200-2023fall/master?filepath=lectures/17-qp/qp.ipynb)--> <!--[[notebook](./lectures/17-qp/qp.ipynb)-->, [Second-order cone programming]<!--(https://mybinder.org/v2/gh/won-j/M1399_000200-2023fall/master?filepath=lectures/18-socp/socp.ipynb)--> <!--[[notebook](./lectures/18-socp/socp.ipynb)]-->, [Semidefinite programming]<!--(https://mybinder.org/v2/gh/won-j/M1399_000200-2023fall/master?filepath=lectures/19-sdp/sdp.ipynb)--> <!--[[notebook](./lectures/19-sdp/sdp.ipynb)]--> |  |  |
+| 12 (11/21, 11/23) | [Geometric programming]<!--(https://mybinder.org/v2/gh/won-j/M1399_000200-2023fall/master?filepath=lectures/20-gp/gp.ipynb)--> <!--[[notebook](./lectures/20-gp/gp.ipynb)-->, [KKT conditions]<!--(./lectures/21-kkt/kkt.html)--> | [Homework 4]<!--(./hw/hw4/hw04.html)--> <!--[[notebook](./hw/hw4/hw04.ipynb)]--> <!--[[corrupted image]](./hw/hw4/barbara128noisy.png)--> | 2023-12-12 |
+| 13 (11/28, 11/30)   | [Newton's method I]<!--(https://mybinder.org/v2/gh/won-j/M1399_000200-2023fall/master?filepath=lectures/22-newton/newton.ipynb)--> <!--[[notebook](./lectures/22-newton/newton.ipynb)]-->, [MM algorithms]<!--(./lectures/24-mm/mm.html)-->, [First-order methods]<!--(./lectures/23-first/first.html)--> |  |  |
+| 14 (12/5, 12/7)  | [Newton's method II]<!--(./lectures/22-newton/newton_constr.html)-->      |  |  |
+| 15 (12/12, 12/14)  | Final Projects      |  |  |
 
 
+<!--| 2 (9/6, 9/8)     | [Julia Intro II](https://mybinder.org/v2/gh/won-j/M1399_000200-2023fall/master?filepath=lectures/02-juliaintro/juliaintro2.ipynb) [[notebook](./lectures/02-juliaintro/juliaintro2.ipynb)] | [Homework 1](./hw/hw1/hw01.html) [[notebook](./hw/hw1/hw01.ipynb)] | 2023-09-26 | -->
