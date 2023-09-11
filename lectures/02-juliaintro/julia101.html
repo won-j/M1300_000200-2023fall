@@ -11,7 +11,6 @@
   <meta name="generator" content="quarto-1.3.450">
 
   <meta name="author" content="Joong-Ho Won">
-  <meta name="dcterms.date" content="2023-01-01">
   <title>A Brief Introduction to Julia</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -385,6 +384,9 @@
       margin-right: 0; 
     }
   </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+  <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 </head>
 <body class="quarto-dark">
   <div class="reveal">
@@ -405,7 +407,7 @@ Joong-Ho Won
     </div>
 </div>
 
-  <p class="date">2023-01-01</p>
+  <p class="date">September 2023</p>
 </section>
 <section>
 <section id="a-quick-cs101" class="title-slide slide level1 center">
@@ -1655,6 +1657,375 @@ Joong-Ho Won
   0.656987   0.989358   0.412118
   0.412118  -0.544021  -0.99999
  -0.99999   -0.536573   0.420167</code></pre>
+</div>
+</div>
+</section>
+<section id="type-system" class="slide level2">
+<h2>Type system</h2>
+<ul>
+<li><p>Every variable in Julia has a type.</p></li>
+<li><p>Everything is a subtype of the abstract type <code>Any</code>.</p></li>
+<li><p>An abstract type defines a set of types.</p></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<ul>
+<li>Consider types in Julia that are a <code>Number</code>:</li>
+</ul>
+<p><img src="1280px-Type-hierarchy-for-julia-numbers.png" width="1280" align="center"> <a href="https://en.wikibooks.org/wiki/Introducing_Julia/Types" class="uri">https://en.wikibooks.org/wiki/Introducing_Julia/Types</a></p>
+</section>
+<section class="slide level2">
+
+<ul>
+<li>We can explore type hierarchy with <code>typeof()</code>, <code>supertype()</code>, and <code>subtypes()</code>.</li>
+</ul>
+<div class="cell" data-execution_count="59">
+<div class="sourceCode cell-code" id="cb176"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb176-1"><a href="#cb176-1"></a><span class="fu">typeof</span>(<span class="fl">1.0</span>), <span class="fu">typeof</span>(<span class="fl">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="59">
+<pre><code>(Float64, Int64)</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="60">
+<div class="sourceCode cell-code" id="cb178"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb178-1"><a href="#cb178-1"></a><span class="fu">supertype</span>(<span class="dt">Float64</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="60">
+<pre><code>AbstractFloat</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="61">
+<div class="sourceCode cell-code" id="cb180"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb180-1"><a href="#cb180-1"></a><span class="fu">subtypes</span>(<span class="dt">AbstractFloat</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="61">
+<pre><code>4-element Vector{Any}:
+ BigFloat
+ Float16
+ Float32
+ Float64</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="62">
+<div class="sourceCode cell-code" id="cb182"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb182-1"><a href="#cb182-1"></a><span class="co"># Is Float64 a subtype of AbstractFloat?</span></span>
+<span id="cb182-2"><a href="#cb182-2"></a><span class="dt">Float64</span> <span class="op">&lt;:</span><span class="dt"> AbstractFloat</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="62">
+<pre><code>true</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="63">
+<div class="sourceCode cell-code" id="cb184"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb184-1"><a href="#cb184-1"></a><span class="co"># On 64bit machine, Int == Int64</span></span>
+<span id="cb184-2"><a href="#cb184-2"></a><span class="dt">Int</span> <span class="op">==</span> <span class="dt">Int64</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="63">
+<pre><code>true</code></pre>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="cell" data-execution_count="64">
+<div class="sourceCode cell-code" id="cb186"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb186-1"><a href="#cb186-1"></a><span class="co"># convert to Float64</span></span>
+<span id="cb186-2"><a href="#cb186-2"></a><span class="fu">convert</span>(<span class="dt">Float64</span>, <span class="fl">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="64">
+<pre><code>1.0</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="65">
+<div class="sourceCode cell-code" id="cb188"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb188-1"><a href="#cb188-1"></a><span class="co"># same as</span></span>
+<span id="cb188-2"><a href="#cb188-2"></a><span class="fu">Float64</span>(<span class="fl">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="65">
+<pre><code>1.0</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="66">
+<div class="sourceCode cell-code" id="cb190"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb190-1"><a href="#cb190-1"></a><span class="co"># Float32 vector</span></span>
+<span id="cb190-2"><a href="#cb190-2"></a>x <span class="op">=</span> <span class="fu">randn</span>(<span class="dt">Float32</span>, <span class="fl">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="66">
+<pre><code>5-element Vector{Float32}:
+ -0.6000053
+  0.57898515
+ -1.9387985
+ -0.04535096
+  0.9868613</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="67">
+<div class="sourceCode cell-code" id="cb192"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb192-1"><a href="#cb192-1"></a><span class="co"># convert to Float64</span></span>
+<span id="cb192-2"><a href="#cb192-2"></a><span class="fu">convert</span>(<span class="dt">Array</span>{<span class="dt">Float64</span>}, x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="67">
+<pre><code>5-element Vector{Float64}:
+ -0.6000053286552429
+  0.5789851546287537
+ -1.9387985467910767
+ -0.04535096138715744
+  0.9868612885475159</code></pre>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="cell" data-execution_count="68">
+<div class="sourceCode cell-code" id="cb194"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb194-1"><a href="#cb194-1"></a><span class="co"># same as</span></span>
+<span id="cb194-2"><a href="#cb194-2"></a><span class="fu">Float64</span>.(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="68">
+<pre><code>5-element Vector{Float64}:
+ -0.6000053286552429
+  0.5789851546287537
+ -1.9387985467910767
+ -0.04535096138715744
+  0.9868612885475159</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="69">
+<div class="sourceCode cell-code" id="cb196"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb196-1"><a href="#cb196-1"></a><span class="co"># convert Float64 to Int64</span></span>
+<span id="cb196-2"><a href="#cb196-2"></a><span class="fu">convert</span>(<span class="dt">Int</span>, <span class="fl">1.0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="69">
+<pre><code>1</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="70">
+<div class="sourceCode cell-code" id="cb198"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb198-1"><a href="#cb198-1"></a><span class="fu">convert</span>(<span class="dt">Int</span>, <span class="fl">1.5</span>) <span class="co"># should use round(1.5)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>LoadError: InexactError: Int64(1.5)</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="71">
+<div class="sourceCode cell-code" id="cb200"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb200-1"><a href="#cb200-1"></a><span class="fu">round</span>(<span class="dt">Int</span>, <span class="fl">1.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="71">
+<pre><code>2</code></pre>
+</div>
+</div>
+</section>
+<section id="multiple-dispatch" class="slide level2">
+<h2>Multiple dispatch</h2>
+<ul>
+<li><p><a href="https://en.wikipedia.org/wiki/Multiple_dispatch">Multiple dispatch</a> is a feature of some programming languages in which a function or method can be dynamically dispatched based on the run time (dynamic) type or, in the more general case, some other attribute of more than one of its arguments.</p></li>
+<li><p>Multiple dispatch lies in the core of Julia design. It allows built-in and user-defined functions to be overloaded for different combinations of argument types.</p></li>
+<li><p>In Juila, methods belong to functions, called <strong>generic functions</strong>.</p></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<ul>
+<li>Let’s consider a simple “doubling” function:</li>
+</ul>
+<div class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb202"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb202-1"><a href="#cb202-1"></a><span class="fu">g</span>(x) <span class="op">=</span> x <span class="op">+</span> x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="2">
+<pre><code>g (generic function with 1 method)</code></pre>
+</div>
+</div>
+<ul>
+<li>This definition is too broad, since some things, e.g., strings, cannot be added.</li>
+</ul>
+<div class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb204"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb204-1"><a href="#cb204-1"></a><span class="fu">g</span>(<span class="fl">1.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<pre><code>3.0</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb206"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb206-1"><a href="#cb206-1"></a><span class="fu">g</span>(<span class="st">"hello world"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>LoadError: MethodError: no method matching +(::String, ::String)
+String concatenation is performed with [36m*[39m (See also: https://docs.julialang.org/en/v1/manual/strings/#man-concatenation).
+
+[0mClosest candidates are:
+[0m  +(::Any, ::Any, [91m::Any[39m, [91m::Any...[39m)
+[0m[90m   @[39m [90mBase[39m [90m[4moperators.jl:578[24m[39m</code></pre>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="cell" data-tags="[]" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb208"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb208-1"><a href="#cb208-1"></a><span class="fu">g</span>(x<span class="op">::</span><span class="dt">Float64</span>) <span class="op">=</span> x <span class="op">+</span> x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<pre><code>g (generic function with 2 methods)</code></pre>
+</div>
+</div>
+<ul>
+<li>This definition is correct but too restrictive, since any <code>Number</code> can be added.</li>
+</ul>
+<div class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb210"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb210-1"><a href="#cb210-1"></a><span class="fu">g</span>(x<span class="op">::</span><span class="dt">Number</span>) <span class="op">=</span> x <span class="op">+</span> x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<pre><code>g (generic function with 3 methods)</code></pre>
+</div>
+</div>
+<ul>
+<li><p>This definition will automatically work on the entire type tree above!</p></li>
+<li><p>A lot nicer than</p></li>
+</ul>
+<div class="sourceCode" id="cb212"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb212-1"><a href="#cb212-1"></a><span class="kw">function</span> <span class="fu">g</span>(x)</span>
+<span id="cb212-2"><a href="#cb212-2"></a>    <span class="cf">if</span> <span class="fu">isa</span>(x, <span class="dt">Number</span>)</span>
+<span id="cb212-3"><a href="#cb212-3"></a>        <span class="cf">return</span> x <span class="op">+</span> x</span>
+<span id="cb212-4"><a href="#cb212-4"></a>    <span class="cf">else</span></span>
+<span id="cb212-5"><a href="#cb212-5"></a>        <span class="fu">throw</span>(<span class="fu">ArgumentError</span>(<span class="st">"x should be a number"</span>))</span>
+<span id="cb212-6"><a href="#cb212-6"></a>    <span class="cf">end</span></span>
+<span id="cb212-7"><a href="#cb212-7"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section class="slide level2">
+
+<p><code>methods(func)</code> displays all methods defined for <code>func</code>.</p>
+<div class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb213"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb213-1"><a href="#cb213-1"></a><span class="fu">methods</span>(g)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+# 3 methods for generic function <b>g</b> from [35mMain[39m:<ul><li> g(x::<b>Float64</b>) in Main at In[6]:1</li> <li> g(x::<b>Number</b>) in Main at In[7]:1</li> <li> g(x) in Main at In[2]:1</li> </ul>
+</div>
+</div>
+<p>When calling a function with multiple definitions, Julia will search from the narrowest signature to the broadest signature.</p>
+</section>
+<section class="slide level2">
+
+<ul>
+<li><code>@which func(x)</code> marco tells which method is being used for argument signature <code>x</code>.</li>
+</ul>
+<div class="cell" data-execution_count="78">
+<div class="sourceCode cell-code" id="cb214"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb214-1"><a href="#cb214-1"></a><span class="co"># an Int64 input</span></span>
+<span id="cb214-2"><a href="#cb214-2"></a><span class="pp">@which</span> <span class="fu">g</span>(<span class="fl">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="78">
+g(x::<b>Number</b>) in Main at In[76]:1
+</div>
+</div>
+<div class="cell" data-execution_count="79">
+<div class="sourceCode cell-code" id="cb215"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb215-1"><a href="#cb215-1"></a><span class="pp">@which</span> <span class="fu">g</span>(<span class="fl">1.0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="79">
+g(x::<b>Float64</b>) in Main at In[75]:1
+</div>
+</div>
+<div class="cell" data-execution_count="80">
+<div class="sourceCode cell-code" id="cb216"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb216-1"><a href="#cb216-1"></a><span class="co"># a Vector{Float64} input</span></span>
+<span id="cb216-2"><a href="#cb216-2"></a><span class="pp">@which</span> <span class="fu">g</span>(<span class="fu">randn</span>(<span class="fl">5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="80">
+g(x) in Main at In[72]:1
+</div>
+</div>
+<ul>
+<li>R also makes use of generic functions and multiple dispatch (see <a href="http://adv-r.had.co.nz/OO-essentials.html#s3" class="uri">http://adv-r.had.co.nz/OO-essentials.html#s3</a>), but it is not fully optimized.</li>
+</ul>
+</section>
+<section id="jit" class="slide level2">
+<h2>JIT</h2>
+<ul>
+<li>Julia’s efficiency results from its capability to <em>infer the types</em> of all variables within a function and then call LLVM (compiler) to generate optimized machine code at run-time.</li>
+</ul>
+<p>Consider the <code>g</code> (doubling) function defined earlier. This function will work on <strong>any</strong> type which has a method for <code>+</code>.</p>
+<div class="cell" data-execution_count="81">
+<div class="sourceCode cell-code" id="cb217"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb217-1"><a href="#cb217-1"></a><span class="fu">g</span>(<span class="fl">2</span>), <span class="fu">g</span>(<span class="fl">2.0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="81">
+<pre><code>(4, 4.0)</code></pre>
+</div>
+</div>
+<p><strong>Step 1</strong>: Parse Julia code into AST.</p>
+<div class="cell" data-execution_count="82">
+<div class="sourceCode cell-code" id="cb219"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb219-1"><a href="#cb219-1"></a><span class="pp">@code_lowered</span> <span class="fu">g</span>(<span class="fl">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="82">
+<div class="ansi-escaped-output">
+<pre>CodeInfo(
+<span class="ansi-bright-black-fg">1 ─</span> %1 = x + x
+<span class="ansi-bright-black-fg">└──</span>      return %1
+)</pre>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p><strong>Step 2</strong>: Type inference according to input type.</p>
+<div class="cell" data-execution_count="83">
+<div class="sourceCode cell-code" id="cb220"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb220-1"><a href="#cb220-1"></a><span class="pp">@code_warntype</span> <span class="fu">g</span>(<span class="fl">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Variables
+  #self#::Core.Const(g)
+  x::Int64
+
+Body::Int64
+1 ─ %1 = (x + x)::Int64
+└──      return %1</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="84">
+<div class="sourceCode cell-code" id="cb222"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb222-1"><a href="#cb222-1"></a><span class="pp">@code_warntype</span> <span class="fu">g</span>(<span class="fl">2.0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Variables
+  #self#::Core.Const(g)
+  x::Float64
+
+Body::Float64
+1 ─ %1 = (x + x)::Float64
+└──      return %1</code></pre>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p><strong>Step 3</strong>: Compile into <strong>LLVM bytecode</strong></p>
+<div class="cell" data-execution_count="85">
+<div class="sourceCode cell-code" id="cb224"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb224-1"><a href="#cb224-1"></a><span class="pp">@code_llvm</span> <span class="fu">g</span>(<span class="fl">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>;  @ In[76]:1 within `g'
+define i64 @julia_g_4079(i64 signext %0) {
+top:
+; ┌ @ int.jl:87 within `+'
+   %1 = shl i64 %0, 1
+; └
+  ret i64 %1
+}</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="86">
+<div class="sourceCode cell-code" id="cb226"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb226-1"><a href="#cb226-1"></a><span class="pp">@code_llvm</span> <span class="fu">g</span>(<span class="fl">2.0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>;  @ In[75]:1 within `g'
+define double @julia_g_4104(double %0) {
+top:
+; ┌ @ float.jl:326 within `+'
+   %1 = fadd double %0, %0
+; └
+  ret double %1
+}</code></pre>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>We didn’t provide a type annotation. But different LLVM code gets generated depending on the argument type!</p>
+<ul>
+<li><p>In R or Python, <code>g(2)</code> and <code>g(2.0)</code> would use the same code for both.</p></li>
+<li><p>In Julia, <code>g(2)</code> and <code>g(2.0)</code> dispatch to optimized code for <code>Int64</code> and <code>Float64</code>, respectively.</p></li>
+</ul>
+<p>For integer input <code>x</code>, LLVM compiler is smart enough to know <code>x + x</code> is simple shifting <code>x</code> by 1 bit, which is faster than addition.</p>
+</section>
+<section class="slide level2">
+
+<ul>
+<li><strong>Step 4</strong>: Lowest level is the <strong>assembly code</strong>, which is machine dependent.</li>
+</ul>
+<div class="cell" data-execution_count="87">
+<div class="sourceCode cell-code" id="cb228"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb228-1"><a href="#cb228-1"></a><span class="pp">@code_native</span> <span class="fu">g</span>(<span class="fl">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    .section    __TEXT,__text,regular,pure_instructions
+; ┌ @ In[76]:1 within `g'
+; │┌ @ int.jl:87 within `+'
+    leaq    (%rdi,%rdi), %rax
+; │└
+    retq
+    nopw    %cs:(%rax,%rax)
+; └</code></pre>
+</div>
+</div>
+<p>1st instruction adds the content of the general purpose 64-bit register (a small memory inside the CPU) RDI to itself, and load the result into another register RAX. The addition here is the integer arithmetic.</p>
+</section>
+<section class="slide level2">
+
+<div class="cell" data-execution_count="88">
+<div class="sourceCode cell-code" id="cb230"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb230-1"><a href="#cb230-1"></a><span class="pp">@code_native</span> <span class="fu">g</span>(<span class="fl">2.0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    .section    __TEXT,__text,regular,pure_instructions
+; ┌ @ In[75]:1 within `g'
+; │┌ @ float.jl:326 within `+'
+    vaddsd  %xmm0, %xmm0, %xmm0
+; │└
+    retq
+    nopw    %cs:(%rax,%rax)
+; └</code></pre>
 </div>
 </div>
 <div class="footer footer-default">
