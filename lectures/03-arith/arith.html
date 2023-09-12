@@ -1,0 +1,1811 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="arith_files/libs/clipboard/clipboard.min.js"></script>
+<script src="arith_files/libs/quarto-html/tabby.min.js"></script>
+<script src="arith_files/libs/quarto-html/popper.min.js"></script>
+<script src="arith_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="arith_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="arith_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="arith_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="arith_files/libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.3.450">
+
+  <meta name="author" content="Joong-Ho Won">
+  <title>Computer Arithmetic</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="arith_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="arith_files/libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+      }
+    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+    div.sourceCode
+      { color: #f8f8f2;  }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #f8f8f2; } /* Normal */
+    code span.al { color: #f07178; background-color: #2a0f15; font-weight: bold; } /* Alert */
+    code span.an { color: #d4d0ab; } /* Annotation */
+    code span.at { color: #00e0e0; } /* Attribute */
+    code span.bn { color: #d4d0ab; } /* BaseN */
+    code span.bu { color: #abe338; } /* BuiltIn */
+    code span.cf { color: #ffa07a; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #abe338; } /* Char */
+    code span.cn { color: #ffd700; } /* Constant */
+    code span.co { color: #f8f8f2; font-style: italic; } /* Comment */
+    code span.cv { color: #ffd700; } /* CommentVar */
+    code span.do { color: #f8f8f2; } /* Documentation */
+    code span.dt { color: #ffa07a; } /* DataType */
+    code span.dv { color: #d4d0ab; } /* DecVal */
+    code span.er { color: #f07178; text-decoration: underline; } /* Error */
+    code span.ex { color: #00e0e0; font-weight: bold; } /* Extension */
+    code span.fl { color: #d4d0ab; } /* Float */
+    code span.fu { color: #ffa07a; } /* Function */
+    code span.im { color: #abe338; } /* Import */
+    code span.in { color: #d4d0ab; } /* Information */
+    code span.kw { color: #ffa07a; font-weight: bold; } /* Keyword */
+    code span.op { color: #ffa07a; } /* Operator */
+    code span.ot { color: #00e0e0; } /* Other */
+    code span.pp { color: #dcc6e0; } /* Preprocessor */
+    code span.re { color: #00e0e0; background-color: #f8f8f2; } /* RegionMarker */
+    code span.sc { color: #abe338; } /* SpecialChar */
+    code span.ss { color: #abe338; } /* SpecialString */
+    code span.st { color: #abe338; } /* String */
+    code span.va { color: #00e0e0; } /* Variable */
+    code span.vs { color: #abe338; } /* VerbatimString */
+    code span.wa { color: #dcc6e0; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="arith_files/libs/revealjs/dist/theme/quarto.css">
+  <link href="arith_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="arith_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="arith_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="arith_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+
+  .callout {
+    margin-top: 1em;
+    margin-bottom: 1em;  
+    border-radius: .25rem;
+  }
+
+  .callout.callout-style-simple { 
+    padding: 0em 0.5em;
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+    display: flex;
+  }
+
+  .callout.callout-style-default {
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+  }
+
+  .callout .callout-body-container {
+    flex-grow: 1;
+  }
+
+  .callout.callout-style-simple .callout-body {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-style-default .callout-body {
+    font-size: 0.9rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-titled.callout-style-simple .callout-body {
+    margin-top: 0.2em;
+  }
+
+  .callout:not(.callout-titled) .callout-body {
+      display: flex;
+  }
+
+  .callout:not(.no-icon).callout-titled.callout-style-simple .callout-content {
+    padding-left: 1.6em;
+  }
+
+  .callout.callout-titled .callout-header {
+    padding-top: 0.2em;
+    margin-bottom: -0.2em;
+  }
+
+  .callout.callout-titled .callout-title  p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+    
+  .callout.callout-titled.callout-style-simple .callout-content  p {
+    margin-top: 0;
+  }
+
+  .callout.callout-titled.callout-style-default .callout-content  p {
+    margin-top: 0.7em;
+  }
+
+  .callout.callout-style-simple div.callout-title {
+    border-bottom: none;
+    font-size: .9rem;
+    font-weight: 600;
+    opacity: 75%;
+  }
+
+  .callout.callout-style-default  div.callout-title {
+    border-bottom: none;
+    font-weight: 600;
+    opacity: 85%;
+    font-size: 0.9rem;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-default div.callout-content {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-simple .callout-icon::before {
+    height: 1rem;
+    width: 1rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 1rem 1rem;
+  }
+
+  .callout.callout-style-default .callout-icon::before {
+    height: 0.9rem;
+    width: 0.9rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 0.9rem 0.9rem;
+  }
+
+  .callout-title {
+    display: flex
+  }
+    
+  .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  .callout.no-icon::before {
+    display: none !important;
+  }
+
+  .callout.callout-titled .callout-body > .callout-content > :last-child {
+    margin-bottom: 0.5rem;
+  }
+
+  .callout.callout-titled .callout-icon::before {
+    margin-top: .5rem;
+    padding-right: .5rem;
+  }
+
+  .callout:not(.callout-titled) .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  /* Callout Types */
+
+  div.callout-note {
+    border-left-color: #4582ec !important;
+  }
+
+  div.callout-note .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEU0lEQVRYCcVXTWhcVRQ+586kSUMMxkyaElstCto2SIhitS5Ek8xUKV2poatCcVHtUlFQk8mbaaziwpWgglJwVaquitBOfhQXFlqlzSJpFSpIYyXNjBNiTCck7x2/8/LeNDOZxDuEkgOXe++553zfefee+/OYLOXFk3+1LLrRdiO81yNqZ6K9cG0P3MeFaMIQjXssE8Z1JzLO9ls20MBZX7oG8w9GxB0goaPrW5aNMp1yOZIa7Wv6o2ykpLtmAPs/vrG14Z+6d4jpbSKuhdcSyq9wGMPXjonwmESXrriLzFGOdDBLB8Y6MNYBu0dRokSygMA/mrun8MGFN3behm6VVAwg4WR3i6FvYK1T7MHo9BK7ydH+1uurECoouk5MPRyVSBrBHMYwVobG2aOXM07sWrn5qgB60rc6mcwIDJtQrnrEr44kmy+UO9r0u9O5/YbkS9juQckLed3DyW2XV/qWBBB3ptvI8EUY3I9p/67OW+g967TNr3Sotn3IuVlfMLVnsBwH4fsnebJvyGm5GeIUA3jljERmrv49SizPYuq+z7c2H/jlGC+Ghhupn/hcapqmcudB9jwJ/3jvnvu6vu5lVzF1fXyZuZZ7U8nRmVzytvT+H3kilYvH09mLWrQdwFSsFEsxFVs5fK7A0g8gMZjbif4ACpKbjv7gNGaD8bUrlk8x+KRflttr22JEMRUbTUwwDQScyzPgedQHZT0xnx7ujw2jfVfExwYHwOsDTjLdJ2ebmeQIlJ7neo41s/DrsL3kl+W2lWvAga0tR3zueGr6GL78M3ifH0rGXrBC2aAR8uYcIA5gwV8zIE8onoh8u0Fca/ciF7j1uOzEnqcIm59sEXoGc0+z6+H45V1CvAvHcD7THztu669cnp+L0okAeIc6zjbM/24LgGM1gZk7jnRu1aQWoU9sfUOuhrmtaPIO3YY1KLLWZaEO5TKUbMY5zx8W9UJ6elpLwKXbsaZ4EFl7B4bMtDv0iRipKoDQT2sNQI9b1utXFdYisi+wzZ/ri/1m7QfDgEuvgUUEIJPq3DhX/5DWNqIXDOweC2wvIR90Oq3lDpdMIgD2r0dXvGdsEW5H6x6HLRJYU7C69VefO1x8Gde1ZFSJLfWS1jbCnhtOPxmpfv2LXOA2Xk2tvnwKKPFuZ/oRmwBwqRQDcKNeVQkYcOjtWVBuM/JuYw5b6isojIkYxyYAFn5K7ZBF10fea52y8QltAg6jnMqNHFBmGkQ1j+U43HMi2xMar1Nv0zGsf1s8nUsmUtPOOrbFIR8bHFDMB5zL13Gmr/kGlCkUzedTzzmzsaJXhYawnA3UmARpiYj5ooJZiUoxFRtK3X6pgNPv+IZVPcnwbOl6f+aBaO1CNvPW9n9LmCp01nuSaTRF2YxHqZ8DYQT6WsXT+RD6eUztwYLZ8rM+rcPxamv1VQzFUkzFXvkiVrySGQgJNvXHJAxiU3/NwiC03rSf05VBaPtu/Z7/B8Yn/w7eguloAAAAAElFTkSuQmCC');
+  }
+
+  div.callout-note.callout-style-default .callout-title {
+    background-color: #dae6fb
+  }
+
+  div.callout-important {
+    border-left-color: #d9534f !important;
+  }
+
+  div.callout-important .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEKklEQVRYCcVXTWhcVRS+575MJym48A+hSRFr00ySRQhURRfd2HYjk2SSTokuBCkU2o0LoSKKraKIBTcuFCoidGFD08nkBzdREbpQ1EDNIv8qSGMFUboImMSZd4/f9zJv8ibJMC8xJQfO3HPPPef7zrvvvnvviIkpC9nsw0UttFunbUhpFzFtarSd6WJkStVMw5xyVqYTvkwfzuf/5FgtkVoB0729j1rjXwThS7Vio+Mo6DNnvLfahoZ+i/o32lULuJ3NNiz7q6+pyAUkJaFF6JwaM2lUJlV0MlnQn5aTRbEu0SEqHUa0A4AdiGuB1kFXRfVyg5d87+Dg4DL6m2TLAub60ilj7A1Ec4odSAc8X95sHh7+ZRPCFo6Fnp7HfU/fBng/hi10CjCnWnJjsxvDNxWw0NfV6Rv5GgP3I3jGWXumdTD/3cbEOP2ZbOZp69yniG3FQ9z1jD7bnBu9Fc2tKGC2q+uAJOQHBDRiZX1x36o7fWBs7J9ownbtO+n0/qWkvW7UPIfc37WgT6ZGR++EOJyeQDSb9UB+DZ1G6DdLDzyS+b/kBCYGsYgJbSQHuThGKRcw5xdeQf8YdNHsc6ePXrlSYMBuSIAFTGAtQo+VuALo4BX83N190NWZWbynBjhOHsmNfFWLeL6v+ynsA58zDvvAC8j5PkbOcXCMg2PZFk3q8MjI7WAG/Dp9AwP7jdGBOOQkAvlFUB+irtm16I1Zw9YBcpGTGXYmk3kQIC/Cds55l+iMI3jqhjAuaoe+am2Jw5GT3Nbz3CkE12NavmzN5+erJW7046n/CH1RO/RVa8lBLozXk9uqykkGAyRXLWlLv5jyp4RFsG5vGVzpDLnIjTWgnRy2Rr+tDKvRc7Y8AyZq10jj8DqXdnIRNtFZb+t/ZRtXcDiVnzpqx8mPcDWxgARUqx0W1QB9MeUZiNrV4qP+Ehc+BpNgATsTX8ozYKL2NtFYAHc84fG7ndxUPr+AR/iQSns7uSUufAymwDOb2+NjK27lEFocm/EE2WpyIy/Hi66MWuMKJn8RvxIcj87IM5Vh9663ziW36kR0HNenXuxmfaD8JC7tfKbrhFr7LiZCrMjrzTeGx+PmkosrkNzW94ObzwocJ7A1HokLolY+AvkTiD/q1H0cN48c5EL8Crkttsa/AXQVDmutfyku0E7jShx49XqV3MFK8IryDhYVbj7Sj2P2eBxwcXoe8T8idsKKPRcnZw1b+slFTubwUwhktrfnAt7J++jwQtLZcm3sr9LQrjRzz6cfMv9aLvgmnAGvpoaGLxM4mAEaLV7iAzQ3oU0IvD5x9ix3yF2RAAuYAOO2f7PEFWCXZ4C9Pb2UsgDeVnFSpbFK7/IWu7TPTvBqzbGdCHOJQSxiEjt6IyZmxQyEJHv6xyQsYk//moVFsN2zP6fRImjfq7/n/wFDguUQFNEwugAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-important.callout-style-default .callout-title {
+    background-color: #f7dddc
+  }
+
+  div.callout-warning {
+    border-left-color: #f0ad4e !important;
+  }
+
+  div.callout-warning .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAETklEQVRYCeVWW2gcVRg+58yaTUnizqbipZeX4uWhBEniBaoUX1Ioze52t7sRq6APio9V9MEaoWlVsFasRq0gltaAPuxms8lu0gcviE/FFOstVbSIxgcv6SU7EZqmdc7v9+9mJtNks51NTUH84ed889/PP+cmxP+d5FIbMJmNbpREu4WUkiTtCicKny0l1pIKmBzovF2S+hIJHX8iEu3hZJ5lNZGqyRrGSIQpq15AzF28jgpeY6yk6GVdrfFqdrD6Iw+QlB8g0YS2g7dyQmXM/IDhBhT0UCiRf59lfqmmDvzRt6kByV/m4JjtzuaujMUM2c5Z2d6JdKrRb3K2q6mA+oYVz8JnDdKPmmNthzkAk/lN63sYPgevrguc72aZX/L9C6x09GYyxBgCX4NlvyGUHOKELlm5rXeR1kchuChJt4SSwyddZRXgvwMGvYo4QSlk3/zkHD8UHxwVJA6zjZZqP8v8kK8OWLnIZtLyCAJagYC4rTGW/9Pqj92N/c+LUaAj27movwbi19tk/whRCIE7Q9vyI6yvRpftAKVTdUjOW40X3h5OXsKCdmFcx0xlLJoSuQngnrJe7Kcjm4OMq9FlC7CMmScQANuNvjfP3PjGXDBaUQmbp296S5L4DrpbrHN1T87ZVEZVCzg1FF0Ft+dKrlLukI+/c9ENo+TvlTDbYFvuKPtQ9+l052rXrgKoWkDAFnvh0wTOmYn8R5f4k/jN/fZiCM1tQx9jQQ4ANhqG4hiL0qIFTGViG9DKB7GYzgubnpofgYRwO+DFjh0Zin2m4b/97EDkXkc+f6xYAPX0KK2I/7fUQuwzuwo/L3AkcjugPNixC8cHf0FyPjWlItmLxWw4Ou9YsQCr5fijMGoD/zpdRy95HRysyXA74MWOnscpO4j2y3HAVisw85hX5+AFBRSHt4ShfLFkIMXTqyKFc46xdzQM6XbAi702a7sy04J0+feReMFKp5q9esYLCqAZYw/k14E/xcLLsFElaornTuJB0svMuJINy8xkIYuL+xPAlWRceH6+HX7THJ0djLUom46zREu7tTkxwmf/FdOZ/sh6Q8qvEAiHpm4PJ4a/doJe0gH1t+aHRgCzOvBvJedEK5OFE5jpm4AGP2a8Dxe3gGJ/pAutug9Gp6he92CsSsWBaEcxGx0FHytmIpuqGkOpldqNYQK8cSoXvd+xLxXADw0kf6UkJNFtdo5MOgaLjiQOQHcn+A6h5NuL2s0qsC2LOM75PcF3yr5STuBSAcGG+meA14K/CI21HcS4LBT6tv0QAh8Dr5l93AhZzG5ZJ4VxAqdZUEl9z7WJ4aN+svMvwHHL21UKTd1mqvChH7/Za5xzXBBKrUcB0TQ+Ulgkfbi/H/YT5EptrGzsEK7tR1B7ln9BBwckYfMiuSqklSznIuoIIOM42MQO+QnduCoFCI0bpkzjCjddHPN/F+2Yu+sd9bKNpVwHhbS3LluK/0zgfwD0xYI5dXuzlQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-warning.callout-style-default .callout-title {
+    background-color: #fcefdc
+  }
+
+  div.callout-tip {
+    border-left-color: #02b875 !important;
+  }
+
+  div.callout-tip .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAADr0lEQVRYCe1XTWgTQRj9ZjZV8a9SPIkKgj8I1bMHsUWrqYLVg4Ue6v9BwZOxSYsIerFao7UiUryIqJcqgtpimhbBXoSCVxUFe9CTiogUrUp2Pt+3aUI2u5vdNh4dmMzOzHvvezuz8xNFM0mjnbXaNu1MvFWRXkXEyE6aYOYJpdW4IXuA4r0fo8qqSMDBU0v1HJUgVieAXxzCsdE/YJTdFcVIZQNMyhruOMJKXYFoLfIfIvVIMWdsrd+Rpd86ZmyzzjJmLStqRn0v8lzkb4rVIXvnpScOJuAn2ACC65FkPzEdEy4TPWRLJ2h7z4cArXzzaOdKlbOvKKX25Wl00jSnrwVxAg3o4dRxhO13RBSdNvH0xSARv3adTXbBdTf64IWO2vH0LT+cv4GR1DJt+DUItaQogeBX/chhbTBxEiZ6gftlDNXTrvT7co4ub5A6gp9HIcHvzTa46OS5fBeP87Qm0fQkr4FsYgVQ7Qg+ZayaDg9jhg1GkWj8RG6lkeSacrrHgDaxdoBiZPg+NXV/KifMuB6//JmYH4CntVEHy/keA6x4h4CU5oFy8GzrBS18cLJMXcljAKB6INjWsRcuZBWVaS3GDrqB7rdapVIeA+isQ57Eev9eCqzqOa81CY05VLd6SamW2wA2H3SiTbnbSxmzfp7WtKZkqy4mdyAlGx7ennghYf8voqp9cLSgKdqNfa6RdRsAAkPwRuJZNbpByn+RrJi1RXTwdi8RQF6ymDwGMAtZ6TVE+4uoKh+MYkcLsT0Hk8eAienbiGdjJHZTpmNjlbFJNKDVAp2fJlYju6IreQxQ08UJDNYdoLSl6AadO+fFuCQqVMB1NJwPm69T04Wv5WhfcWyfXQB+wXRs1pt+nCknRa0LVzSA/2B+a9+zQJadb7IyyV24YAxKp2Jqs3emZTuNnKxsah+uabKbMk7CbTgJx/zIgQYErIeTKRQ9yD9wxVof5YolPHqaWo7TD6tJlh7jQnK5z2n3+fGdggIOx2kaa2YI9QWarc5Ce1ipNWMKeSG4DysFF52KBmTNMmn5HqCFkwy34rDg05gDwgH3bBi+sgFhN/e8QvRn8kbamCOhgrZ9GJhFDgfcMHzFb6BAtjKpFhzTjwv1KCVuxHvCbsSiEz4CANnj84cwHdFXAbAOJ4LTSAawGWFn5tDhLMYz6nWeU2wJfIhmIJBefcd/A5FWQWGgrWzyORZ3Q6HuV+Jf0Bj+BTX69fm1zWgK7By1YTXchFDORywnfQ7GpzOo6S+qECrsx2ifVQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-tip.callout-style-default .callout-title {
+    background-color: #ccf1e3
+  }
+
+  div.callout-caution {
+    border-left-color: #fd7e14 !important;
+  }
+
+  div.callout-caution .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAACV0lEQVRYCdVWzWoUQRCuqp2ICBLJXgITZL1EfQDBW/bkzUMUD7klD+ATSHBEfAIfQO+iXsWDxJsHL96EHAwhgzlkg8nBg25XWb0zIb0zs9muYYWkoKeru+vn664fBqElyZNuyh167NXJ8Ut8McjbmEraKHkd7uAnAFku+VWdb3reSmRV8PKSLfZ0Gjn3a6Xlcq9YGb6tADjn+lUfTXtVmaZ1KwBIvFI11rRXlWlatwIAAv2asaa9mlB9wwygiDX26qaw1yYPzFXg2N1GgG0FMF8Oj+VIx7E/03lHx8UhvYyNZLN7BwSPgekXXLribw7w5/c8EF+DBK5idvDVYtEEwMeYefjjLAdEyQ3M9nfOkgnPTEkYU+sxMq0BxNR6jExrAI31H1rzvLEfRIdgcv1XEdj6QTQAS2wtstEALLG1yEZ3QhH6oDX7ExBSFEkFINXH98NTrme5IOaaA7kIfiu2L8A3qhH9zRbukdCqdsA98TdElyeMe5BI8Rs2xHRIsoTSSVFfCFCWGPn9XHb4cdobRIWABNf0add9jakDjQJpJ1bTXOJXnnRXHRf+dNL1ZV1MBRCXhMbaHqGI1JkKIL7+i8uffuP6wVQAzO7+qVEbF6NbS0LJureYcWXUUhH66nLR5rYmva+2tjRFtojkM2aD76HEGAD3tPtKM309FJg5j/K682ywcWJ3PASCcycH/22u+Bh7Aa0ehM2Fu4z0SAE81HF9RkB21c5bEn4Dzw+/qNOyXr3DCTQDMBOdhi4nAgiFDGCinIa2owCEChUwD8qzd03PG+qdW/4fDzjUMcE1ZpIAAAAASUVORK5CYII=');
+  }
+
+  div.callout-caution.callout-style-default .callout-title {
+    background-color: #ffe5d0
+  }
+
+  </style>
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-dark">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Computer Arithmetic</h1>
+  <p class="subtitle">Advanced Statistical Computing</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Joong-Ho Won 
+</div>
+        <p class="quarto-title-affiliation">
+            Seoul National University
+          </p>
+    </div>
+</div>
+
+  <p class="date">September 2023</p>
+</section>
+<section class="slide level2">
+
+<div class="cell" data-tags="[]" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">versioninfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Julia Version 1.9.3
+Commit bed2cd540a1 (2023-08-24 14:43 UTC)
+Build Info:
+  Official https://julialang.org/ release
+Platform Info:
+  OS: macOS (x86_64-apple-darwin22.4.0)
+  CPU: 8 × Intel(R) Core(TM) i5-8279U CPU @ 2.40GHz
+  WORD_SIZE: 64
+  LIBM: libopenlibm
+  LLVM: libLLVM-14.0.6 (ORCJIT, skylake)
+  Threads: 2 on 8 virtual cores</code></pre>
+</div>
+</div>
+<div class="cell" data-tags="[]" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1"></a><span class="im">using</span> <span class="bu">Pkg</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="bu">Pkg</span>.<span class="fu">activate</span>(<span class="fu">pwd</span>())</span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="bu">Pkg</span>.<span class="fu">instantiate</span>()</span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="bu">Pkg</span>.<span class="fu">status</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Status `~/Dropbox/class/M1399.000200/2023/M1300_000200-2023fall/lectures/03-arith/Project.toml` (empty project)</code></pre>
+</div>
+</div>
+</section>
+<section>
+<section id="computer-arithmetics" class="title-slide slide level1 center">
+<h1>Computer arithmetics</h1>
+
+</section>
+<section id="units-of-computer-storage" class="slide level2">
+<h2>Units of computer storage</h2>
+<ul>
+<li>Humans use decimal digits (why?)</li>
+<li>Computers use binary digits (why?)
+<ul>
+<li><em>Bit</em> = binary digit (coined by statistician <a href="https://en.wikipedia.org/wiki/Bit#History">John Tukey</a>).<br>
+</li>
+<li><em>byte</em> = 8 bits.</li>
+<li>KB = kilobyte = <span class="math inline">\(10^3\)</span> bytes; KiB = kibibyte = <span class="math inline">\(2^{10}\)</span> bytes.<br>
+</li>
+<li>MB = megabyte = <span class="math inline">\(10^6\)</span> bytes; MiB = mebibyte = <span class="math inline">\(2^{20}\)</span> bytes.</li>
+<li>GB = gigabyte = <span class="math inline">\(10^9\)</span> bytes. Typical RAM size.<br>
+</li>
+<li>TB = terabyte = <span class="math inline">\(10^{12}\)</span> bytes. Typical hard drive size.</li>
+<li>PB = petabyte = <span class="math inline">\(10^{15}\)</span> bytes.</li>
+</ul></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<ul>
+<li>(cont’d)
+<ul>
+<li>EB = exabyte = <span class="math inline">\(10^{18}\)</span> bytes.</li>
+<li>ZB = zetabyte = <span class="math inline">\(10^{21}\)</span> bytes. <a href="https://www.linkedin.com/pulse/state-data-2023-health-tech-industry-fadwa-ouardani/">Size of all healthcare data in 2018 is ~33 ZB.</a></li>
+</ul></li>
+</ul>
+<p>Julia function <code>Base.summarysize</code> shows the amount of memory (in bytes) used by an object.</p>
+<div class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1"></a>x <span class="op">=</span> <span class="fu">rand</span>(<span class="fl">100</span>, <span class="fl">100</span>)</span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="bu">Base</span>.<span class="fu">summarysize</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<pre><code>80040</code></pre>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p><code>varinfo()</code> function prints all variables in workspace and their sizes.</p>
+<div class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">varinfo</span>() <span class="co"># similar to Matlab whos()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">name</th>
+<th style="text-align: right;">size</th>
+<th style="text-align: left;">summary</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Base</td>
+<td style="text-align: right;"></td>
+<td style="text-align: left;">Module</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Core</td>
+<td style="text-align: right;"></td>
+<td style="text-align: left;">Module</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Main</td>
+<td style="text-align: right;"></td>
+<td style="text-align: left;">Module</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">x</td>
+<td style="text-align: right;">78.164 KiB</td>
+<td style="text-align: left;">100×100 Matrix{Float64}</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="storage-of-characters" class="slide level2">
+<h2>Storage of Characters</h2>
+<ul>
+<li>Plain text files are stored in the form of characters: <code>.jl</code>, <code>.r</code>, <code>.c</code>, <code>.cpp</code>, <code>.ipynb</code>, <code>.html</code>, <code>.tex</code>, …<br>
+</li>
+<li>ASCII (American Code for Information Interchange): 7 bits, only <span class="math inline">\(2^7=128\)</span> characters.</li>
+</ul>
+<div class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># integers 0, 1, ..., 127 and corresponding ascii character</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>[<span class="fl">0</span><span class="op">:</span><span class="fl">127</span> <span class="fu">Char</span>.(<span class="fl">0</span><span class="op">:</span><span class="fl">127</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<pre><code>128×2 Matrix{Any}:
+   0  '\0'
+   1  '\x01'
+   2  '\x02'
+   3  '\x03'
+   4  '\x04'
+   5  '\x05'
+   6  '\x06'
+   7  '\a'
+   8  '\b'
+   9  '\t'
+  10  '\n'
+  11  '\v'
+  12  '\f'
+   ⋮  
+ 116  't'
+ 117  'u'
+ 118  'v'
+ 119  'w'
+ 120  'x'
+ 121  'y'
+ 122  'z'
+ 123  '{'
+ 124  '|'
+ 125  '}'
+ 126  '~'
+ 127  '\x7f'</code></pre>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<ul>
+<li>Extended ASCII: 8 bits, <span class="math inline">\(2^8=256\)</span> characters.</li>
+</ul>
+<div class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># integers 128, 129, ..., 255 and corresponding extended ascii character</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="co"># show(STDOUT, "text/plain", [128:255 Char.(128:255)])</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a>[<span class="fl">128</span><span class="op">:</span><span class="fl">255</span> <span class="fu">Char</span>.(<span class="fl">128</span><span class="op">:</span><span class="fl">255</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<pre><code>128×2 Matrix{Any}:
+ 128  '\u80'
+ 129  '\u81'
+ 130  '\u82'
+ 131  '\u83'
+ 132  '\u84'
+ 133  '\u85'
+ 134  '\u86'
+ 135  '\u87'
+ 136  '\u88'
+ 137  '\u89'
+ 138  '\u8a'
+ 139  '\u8b'
+ 140  '\u8c'
+   ⋮  
+ 244  'ô'
+ 245  'õ'
+ 246  'ö'
+ 247  '÷'
+ 248  'ø'
+ 249  'ù'
+ 250  'ú'
+ 251  'û'
+ 252  'ü'
+ 253  'ý'
+ 254  'þ'
+ 255  'ÿ'</code></pre>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<ul>
+<li>Unicode: UTF-8, UTF-16 and UTF-32 support many more characters including foreign characters; last 7 digits conform to ASCII.
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/UTF-8">UTF-8</a> is the current dominant character encoding on internet.</li>
+</ul></li>
+<li>Julia supports the full range of UTF-8 characters. You can type many Unicode math symbols by typing the backslashed LaTeX symbol name followed by tab.</li>
+</ul>
+<div class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># \beta-&lt;tab&gt;</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a>β <span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="co"># \beta-&lt;tab&gt;-\hat-&lt;tab&gt;</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a>β̂ <span class="op">=</span> <span class="fl">0.0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<pre><code>0.0</code></pre>
+</div>
+</div>
+<p>See <a href="https://docs.julialang.org/en/v1/manual/unicode-input/" class="uri">https://docs.julialang.org/en/v1/manual/unicode-input/</a></p>
+</section>
+<section id="integers-fixed-point-number-system" class="slide level2">
+<h2>Integers: fixed-point number system</h2>
+<ul>
+<li>Fixed-point number system is a computer model for integers <span class="math inline">\(\mathbb{Z}\)</span>.
+<ul>
+<li>Remember that computer memory is <em>finite</em> whereas the cardinality of <span class="math inline">\(\mathbb{Z}\)</span> is (countably) infinite.</li>
+<li><em>Any</em> representation of numbers in computer <em>has to be</em> an approximation.</li>
+</ul></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<ul>
+<li>Number of bits M to represent integers and method of representing negative numbers vary from system to system.
+<ul>
+<li>The <code>integer</code> type in R has <span class="math inline">\(M=32\)</span> (packages such as ‘bit64’ support 64 bit integers).
+<ul>
+<li><a href="https://www.r-bloggers.com/r-in-a-64-bit-world/" class="uri">https://www.r-bloggers.com/r-in-a-64-bit-world/</a></li>
+</ul></li>
+<li>C has (<code>unsigned</code>) <code>char</code>, <code>int</code>, <code>short</code>, <code>long</code> (and <code>long long</code>), whose sizes depend on the machine.</li>
+<li>Matlab has <code>(u)int8</code>, <code>(u)int16</code>, <code>(u)int32</code>, <code>(u)int64</code>.</li>
+</ul></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<ul>
+<li>Julia has even more integer types:</li>
+</ul>
+<div class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb14-1"><a href="#cb14-1"></a><span class="im">using</span> <span class="bu">GraphRecipes</span>, <span class="bu">Plots</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="co"># Source http://www.breloff.com/Graphs/</span></span>
+<span id="cb14-3"><a href="#cb14-3"></a><span class="fu">gr</span>(size<span class="op">=</span>(<span class="fl">600</span>, <span class="fl">400</span>))</span>
+<span id="cb14-4"><a href="#cb14-4"></a><span class="fu">theme</span>(<span class="op">:</span>default)</span>
+<span id="cb14-5"><a href="#cb14-5"></a></span>
+<span id="cb14-6"><a href="#cb14-6"></a><span class="fu">plot</span>(<span class="dt">Integer</span>, method<span class="op">=:</span>tree, fontsize<span class="op">=</span><span class="fl">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="arith_files/figure-revealjs/cell-9-output-1.svg" class="r-stretch"></section>
+<section class="slide level2">
+
+<h3 id="unsigned-integers">Unsigned integers</h3>
+<ul>
+<li>Model for <span class="math inline">\(\mathbb{N} \cup \{0\}\)</span>.</li>
+<li>For unsigned integers, the range is <span class="math inline">\([0,2^M-1]\)</span>.</li>
+<li>Julia functions <code>typemin(T)</code> and <code>typemax(T)</code> give the lowest and highest representable number of a type <code>T</code> respectively</li>
+</ul>
+<div class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb15-1"><a href="#cb15-1"></a><span class="cf">for</span> t <span class="kw">in</span> [<span class="dt">UInt8</span>, <span class="dt">UInt16</span>, <span class="dt">UInt32</span>, <span class="dt">UInt64</span>, <span class="dt">UInt128</span>]</span>
+<span id="cb15-2"><a href="#cb15-2"></a>    <span class="fu">println</span>(t, <span class="ch">'\t'</span>, <span class="fu">typemin</span>(t), <span class="ch">'\t'</span>, <span class="fu">typemax</span>(t))</span>
+<span id="cb15-3"><a href="#cb15-3"></a><span class="cf">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>UInt8   0   255
+UInt16  0   65535
+UInt32  0   4294967295
+UInt64  0   18446744073709551615
+UInt128 0   340282366920938463463374607431768211455</code></pre>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="signed-integers">Signed integers</h3>
+<ul>
+<li><p>Model of <span class="math inline">\(\mathbb{Z}\)</span>. Can do subtraction.</p></li>
+<li><p>First bit (“most significant bit” or MSB) is the sign bit.</p>
+<ul>
+<li><code>0</code> for nonnegative numbers</li>
+<li><code>1</code> for negative numbers</li>
+</ul></li>
+<li><p><strong>Two’s complement representation</strong> for negative numbers.</p>
+<ul>
+<li>Set the sign bit to 1<br>
+</li>
+<li>Negate (<code>0</code>-&gt;<code>1</code>, <code>1</code>-&gt;<code>0</code>) the remaining bits</li>
+<li>Add to <code>1</code> to the result<br>
+</li>
+<li>Two’s complement representation of a negative integer <span class="math inline">\(x\)</span> is the same as the unsigned integer <span class="math inline">\(2^M - x\)</span>.</li>
+</ul></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<div class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb17-1"><a href="#cb17-1"></a><span class="pp">@show</span> <span class="fu">typeof</span>(<span class="fl">5</span>)</span>
+<span id="cb17-2"><a href="#cb17-2"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="fl">5</span>)</span>
+<span id="cb17-3"><a href="#cb17-3"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="op">-</span><span class="fl">5</span>)</span>
+<span id="cb17-4"><a href="#cb17-4"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="fu">UInt64</span>(<span class="fu">Int128</span>(<span class="fl">2</span>)<span class="op">^</span><span class="fl">64</span> <span class="op">-</span> <span class="fl">5</span>)) <span class="op">==</span> <span class="fu">bitstring</span>(<span class="op">-</span><span class="fl">5</span>)</span>
+<span id="cb17-5"><a href="#cb17-5"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="fl">2</span> <span class="op">*</span> <span class="fl">5</span>) <span class="co"># shift bits of 5 to the left</span></span>
+<span id="cb17-6"><a href="#cb17-6"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="fl">2</span> <span class="op">*</span> <span class="op">-</span><span class="fl">5</span>); <span class="co"># shift bits of -5 to left</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>typeof(5) = Int64
+bitstring(5) = "0000000000000000000000000000000000000000000000000000000000000101"
+bitstring(-5) = "1111111111111111111111111111111111111111111111111111111111111011"
+bitstring(UInt64(Int128(2) ^ 64 - 5)) == bitstring(-5) = true
+bitstring(2 * 5) = "0000000000000000000000000000000000000000000000000000000000001010"
+bitstring(2 * -5) = "1111111111111111111111111111111111111111111111111111111111110110"</code></pre>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<ul>
+<li>Two’s complement representation respects modular arithmetic nicely. Addition of any two signed integers are just bitwise addition, possibly modulo <span class="math inline">\(2^M\)</span>
+<ul>
+<li><span class="math inline">\(M=4\)</span> case:</li>
+</ul></li>
+</ul>
+<p><img src="http://users.dickinson.edu/~braught/courses/cs251f02/classes/images/twosCompWheel.png" width="400" align="center"><br>
+Source: <a href="http://users.dickinson.edu/~braught/courses/cs251f02/classes/notes07.html">Signed Binary Numbers, Subtraction and Overflow</a></p>
+</section>
+<section class="slide level2">
+
+<ul>
+<li><strong>Range</strong> of representable integers by <span class="math inline">\(M\)</span>-bit <strong>signed integer</strong> is <span class="math inline">\([-2^{M-1},2^{M-1}-1]\)</span>:</li>
+</ul>
+<div class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb19-1"><a href="#cb19-1"></a><span class="fu">typemin</span>(<span class="dt">Int64</span>), <span class="fu">typemax</span>(<span class="dt">Int64</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="11">
+<pre><code>(-9223372036854775808, 9223372036854775807)</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb21-1"><a href="#cb21-1"></a><span class="cf">for</span> T <span class="kw">in</span> [<span class="dt">Int8</span>, <span class="dt">Int16</span>, <span class="dt">Int32</span>, <span class="dt">Int64</span>, <span class="dt">Int128</span>]</span>
+<span id="cb21-2"><a href="#cb21-2"></a>    <span class="fu">println</span>(T, <span class="ch">'\t'</span>, <span class="fu">typemin</span>(T), <span class="ch">'\t'</span>, <span class="fu">typemax</span>(T))</span>
+<span id="cb21-3"><a href="#cb21-3"></a><span class="cf">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Int8    -128    127
+Int16   -32768  32767
+Int32   -2147483648 2147483647
+Int64   -9223372036854775808    9223372036854775807
+Int128  -170141183460469231731687303715884105728    170141183460469231731687303715884105727</code></pre>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="bigint"><code>BigInt</code></h3>
+<p>Julia <code>BigInt</code> type is arbitrary precision.</p>
+<div class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb23-1"><a href="#cb23-1"></a><span class="pp">@show</span> <span class="fu">typemax</span>(<span class="dt">Int128</span>)</span>
+<span id="cb23-2"><a href="#cb23-2"></a><span class="pp">@show</span> <span class="fu">typemax</span>(<span class="dt">Int128</span>) <span class="op">+</span> <span class="fl">1</span> <span class="co"># overflow!</span></span>
+<span id="cb23-3"><a href="#cb23-3"></a><span class="pp">@show</span> <span class="fu">BigInt</span>(<span class="fu">typemax</span>(<span class="dt">Int128</span>)) <span class="op">+</span> <span class="fl">1</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>typemax(Int128) = 170141183460469231731687303715884105727
+typemax(Int128) + 1 = -170141183460469231731687303715884105728
+BigInt(typemax(Int128)) + 1 = 170141183460469231731687303715884105728</code></pre>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="overflow-in-integer-arithmetic">Overflow in integer arithmetic</h3>
+<p>R reports <code>NA</code> for integer overflow. <strong>Julia outputs the result according to modular arithmetic.</strong></p>
+<div class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb25-1"><a href="#cb25-1"></a><span class="pp">@show</span> <span class="fu">typemax</span>(<span class="dt">Int32</span>)</span>
+<span id="cb25-2"><a href="#cb25-2"></a><span class="pp">@show</span> <span class="fu">typemax</span>(<span class="dt">Int32</span>) <span class="op">+</span> <span class="fu">Int32</span>(<span class="fl">1</span>); <span class="co"># modular arithmetics!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>typemax(Int32) = 2147483647
+typemax(Int32) + Int32(1) = -2147483648</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb27-1"><a href="#cb27-1"></a><span class="im">using</span> <span class="bu">RCall</span></span>
+<span id="cb27-2"><a href="#cb27-2"></a><span class="co"># The largest integer R can hold</span></span>
+<span id="cb27-3"><a href="#cb27-3"></a>R<span class="st">"""</span></span>
+<span id="cb27-4"><a href="#cb27-4"></a><span class="st">.Machine</span><span class="sc">$</span>integer<span class="st">.max </span></span>
+<span id="cb27-5"><a href="#cb27-5"></a><span class="st">"""</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="15">
+<pre><code>RObject{IntSxp}
+[1] 2147483647</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb29-1"><a href="#cb29-1"></a>R<span class="st">"""</span></span>
+<span id="cb29-2"><a href="#cb29-2"></a><span class="st">as.integer(big+1)</span></span>
+<span id="cb29-3"><a href="#cb29-3"></a><span class="st">"""</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="17">
+<pre><code>RObject{IntSxp}
+[1] NA</code></pre>
+</div>
+</div>
+</section>
+<section id="real-numbers-floating-point-number-system" class="slide level2">
+<h2>Real numbers: floating-point number system</h2>
+<p>Floating-point number system is a computer model for the real line <span class="math inline">\(\mathbb{R}\)</span>.</p>
+<ul>
+<li><p>Most computer systems adopt the <a href="https://en.wikipedia.org/wiki/IEEE_floating_point">IEEE 754 standard</a>, established in 1985, for floating-point arithmetics.<br>
+For the history, see an <a href="http://www.cs.berkeley.edu/~wkahan/ieee754status/754story.html">interview with William Kahan</a>.</p></li>
+<li><p>In the scientific notation, a real number is represented as <span class="math display">\[
+\pm d_1.d_2d_3 \cdots d_p \times b^e, \quad 0 \le d_i &lt; b.
+\]</span> Humans use the <em>base</em> <span class="math inline">\(b=10\)</span> and <em>digits</em> <span class="math inline">\(d_i=0, 1, \dotsc, 9\)</span>.<br>
+In computer, the base is <span class="math inline">\(b=2\)</span> and the digits <span class="math inline">\(d_i\)</span> are 0 or 1. The <em>exponent</em> <span class="math inline">\(e\)</span> is between <span class="math inline">\(e_{\min}\)</span> and <span class="math inline">\(e_{\max}\)</span>.</p></li>
+<li><p><strong>Normalized</strong> vs <strong>denormalized</strong> numbers. For example, decimal number 18 is <span class="math display">\[ +1.0010 \times 2^4 \quad (\text{normalized})\]</span> or, equivalently, <span class="math display">\[ +0.1001 \times 2^5 \quad (\text{denormalized}).\]</span></p></li>
+<li><p>In the floating-number system, computer stores</p>
+<ul>
+<li>sign bit<br>
+</li>
+<li>the <em>fraction</em> (or <em>mantissa</em>, or <em>significand</em>) of the <strong>normalized</strong> representation (except some special cases)</li>
+<li>the actual exponent plus a <em>bias</em>
+<ul>
+<li>Because <span class="math inline">\(e_{\min}\)</span> is likely negative and <span class="math inline">\(e_{\max}\)</span> is positive, the exponent requires a sign. IEEE 754 handles the sign of the exponent by subtracting the bias from the value of the exponent evaluated as an unsigned integer.</li>
+</ul></li>
+</ul></li>
+<li><p>Julia provides <code>Float16</code> (half precision, implemented in software using <code>Float32</code>), <code>Float32</code> (single precision), <code>Float64</code> (double precision), and <code>BigFloat</code> (arbitrary precision).</p></li>
+</ul>
+<div class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb31-1"><a href="#cb31-1"></a><span class="im">using</span> <span class="bu">GraphRecipes</span>, <span class="bu">Plots</span></span>
+<span id="cb31-2"><a href="#cb31-2"></a></span>
+<span id="cb31-3"><a href="#cb31-3"></a><span class="co">#pyplot(size=(800, 600))</span></span>
+<span id="cb31-4"><a href="#cb31-4"></a><span class="fu">gr</span>(size<span class="op">=</span>(<span class="fl">600</span>, <span class="fl">400</span>))</span>
+<span id="cb31-5"><a href="#cb31-5"></a><span class="fu">theme</span>(<span class="op">:</span>default)</span>
+<span id="cb31-6"><a href="#cb31-6"></a></span>
+<span id="cb31-7"><a href="#cb31-7"></a><span class="fu">plot</span>(<span class="dt">AbstractFloat</span>, method<span class="op">=:</span>tree, fontsize<span class="op">=</span><span class="fl">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="18">
+<p><img data-src="arith_files/figure-revealjs/cell-18-output-1.svg"></p>
+</div>
+</div>
+<h3 id="half-precision-float16">Half precision (Float16)</h3>
+<p><img src="./half-precision-numbers.png" width="300" align="center"></p>
+<p>Source: <a href="https://en.wikipedia.org/wiki/Half-precision_floating-point_format" class="uri">https://en.wikipedia.org/wiki/Half-precision_floating-point_format</a></p>
+<ul>
+<li><p>In Julia, <code>Float16</code> is the type for half precision numbers.</p></li>
+<li><p>MSB is the sign bit.</p></li>
+<li><p>10 significand bits (<strong>fraction</strong>=<strong>mantissa</strong>), hence <span class="math inline">\(p=11\)</span> (why?)</p></li>
+<li><p>5 exponent bits: <span class="math inline">\(e_{\max}=15\)</span>, <span class="math inline">\(e_{\min}=-14\)</span>, <strong>bias</strong>=15 = <span class="math inline">\(01111_2\)</span> for encoding:</p>
+<ul>
+<li><span class="math inline">\(e_{\min} = \mathbf{00001_2} - 01111_2 = -14_{10}\)</span></li>
+<li><span class="math inline">\(e_{\max} = \mathbf{11110_2} - 01111_2 = 15_{10}\)</span></li>
+</ul></li>
+<li><p><span class="math inline">\(e_{\text{min}}-1\)</span> and <span class="math inline">\(e_{\text{max}}+1\)</span> are reserved for special numbers.</p></li>
+<li><p>range of <strong>magnitude</strong>: <span class="math inline">\(10^{\pm 4}\)</span> in decimal because <span class="math inline">\(\log_{10} (2^{15}) \approx 4\)</span>.</p></li>
+<li><p><strong>Precision</strong>: <span class="math inline">\(\log_{10}2^{11} \approx 3.311\)</span> decimal digits.</p></li>
+</ul>
+<p><span class="math display">\[
+(value) = (-1)^{b_{15}}\times 2^{(\sum_{j=1}^5 b_{15-j}2^{5-j}) - 15} \times \left( 1 + \sum_{i=1}^{10}\frac{b_{10-i}}{2^i}\right)
+\]</span></p>
+<div class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb32-1"><a href="#cb32-1"></a><span class="fu">println</span>(<span class="st">"Half precision:"</span>)</span>
+<span id="cb32-2"><a href="#cb32-2"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="fu">Float16</span>(<span class="fl">5</span>)) <span class="co"># 5 in half precision</span></span>
+<span id="cb32-3"><a href="#cb32-3"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="fu">Float16</span>(<span class="op">-</span><span class="fl">5</span>)); <span class="co"># -5 in half precision</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Half precision:
+bitstring(Float16(5)) = "0100010100000000"
+bitstring(Float16(-5)) = "1100010100000000"</code></pre>
+</div>
+</div>
+<h3 id="single-precision-float32">Single precision (Float32)</h3>
+<p><img src="./single-precision-numbers.png" width="600" align="center"></p>
+<p>Source: <a href="https://en.wikipedia.org/wiki/Single-precision_floating-point_format" class="uri">https://en.wikipedia.org/wiki/Single-precision_floating-point_format</a></p>
+<ul>
+<li><p>In Julia, <code>Float32</code> is the type for single precision numbers.</p></li>
+<li><p>MSB is the sign bit.</p></li>
+<li><p>23 significand bits (<span class="math inline">\(p=24\)</span>).</p></li>
+<li><p>8 exponent bits: <span class="math inline">\(e_{\max}=127\)</span>, <span class="math inline">\(e_{\min}=-126\)</span>, <strong>bias</strong>=127.</p></li>
+<li><p><span class="math inline">\(e_{\text{min}}-1\)</span> and <span class="math inline">\(e_{\text{max}}+1\)</span> are reserved for special numbers.</p></li>
+<li><p>range of <strong>magnitude</strong>: <span class="math inline">\(10^{\pm 38}\)</span> in decimal because <span class="math inline">\(\log_{10} (2^{127}) \approx 38\)</span>.</p></li>
+<li><p><strong>precision</strong>: <span class="math inline">\(\log_{10}(2^{24}) \approx 7.225\)</span> decimal digits.</p></li>
+</ul>
+<div class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb34-1"><a href="#cb34-1"></a><span class="fu">println</span>(<span class="st">"Single precision:"</span>)</span>
+<span id="cb34-2"><a href="#cb34-2"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="fu">Float32</span>(<span class="fl">5</span>)) <span class="co"># 5 in single precision</span></span>
+<span id="cb34-3"><a href="#cb34-3"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="fu">Float32</span>(<span class="op">-</span><span class="fl">5</span>)); <span class="co"># -5 in single precision</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Single precision:
+bitstring(Float32(5)) = "01000000101000000000000000000000"
+bitstring(Float32(-5)) = "11000000101000000000000000000000"</code></pre>
+</div>
+</div>
+<h3 id="double-precision-float64">Double precision (Float64)</h3>
+<p><img src="./double-precision-numbers.png" width="600" align="center"></p>
+<p>Source: <a href="https://en.wikipedia.org/wiki/Double-precision_floating-point_format" class="uri">https://en.wikipedia.org/wiki/Double-precision_floating-point_format</a></p>
+<ul>
+<li><p>Double precision (64 bits = 8 bytes) numbers are the dominant data type in scientific computing.</p></li>
+<li><p>In Julia, <code>Float64</code> is the type for double precision numbers.</p></li>
+<li><p>MSB is the sign bit.</p></li>
+<li><p>52 significand bits (<span class="math inline">\(p=53\)</span>).</p></li>
+<li><p>11 exponent bits: <span class="math inline">\(e_{\max}=1023\)</span>, <span class="math inline">\(e_{\min}=-1022\)</span>, <strong>bias</strong>=1023.</p></li>
+<li><p><span class="math inline">\(e_{\text{min}}-1\)</span> and <span class="math inline">\(e_{\text{max}}+1\)</span> are reserved for special numbers.</p></li>
+<li><p>range of <strong>magnitude</strong>: <span class="math inline">\(10^{\pm 308}\)</span> in decimal because <span class="math inline">\(\log_{10} (2^{1023}) \approx 308\)</span>.</p></li>
+<li><p><strong>precision</strong> to the <span class="math inline">\(\log_{10}(2^{53}) \approx 15.95\)</span> decimal point.</p></li>
+</ul>
+<div class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb36-1"><a href="#cb36-1"></a><span class="fu">println</span>(<span class="st">"Double precision:"</span>)</span>
+<span id="cb36-2"><a href="#cb36-2"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="fu">Float64</span>(<span class="fl">5</span>)) <span class="co"># 5 in double precision</span></span>
+<span id="cb36-3"><a href="#cb36-3"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="fu">Float64</span>(<span class="op">-</span><span class="fl">5</span>)); <span class="co"># -5 in double precision</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Double precision:
+bitstring(Float64(5)) = "0100000000010100000000000000000000000000000000000000000000000000"
+bitstring(Float64(-5)) = "1100000000010100000000000000000000000000000000000000000000000000"</code></pre>
+</div>
+</div>
+<h3 id="special-floating-point-numbers">Special floating-point numbers</h3>
+<ul>
+<li>Exponent <span class="math inline">\(e_{\max}+1\)</span> plus a zero mantissa means <span class="math inline">\(\pm \infty\)</span>.</li>
+</ul>
+<div class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb38-1"><a href="#cb38-1"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="cn">Inf</span>) <span class="co"># Inf in double precision</span></span>
+<span id="cb38-2"><a href="#cb38-2"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="op">-</span><span class="cn">Inf</span>); <span class="co"># -Inf in double precision</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>bitstring(Inf) = "0111111111110000000000000000000000000000000000000000000000000000"
+bitstring(-Inf) = "1111111111110000000000000000000000000000000000000000000000000000"</code></pre>
+</div>
+</div>
+<ul>
+<li><p>Exponent <span class="math inline">\(e_{\max}+1\)</span> plus a nonzero mantissa means <code>NaN</code>. <code>NaN</code> could be produced from <code>0 / 0</code>, <code>0 * Inf</code>, …</p></li>
+<li><p>In general <code>NaN ≠ NaN</code> bitwise. Test whether a number is <code>NaN</code> by <code>isnan</code> function.</p></li>
+</ul>
+<div class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb40-1"><a href="#cb40-1"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="fl">0</span> <span class="op">/</span> <span class="fl">0</span>) <span class="co"># NaN</span></span>
+<span id="cb40-2"><a href="#cb40-2"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="fl">0</span> <span class="op">*</span> <span class="cn">Inf</span>); <span class="co"># NaN</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>bitstring(0 / 0) = "1111111111111000000000000000000000000000000000000000000000000000"
+bitstring(0Inf) = "1111111111111000000000000000000000000000000000000000000000000000"</code></pre>
+</div>
+</div>
+<ul>
+<li>Exponent <span class="math inline">\(e_{\min}-1\)</span> with a zero mantissa represents the real number 0 (“exact zero”).
+<ul>
+<li>Why do we need an exact zero?</li>
+</ul></li>
+</ul>
+<div class="cell" data-execution_count="24">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb42-1"><a href="#cb42-1"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="fl">0.0</span>); <span class="co"># 0 in double precision </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>bitstring(0.0) = "0000000000000000000000000000000000000000000000000000000000000000"</code></pre>
+</div>
+</div>
+<ul>
+<li>Exponent <span class="math inline">\(e_{\min}-1\)</span> with a nonzero mantissa are for numbers less than <span class="math inline">\(b^{e_{\min}}\)</span> (subnormal numbers).</li>
+<li>Numbers are <em>denormalized</em> in the range <span class="math inline">\((0,b^{e_{\min}})\)</span> – <strong>gradual underflow</strong>.</li>
+<li>For example, in half-precision, <span class="math inline">\(e_{\min}=-14\)</span> but <span class="math inline">\(2^{-24}\)</span> is represented by <span class="math inline">\(0.0000000001_2 \times 2^{-14}\)</span>.</li>
+<li>If floating point numbers are all normalized, the spacing between 0 and <span class="math inline">\(b^{e_{\min}}\)</span> is just <span class="math inline">\(b^{e_{\min}}\)</span>, whereas the spacing between <span class="math inline">\(b^{e_{\min}}\)</span> and <span class="math inline">\(b^{e_{\min}+1}\)</span> is <span class="math inline">\(b^{e_{\min}-p+1}\)</span>. With subnormal numbers, the spacing between 0 and <span class="math inline">\(b^{e_{\min}}\)</span> can be <span class="math inline">\(b^{e_{\min}-p+1}\)</span>, which is consistent with the spacing just above <span class="math inline">\(b^{e_{\min}}\)</span>.</li>
+</ul>
+<div class="cell" data-execution_count="25">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb44-1"><a href="#cb44-1"></a><span class="pp">@show</span> <span class="fu">Float16</span>(<span class="fl">2</span><span class="op">^</span>(<span class="op">-</span><span class="fl">14</span>))  <span class="co"># emin=-14</span></span>
+<span id="cb44-2"><a href="#cb44-2"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="fu">Float16</span>(<span class="fl">2</span><span class="op">^</span>(<span class="op">-</span><span class="fl">14</span>)));</span>
+<span id="cb44-3"><a href="#cb44-3"></a><span class="pp">@show</span> <span class="fu">Float16</span>(<span class="fl">2</span><span class="op">^</span>(<span class="op">-</span><span class="fl">24</span>))  <span class="co"># emin=-14</span></span>
+<span id="cb44-4"><a href="#cb44-4"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="fu">Float16</span>(<span class="fl">2</span><span class="op">^</span>(<span class="op">-</span><span class="fl">24</span>))); <span class="co"># denormalized</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Float16(2 ^ -14) = Float16(6.104e-5)
+bitstring(Float16(2 ^ -14)) = "0000010000000000"
+Float16(2 ^ -24) = Float16(6.0e-8)
+bitstring(Float16(2 ^ -24)) = "0000000000000001"</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="26">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb46-1"><a href="#cb46-1"></a><span class="pp">@show</span> <span class="fu">nextfloat</span>(<span class="fu">Float16</span>(<span class="fl">0.0</span>)) <span class="co"># next representable number</span></span>
+<span id="cb46-2"><a href="#cb46-2"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="fu">nextfloat</span>(<span class="fu">Float16</span>(<span class="fl">0.0</span>))); <span class="co"># denormalized</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>nextfloat(Float16(0.0)) = Float16(6.0e-8)
+bitstring(nextfloat(Float16(0.0))) = "0000000000000001"</code></pre>
+</div>
+</div>
+<h3 id="rounding">Rounding</h3>
+<ul>
+<li><p>Rounding is necessary whenever a number has more than <span class="math inline">\(p\)</span> significand bits. Most computer systems use the default IEEE 754 <em>round to nearest</em> mode (also called <em>ties to even</em> mode). Julia offers several <a href="https://docs.julialang.org/en/v1/base/math/#Base.Rounding.RoundingMode">rounding modes</a>, the default being <a href="https://docs.julialang.org/en/v1/base/math/#Base.Rounding.RoundNearest"><code>RoundNearest</code></a>.</p></li>
+<li><p>“<em>Round to nearest, ties to even</em>” rule: rounds to the nearest value; if the number falls midway, it is rounded to the nearest value with an even least significant digit (i.e., zero; default for IEEE 754 binary floating point numbers)</p></li>
+<li><p>For example, the number 1/10 cannot be represented accurately as a (binary) floating point number: <span class="math display">\[ 0.1 = 1.10011001\dotsc_2 \times 2^{-4} \]</span></p></li>
+</ul>
+<div class="cell" data-execution_count="27">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb48-1"><a href="#cb48-1"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="fl">0.1</span>);  <span class="co"># double precision Float64</span></span>
+<span id="cb48-2"><a href="#cb48-2"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="fl">0.1f0</span>); <span class="co"># single precision Float32, 1001 gets rounded to 101(0)</span></span>
+<span id="cb48-3"><a href="#cb48-3"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="fu">Float16</span>(<span class="fl">0.1</span>)); <span class="co"># half precision Float16, 1001 gets rounded to 101(0)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>bitstring(0.1) = "0011111110111001100110011001100110011001100110011001100110011010"
+bitstring(0.1f0) = "00111101110011001100110011001101"
+bitstring(Float16(0.1)) = "0010111001100110"</code></pre>
+</div>
+</div>
+<h3 id="errors">Errors</h3>
+<p>Rounding (more fundamentally, finite precision) incurs errors in floating porint computation. If a real number <span class="math inline">\(x\)</span> is represented by a floating point number <span class="math inline">\([x]\)</span>, then</p>
+<ul>
+<li><p>Absolute error <span class="math display">\[
+  | [x] - x |
+\]</span></p></li>
+<li><p>Relative error <span class="math display">\[
+  \frac{| [x] - x |}{|x|}
+\]</span> (if <span class="math inline">\(x \neq 0\)</span>).</p></li>
+</ul>
+<p>Of course, we want to ensure that the error after a computation is small.</p>
+<h3 id="machine-epsilons">Machine epsilons</h3>
+<ul>
+<li>Floating-point numbers do not occur uniformly over the real number line <img src="http://www.volkerschatz.com/science/pics/fltscale-wh.png" width="700" align="center"></li>
+</ul>
+<p>Source: <a href="http://www.volkerschatz.com/science/float.html">What you never wanted to know about floating point but will be forced to find out</a></p>
+<ul>
+<li><p>Same number of representible numbers in <span class="math inline">\((2^i, 2^{i+1}]\)</span> as in <span class="math inline">\((2^{i+1}, 2^{i+2}]\)</span>. Within an interval, they are uniformly distributed.</p></li>
+<li><p><strong>Machine epsilons</strong> are the spacings of numbers around 1:</p>
+<ul>
+<li><span class="math inline">\(\epsilon_{\max}\)</span> = (smallest positive floating point number that added to 1 will give a result different from 1) = <span class="math inline">\(\frac{1}{2^p} + \frac{1}{2^{2p-1}}\)</span></li>
+<li><span class="math inline">\(\epsilon_{\min}\)</span> = (smallest positive floating point number that subtracted from 1 will give a result different from 1) = <span class="math inline">\(\frac{1}{2^{p+1}} + \frac{1}{2^{2p}}\)</span>.</li>
+<li>That is, <span class="math inline">\(1 + \epsilon_{\max}\)</span> is the number in the “midway” between 1 and the floating point number right next to it, etc.</li>
+</ul>
+<p><img src="./machine_epsilons.png" width="500" align="center"></p></li>
+</ul>
+<p>Source: <em>Computational Statistics</em>, James Gentle, Springer, New York, 2009.</p>
+<p><em>Caution: the definition of <span class="math inline">\(\epsilon_{\max}\)</span> and <span class="math inline">\(\epsilon_{\min}\)</span> in this book is different from the lecture note.</em></p>
+<ul>
+<li><p>Any real number in the interval <span class="math inline">\(\left[1 - \frac{1}{2^{p+1}}, 1 + \frac{1}{2^p}\right]=[1.111\dotsb1|1_2 \times 2^{-1}, 1.000\dotsb 0|1 \times 2^0]\)</span> is represented by a floating point number <span class="math inline">\(1 = 1.00\dotsc 0_2 \times 2^0\)</span> (assuming the “ties to even” rule: consider <span class="math inline">\(p=2\)</span> case).</p></li>
+<li><p>Adding <span class="math inline">\(\frac{1}{2^p}\)</span> to 1 won’t reach the next representable floating point number <span class="math inline">\(1.00\dotsc 01_2 \times 2^0 = 1 + \frac{1}{2^{p-1}}\)</span>. Hence <span class="math inline">\(\epsilon_{\max} &gt; \frac{1}{2^p} = 1.00\dotsc 0_2 \times 2^{-p}\)</span>.</p></li>
+<li><p>Adding the floating point number <em>next to</em> <span class="math inline">\(\frac{1}{2^p} = 1.00\dotsc 0_2 \times 2^{-p}\)</span> to 1 WILL result in <span class="math inline">\(1.00\dotsc 01_2 \times 2^0 = 1 + \frac{1}{2^{p-1}}\)</span>, hence <span class="math inline">\(\epsilon_{\max} = 1.00\dotsb 01_2 \times 2^{-p} = \frac{1}{2^p} + \frac{1}{2^{p+p-1}}\)</span>.</p></li>
+<li><p>Subtracting <span class="math inline">\(\frac{1}{2^{p+1}}\)</span> from 1 results in <span class="math inline">\(1-\frac{1}{2^{p+1}} = \frac{1}{2} + \frac{1}{2^2} + \dotsb + \frac{1}{2^p} + \frac{1}{2^{p+1}}\)</span>, which is represented by the floating point number <span class="math inline">\(1.00\dotsb 0_2 \times 2^{0} = 1\)</span> by the “ties to even” rule. Hence <span class="math inline">\(\epsilon_{\min} &gt; \frac{1}{2^{p+1}}\)</span>.</p></li>
+<li><p>The smallest positive floating point number larger than <span class="math inline">\(\frac{1}{2^{p+1}}\)</span> is <span class="math inline">\(\frac{1}{2^{p+1}} + \frac{1}{2^{2p}}=1.00\dotsc 1_2 \times 2^{-p-1}\)</span>. Thus <span class="math inline">\(\epsilon_{\min} = \frac{1}{2^{p+1}} + \frac{1}{2^{2p}}\)</span>.</p></li>
+</ul>
+<h3 id="machine-precision">Machine precision</h3>
+<ul>
+<li><p>Machine epsilon is often called the machine precision.</p></li>
+<li><p>If a positive real number <span class="math inline">\(x \in \mathbb{R}\)</span> is represented by <span class="math inline">\([x]\)</span> in the floating point arithmetic, then <span class="math display">\[
+  [x] = \left( 1 + \sum_{i=1}^{p-1}\frac{d_{i+1}}{2^i}\right) \times 2^e.
+\]</span> Thus <span class="math inline">\(x - \frac{2^e}{2^p} \le [x] \le x + \frac{2^e}{2^p}\)</span>, and <span class="math display">\[
+  \begin{split}
+  \frac{| x - [x] |}{|x|} &amp;\le \frac{2^e}{2^p|x|} \le \frac{2^e}{2^p}\frac{1}{[x]-2^e/2^p} \\
+                          &amp;\le \frac{2^e}{2^p}\frac{1}{2^e(1-1/2^p)}  \quad (\because [x] \ge 2^e) \\
+                          &amp;\le \frac{2^e}{2^p}\frac{1}{2^e}(1 + \frac{1}{2^{p-1}}) \\
+                          &amp;= \frac{1}{2^p} + \frac{1}{2^{2p-1}} = \epsilon_{\max}.
+  \end{split}
+\]</span> That is, the <strong>relative error</strong> of the floating point representation <span class="math inline">\([x]\)</span> of real number <span class="math inline">\(x\)</span> is bounded by <span class="math inline">\(\epsilon_{\max}\)</span>.</p></li>
+</ul>
+<div class="cell" data-execution_count="28">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb50-1"><a href="#cb50-1"></a><span class="pp">@show</span> <span class="fl">2</span><span class="op">^</span>(<span class="op">-</span><span class="fl">53</span>) <span class="op">+</span> <span class="fl">2</span><span class="op">^</span>(<span class="op">-</span><span class="fl">105</span>);   <span class="co"># epsilon_max for Float64</span></span>
+<span id="cb50-2"><a href="#cb50-2"></a><span class="pp">@show</span> <span class="fl">1.0</span> <span class="op">+</span> <span class="fl">2</span><span class="op">^</span>(<span class="op">-</span><span class="fl">53</span>);</span>
+<span id="cb50-3"><a href="#cb50-3"></a><span class="pp">@show</span> <span class="fl">1.0</span> <span class="op">+</span> (<span class="fl">2</span><span class="op">^</span>(<span class="op">-</span><span class="fl">53</span>) <span class="op">+</span> <span class="fl">2</span><span class="op">^</span>(<span class="op">-</span><span class="fl">105</span>));</span>
+<span id="cb50-4"><a href="#cb50-4"></a><span class="pp">@show</span> <span class="fl">1.0</span> <span class="op">+</span> <span class="fl">2</span><span class="op">^</span>(<span class="op">-</span><span class="fl">53</span>) <span class="op">+</span> <span class="fl">2</span><span class="op">^</span>(<span class="op">-</span><span class="fl">105</span>);  <span class="co"># why is the result?  See "Catastrophic cancellation"</span></span>
+<span id="cb50-5"><a href="#cb50-5"></a></span>
+<span id="cb50-6"><a href="#cb50-6"></a><span class="pp">@show</span> <span class="fu">Float32</span>(<span class="fl">2</span><span class="op">^</span>(<span class="op">-</span><span class="fl">24</span>) <span class="op">+</span> <span class="fl">2</span><span class="op">^</span>(<span class="op">-</span><span class="fl">47</span>)); <span class="co"># epsilon_max for Float32</span></span>
+<span id="cb50-7"><a href="#cb50-7"></a><span class="pp">@show</span> <span class="fl">1.0f0</span> <span class="op">+</span> <span class="fu">Float32</span>(<span class="fl">2</span><span class="op">^</span>(<span class="op">-</span><span class="fl">24</span>));</span>
+<span id="cb50-8"><a href="#cb50-8"></a><span class="pp">@show</span> <span class="fl">1.0f0</span> <span class="op">+</span> <span class="fu">Float32</span>(<span class="fl">2</span><span class="op">^</span>(<span class="op">-</span><span class="fl">24</span>) <span class="op">+</span> <span class="fl">2</span><span class="op">^</span>(<span class="op">-</span><span class="fl">47</span>));</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>2 ^ -53 + 2 ^ -105 = 1.1102230246251568e-16
+1.0 + 2 ^ -53 = 1.0
+1.0 + (2 ^ -53 + 2 ^ -105) = 1.0000000000000002
+1.0 + 2 ^ -53 + 2 ^ -105 = 1.0
+Float32(2 ^ -24 + 2 ^ -47) = 5.960465f-8
+1.0f0 + Float32(2 ^ -24) = 1.0f0
+1.0f0 + Float32(2 ^ -24 + 2 ^ -47) = 1.0000001f0</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="29">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb52-1"><a href="#cb52-1"></a><span class="pp">@show</span> <span class="fl">2</span><span class="op">^</span>(<span class="op">-</span><span class="fl">54</span>) <span class="op">+</span> <span class="fl">2</span><span class="op">^</span>(<span class="op">-</span><span class="fl">106</span>);  <span class="co"># epsilon_min for Float64</span></span>
+<span id="cb52-2"><a href="#cb52-2"></a><span class="pp">@show</span> <span class="fl">1</span> <span class="op">-</span> (<span class="fl">2</span><span class="op">^</span>(<span class="op">-</span><span class="fl">54</span>) <span class="op">+</span> <span class="fl">2</span><span class="op">^</span>(<span class="op">-</span><span class="fl">106</span>))</span>
+<span id="cb52-3"><a href="#cb52-3"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="fl">1.0</span>)</span>
+<span id="cb52-4"><a href="#cb52-4"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="fl">1</span> <span class="op">-</span> (<span class="fl">2</span><span class="op">^</span>(<span class="op">-</span><span class="fl">54</span>) <span class="op">+</span> <span class="fl">2</span><span class="op">^</span>(<span class="op">-</span><span class="fl">106</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>2 ^ -54 + 2 ^ -106 = 5.551115123125784e-17
+1 - (2 ^ -54 + 2 ^ -106) = 0.9999999999999999
+bitstring(1.0) = "0011111111110000000000000000000000000000000000000000000000000000"
+bitstring(1 - (2 ^ -54 + 2 ^ -106)) = "0011111111101111111111111111111111111111111111111111111111111111"</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="29">
+<pre><code>"0011111111101111111111111111111111111111111111111111111111111111"</code></pre>
+</div>
+</div>
+<p>In Julia, <code>eps(x)</code> gives the distance between consecutive representable floating point values at <code>x</code>, i.e.,</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb55-1"><a href="#cb55-1"></a><span class="fu">eps</span>(x) <span class="op">==</span> <span class="fu">max</span>(<span class="fu">x-prevfloat</span>(x), <span class="fu">nextfloat</span>(x)<span class="op">-</span>x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>which is roughly twice the <span class="math inline">\(\epsilon_{\max}\)</span>.</p>
+<div class="cell" data-execution_count="30">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb56-1"><a href="#cb56-1"></a><span class="pp">@show</span> <span class="fu">eps</span>(<span class="dt">Float32</span>)  <span class="co"># machine epsilon for a floating point type, roughly twice our \epsilon_{\max}</span></span>
+<span id="cb56-2"><a href="#cb56-2"></a><span class="pp">@show</span> <span class="fu">eps</span>(<span class="dt">Float64</span>)  <span class="co"># same as eps()</span></span>
+<span id="cb56-3"><a href="#cb56-3"></a><span class="co"># eps(x) is the spacing after x</span></span>
+<span id="cb56-4"><a href="#cb56-4"></a><span class="pp">@show</span> <span class="fu">eps</span>(<span class="fl">100.0</span>)</span>
+<span id="cb56-5"><a href="#cb56-5"></a><span class="pp">@show</span> <span class="fu">eps</span>(<span class="fl">0.0</span>)</span>
+<span id="cb56-6"><a href="#cb56-6"></a><span class="co"># nextfloat(x) and prevfloat(x) give the neighbors of x</span></span>
+<span id="cb56-7"><a href="#cb56-7"></a><span class="pp">@show</span> x <span class="op">=</span> <span class="fl">1.25f0</span></span>
+<span id="cb56-8"><a href="#cb56-8"></a><span class="pp">@show</span> <span class="fu">prevfloat</span>(x), x, <span class="fu">nextfloat</span>(x)</span>
+<span id="cb56-9"><a href="#cb56-9"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="fu">prevfloat</span>(x)), <span class="fu">bitstring</span>(x), <span class="fu">bitstring</span>(<span class="fu">nextfloat</span>(x));</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>eps(Float32) = 1.1920929f-7
+eps(Float64) = 2.220446049250313e-16
+eps(100.0) = 1.4210854715202004e-14
+eps(0.0) = 5.0e-324
+x = 1.25f0 = 1.25f0
+(prevfloat(x), x, nextfloat(x)) = (1.2499999f0, 1.25f0, 1.2500001f0)
+(bitstring(prevfloat(x)), bitstring(x), bitstring(nextfloat(x))) = ("00111111100111111111111111111111", "00111111101000000000000000000000", "00111111101000000000000000000001")</code></pre>
+</div>
+</div>
+<ul>
+<li>In R, the variable <code>.Machine</code> contains numerical characteristics of the machine. <code>double.eps</code> and <code>double.neg.eps</code> are roughly twice our <span class="math inline">\(\epsilon_{\max}\)</span> and <span class="math inline">\(\epsilon_{\min}\)</span>, respectively.</li>
+</ul>
+<div class="cell" data-execution_count="31">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb58-1"><a href="#cb58-1"></a>R<span class="st">"""</span></span>
+<span id="cb58-2"><a href="#cb58-2"></a><span class="st">.Machine</span></span>
+<span id="cb58-3"><a href="#cb58-3"></a><span class="st">"""</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="31">
+<pre><code>RObject{VecSxp}
+$double.eps
+[1] 2.220446e-16
+
+$double.neg.eps
+[1] 1.110223e-16
+
+$double.xmin
+[1] 2.225074e-308
+
+$double.xmax
+[1] 1.797693e+308
+
+$double.base
+[1] 2
+
+$double.digits
+[1] 53
+
+$double.rounding
+[1] 5
+
+$double.guard
+[1] 0
+
+$double.ulp.digits
+[1] -52
+
+$double.neg.ulp.digits
+[1] -53
+
+$double.exponent
+[1] 11
+
+$double.min.exp
+[1] -1022
+
+$double.max.exp
+[1] 1024
+
+$integer.max
+[1] 2147483647
+
+$sizeof.long
+[1] 8
+
+$sizeof.longlong
+[1] 8
+
+$sizeof.longdouble
+[1] 16
+
+$sizeof.pointer
+[1] 8
+
+$longdouble.eps
+[1] 1.084202e-19
+
+$longdouble.neg.eps
+[1] 5.421011e-20
+
+$longdouble.digits
+[1] 64
+
+$longdouble.rounding
+[1] 5
+
+$longdouble.guard
+[1] 0
+
+$longdouble.ulp.digits
+[1] -63
+
+$longdouble.neg.ulp.digits
+[1] -64
+
+$longdouble.exponent
+[1] 15
+
+$longdouble.min.exp
+[1] -16382
+
+$longdouble.max.exp
+[1] 16384
+</code></pre>
+</div>
+</div>
+<h3 id="overflow-and-underflow-of-floating-point-number">Overflow and underflow of floating-point number</h3>
+<ul>
+<li><p>For double precision, the range is <span class="math inline">\(\pm 10^{\pm 308}\)</span>. In most situations, underflow (magnitude of result is less than <span class="math inline">\(10^{-308}\)</span>) is preferred over overflow (magnitude of result is larger than <span class="math inline">\(10^{+308}\)</span>). Overflow produces <span class="math inline">\(\pm \inf\)</span>. Underflow yields zeros or subnormal numbers.</p></li>
+<li><p>E.g., the logit link function is <span class="math display">\[p = \frac{\exp (x^T \beta)}{1 + \exp (x^T \beta)} = \frac{1}{1+\exp(- x^T \beta)}.\]</span> The former expression can easily lead to <code>Inf / Inf = NaN</code>, while the latter expression leads to gradual underflow.</p></li>
+<li><p><code>floatmin</code> and <code>floatmax</code> functions gives largest and smallest <em>non-subnormal</em> number represented by the given floating point type.</p></li>
+</ul>
+<div class="cell" data-execution_count="32">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb60-1"><a href="#cb60-1"></a><span class="cf">for</span> T <span class="kw">in</span> [<span class="dt">Float16</span>, <span class="dt">Float32</span>, <span class="dt">Float64</span>]</span>
+<span id="cb60-2"><a href="#cb60-2"></a>    <span class="fu">println</span>(T, <span class="ch">'\t'</span>, <span class="fu">floatmin</span>(T), <span class="ch">'\t'</span>, <span class="fu">floatmax</span>(T), <span class="ch">'\t'</span>, <span class="fu">typemin</span>(T), </span>
+<span id="cb60-3"><a href="#cb60-3"></a>        <span class="ch">'\t'</span>, <span class="fu">typemax</span>(T), <span class="ch">'\t'</span>, <span class="fu">eps</span>(T))</span>
+<span id="cb60-4"><a href="#cb60-4"></a><span class="cf">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Float16 6.104e-5    6.55e4  -Inf    Inf 0.000977
+Float32 1.1754944e-38   3.4028235e38    -Inf    Inf 1.1920929e-7
+Float64 2.2250738585072014e-308 1.7976931348623157e308  -Inf    Inf 2.220446049250313e-16</code></pre>
+</div>
+</div>
+<ul>
+<li><code>BigFloat</code> in Julia offers arbitrary precision.</li>
+</ul>
+<div class="cell" data-execution_count="33">
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb62-1"><a href="#cb62-1"></a><span class="pp">@show</span> <span class="fu">precision</span>(<span class="dt">BigFloat</span>)</span>
+<span id="cb62-2"><a href="#cb62-2"></a><span class="pp">@show</span> <span class="fu">floatmin</span>(<span class="dt">BigFloat</span>)</span>
+<span id="cb62-3"><a href="#cb62-3"></a><span class="pp">@show</span> <span class="fu">floatmax</span>(<span class="dt">BigFloat</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>precision(BigFloat) = 256
+floatmin(BigFloat) = 8.50969131174083613912978790962048280567755996982969624908264897850135431080301e-1388255822130839284
+floatmax(BigFloat) = 5.875653789111587590936911998878442589938516392745498308333779606469323584389875e+1388255822130839282</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="34">
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb64-1"><a href="#cb64-1"></a><span class="pp">@show</span> <span class="fu">BigFloat</span>(<span class="cn">π</span>); <span class="co"># default precision for BigFloat is 256 bits</span></span>
+<span id="cb64-2"><a href="#cb64-2"></a><span class="co"># set precision to 1024 bits</span></span>
+<span id="cb64-3"><a href="#cb64-3"></a><span class="fu">setprecision</span>(<span class="dt">BigFloat</span>, <span class="fl">1024</span>) <span class="cf">do</span> </span>
+<span id="cb64-4"><a href="#cb64-4"></a>    <span class="pp">@show</span> <span class="fu">BigFloat</span>(<span class="cn">π</span>)</span>
+<span id="cb64-5"><a href="#cb64-5"></a><span class="cf">end</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>BigFloat(π) = 3.141592653589793238462643383279502884197169399375105820974944592307816406286198
+BigFloat(π) = 3.141592653589793238462643383279502884197169399375105820974944592307816406286208998628034825342117067982148086513282306647093844609550582231725359408128481117450284102701938521105559644622948954930381964428810975665933446128475648233786783165271201909145648566923460348610454326648213393607260249141273724586997</code></pre>
+</div>
+</div>
+</section>
+<section id="catastrophic-cancellation" class="slide level2">
+<h2>Catastrophic cancellation</h2>
+<blockquote>
+<p>The result of computation is just the digits that represented the rounding.</p>
+</blockquote>
+<ul>
+<li><strong>Scenario 1</strong> (benign cancellation): Addition or subtraction of two numbers of widely different magnitudes: <span class="math inline">\(a+b\)</span> or <span class="math inline">\(a-b\)</span> where <span class="math inline">\(a \gg b\)</span> or <span class="math inline">\(a \ll b\)</span>. We lose the precision in the number of smaller magnitude. Consider <span class="math display">\[\begin{eqnarray*}
+  a &amp;=&amp; x.xxx ... \times 2^{30} \\  
+  b &amp;=&amp; y.yyy... \times 2^{-30}
+\end{eqnarray*}\]</span> What happens when computer calculates <span class="math inline">\(a+b\)</span>? We get <span class="math inline">\(a+b=a\)</span>!</li>
+</ul>
+<div class="cell" data-execution_count="35">
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb66-1"><a href="#cb66-1"></a><span class="pp">@show</span> a <span class="op">=</span> <span class="fl">2.0</span><span class="op">^</span><span class="fl">30</span></span>
+<span id="cb66-2"><a href="#cb66-2"></a><span class="pp">@show</span> b <span class="op">=</span> <span class="fl">2.0</span><span class="op">^-</span><span class="fl">30</span></span>
+<span id="cb66-3"><a href="#cb66-3"></a><span class="pp">@show</span> a <span class="op">+</span> b <span class="op">==</span> a</span>
+<span id="cb66-4"><a href="#cb66-4"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(a)</span>
+<span id="cb66-5"><a href="#cb66-5"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(a <span class="op">+</span> b);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>a = 2.0 ^ 30 = 1.073741824e9
+b = 2.0 ^ -30 = 9.313225746154785e-10
+a + b == a = true
+bitstring(a) = "0100000111010000000000000000000000000000000000000000000000000000"
+bitstring(a + b) = "0100000111010000000000000000000000000000000000000000000000000000"</code></pre>
+</div>
+</div>
+<p>Analysis: suppose we want to compute <span class="math inline">\(x + y\)</span>, <span class="math inline">\(x, y &gt; 0\)</span>. Let the relative error of <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> be <span class="math display">\[
+\delta_x = \frac{[x] - x}{x},
+\quad
+\delta_y = \frac{[y] - y}{y}
+.
+\]</span> What the computer actually calculates is <span class="math inline">\([x] + [y]\)</span>, which in turn is represented by <span class="math inline">\([ [x] + [y] ]\)</span>. The relative error of this representation is <span class="math display">\[
+\delta_{\text{sum}} = \frac{[[x]+[y]] - ([x]+[y])}{[x]+[y]}
+.
+\]</span> Recall that <span class="math inline">\(|\delta_x|, |\delta_y|, |\delta_{\text{sum}}| \le \epsilon_{\max}\)</span>.</p>
+<p>We want to find a bound of the relative error of <span class="math inline">\([[x]+[y]]\)</span> with respect to <span class="math inline">\(x+y\)</span>. Since <span class="math inline">\(|[x]+[y]| = |x(1+\delta_x) + y(1+\delta_y)| \le |x+y|(1+\epsilon_{\max})\)</span>, we have <span class="math display">\[
+\begin{split}
+| [[x]+[y]]-(x+y) | &amp;= | [[x]+[y]] - [x] - [y] + [x] - x + [y] - y | \\
+                   &amp;\le | [[x]+[y]] - [x] - [y] | +  | [x] - x | + | [y] - y | \\
+                   &amp;= |\delta_{\text{sum}}([x]+[y])| + |\delta_x x| + |\delta_y y| \\
+                   &amp;\le \epsilon_{\max}(x+y)(1+\epsilon_{\max}) + \epsilon_{\max}x + \epsilon_{\max}y \\
+                   &amp;\approx 2\epsilon_{\max}(x+y)
+\end{split}
+\]</span> because <span class="math inline">\(\epsilon_{\max}^2 \approx 0\)</span>. Thus <span class="math display">\[
+\frac{| [[x]+[y]]-(x+y) |}{|x+y|} \le 2\epsilon_{\max}
+\]</span> approximately.</p>
+<ul>
+<li><strong>Scenario 2</strong> (catastrophic cancellation): Subtraction of two nearly equal numbers eliminates significant digits. <span class="math inline">\(a-b\)</span> where <span class="math inline">\(a \approx b\)</span>. Consider <span class="math display">\[\begin{eqnarray*}
+  a &amp;=&amp; x.xxxxxxxxxx1ssss  \\
+  b &amp;=&amp; x.xxxxxxxxxx0tttt
+\end{eqnarray*}\]</span> The result is <span class="math inline">\(1.vvvvu...u\)</span> where <span class="math inline">\(u\)</span> are unassigned digits.</li>
+</ul>
+<div class="cell" data-execution_count="36">
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb68-1"><a href="#cb68-1"></a>a <span class="op">=</span> <span class="fl">1.2345678f0</span> <span class="co"># rounding</span></span>
+<span id="cb68-2"><a href="#cb68-2"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(a) <span class="co"># rounding</span></span>
+<span id="cb68-3"><a href="#cb68-3"></a>b <span class="op">=</span> <span class="fl">1.2345677f0</span></span>
+<span id="cb68-4"><a href="#cb68-4"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(b)</span>
+<span id="cb68-5"><a href="#cb68-5"></a><span class="pp">@show</span> a <span class="op">-</span> b <span class="co"># correct result should be 1f-7</span></span>
+<span id="cb68-6"><a href="#cb68-6"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(a <span class="op">-</span> b)   <span class="co"># must be 1.0000...0 x 2^(-23)</span></span>
+<span id="cb68-7"><a href="#cb68-7"></a><span class="pp">@show</span> <span class="fu">Float32</span>(<span class="fl">1</span><span class="op">/</span><span class="fl">2</span><span class="op">^</span><span class="fl">23</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>bitstring(a) = "00111111100111100000011001010001"
+bitstring(b) = "00111111100111100000011001010000"
+a - b = 1.1920929f-7
+bitstring(a - b) = "00110100000000000000000000000000"
+Float32(1 / 2 ^ 23) = 1.1920929f-7</code></pre>
+</div>
+</div>
+<p>Analysis: Let <span class="math display">\[
+[x] = 1 + \sum_{i=1}^{p-2}\frac{d_{i+1}}{2^i} + \frac{1}{2^{p-1}},
+\quad
+[y] = 1 + \sum_{i=1}^{p-2}\frac{d_{i+1}}{2^i} + \frac{0}{2^{p-1}}
+.
+\]</span></p>
+<ul>
+<li><p><span class="math inline">\([x]-[y] = \frac{1}{2^{p-1}} = [[x]-[y]]\)</span>.</p></li>
+<li><p>The true difference <span class="math inline">\(x-y\)</span> may lie anywhere in <span class="math inline">\((0, \frac{1}{2^{p-2}}]\)</span>.</p></li>
+<li><p>Relative error <span class="math display">\[
+\frac{|x-y -[[x]-[y]]|}{|x-y|}
+\]</span> is unbounded – no guarantee of any significant digit!</p></li>
+<li><p>Implications for numerical computation</p>
+<ul>
+<li>Rule 1: add small numbers together before adding larger ones<br>
+</li>
+<li>Rule 2: add numbers of like magnitude together (paring). When all numbers are of same sign and similar magnitude, add in pairs so each stage the summands are of similar magnitude<br>
+</li>
+<li>Rule 3: avoid substraction of two numbers that are nearly equal</li>
+</ul></li>
+</ul>
+<h3 id="algebraic-laws">Algebraic laws</h3>
+<p>Floating-point numbers may violate many algebraic laws we are familiar with, such associative and distributive laws. See the example in the Machine Epsilon section and HW1.</p>
+</section>
+<section id="coditioning" class="slide level2">
+<h2>Coditioning</h2>
+<p>Consider solving a linear system <span class="math inline">\(Ax=b\)</span>:</p>
+<p><span class="math display">\[
+\begin{bmatrix} 1.000 &amp; 0.500 \\ 0.667 &amp; 0.333 \end{bmatrix}
+\begin{bmatrix} x_1 \\ x_2 \end{bmatrix}
+=
+\begin{bmatrix} 1.500 \\ 1.000 \end{bmatrix}
+,
+\]</span></p>
+<p>whose solution is <span class="math inline">\((x_1, x_2) = (1.000, 1.000)\)</span>.</p>
+<div class="cell" data-execution_count="37">
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb70-1"><a href="#cb70-1"></a>A<span class="op">=</span>[<span class="fl">1.0</span> <span class="fl">0.5</span>; <span class="fl">0.667</span> <span class="fl">0.333</span>]; b <span class="op">=</span> [<span class="fl">1.5</span>, <span class="fl">1.0</span>]; A<span class="op">\</span>b</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="37">
+<pre><code>2-element Vector{Float64}:
+ 0.9999999999998335
+ 1.000000000000333</code></pre>
+</div>
+</div>
+<p>If we <em>perturb</em> <span class="math inline">\(b\)</span> by 0.001, i.e., solve</p>
+<p><span class="math display">\[
+\begin{bmatrix} 1.000 &amp; 0.500 \\ 0.667 &amp; 0.333 \end{bmatrix}
+\begin{bmatrix} x_1 \\ x_2 \end{bmatrix}
+=
+\begin{bmatrix} 1.500 \\ 0.999 \end{bmatrix}
+,
+\]</span></p>
+<p>then the solution changes to <span class="math inline">\((x_1, x_2) = (0.000, 3.000)\)</span>.</p>
+<div class="cell" data-execution_count="38">
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb72-1"><a href="#cb72-1"></a>b1 <span class="op">=</span> [<span class="fl">1.5</span>, <span class="fl">0.999</span>]; A<span class="op">\</span>b1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="38">
+<pre><code>2-element Vector{Float64}:
+ -1.6653345369377348e-13
+  3.000000000000333</code></pre>
+</div>
+</div>
+<p>If we instead perturb <span class="math inline">\(A\)</span> by 0.001, i.e., solve</p>
+<p><span class="math display">\[
+\begin{bmatrix} 1.000 &amp; 0.500 \\ 0.667 &amp; 0.334 \end{bmatrix}
+\begin{bmatrix} x_1 \\ x_2 \end{bmatrix}
+=
+\begin{bmatrix} 1.500 \\ 1.000 \end{bmatrix}
+,
+\]</span></p>
+<p>then this time the solution changes to <span class="math inline">\((x_1, x_2) = (2.000, -1.000)\)</span>.</p>
+<div class="cell" data-execution_count="39">
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb74-1"><a href="#cb74-1"></a>A1<span class="op">=</span>[<span class="fl">1.0</span> <span class="fl">0.5</span>; <span class="fl">0.667</span> <span class="fl">0.334</span>]; A1<span class="op">\</span>b</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="39">
+<pre><code>2-element Vector{Float64}:
+  2.0000000000001665
+ -1.000000000000333</code></pre>
+</div>
+</div>
+<p>In other words, an input perturbation of order <span class="math inline">\(10^{-3}\)</span> yield an output perturbation of order <span class="math inline">\(10^0\)</span>. Thats 3 orders of magnutide of relative change!</p>
+<p>Floating point representation <span class="math inline">\([x]\)</span> of a real number <span class="math inline">\(x\)</span> in a digital computer may introduce such input perturbation easily. The perturbation of output of a problem with respect to the input is called <em>conditioning</em>.</p>
+<ul>
+<li><p>Abstractly, a <em>problem</em> can be viewed as function <span class="math inline">\(f: \mathcal{X} \to \mathcal{Y}\)</span> where <span class="math inline">\(\mathcal{X}\)</span> is a normed vector space of data and <span class="math inline">\(\mathcal{Y}\)</span> is a normed vector space of solutions.</p>
+<ul>
+<li>The problem of solving <span class="math inline">\(Ax=b\)</span> for fixed <span class="math inline">\(b\)</span> is <span class="math inline">\(f: A \mapsto A^{-1}b\)</span> with <span class="math inline">\(\mathcal{X}=\{M\in\mathbb{R}^{n\times n}: M \text{ is invertible} \}\)</span> and <span class="math inline">\(\mathcal{Y} = \mathbb{R}^n\)</span>.</li>
+<li>The combination of a problem <span class="math inline">\(f\)</span> with a given data <span class="math inline">\(x\)</span> is called a <em>problem instance</em>, or simply problem unless no confusion occurs.</li>
+</ul></li>
+<li><p>A <em>well-conditioned</em> problem (instance) is one such that all small perturbations of <span class="math inline">\(x\)</span> lead to only small changes in <span class="math inline">\(f(x)\)</span>.</p></li>
+<li><p>An <em>ill-conditioned</em> problem is one such that some small perturbation of <span class="math inline">\(x\)</span> leads to a large change in <span class="math inline">\(f(x)\)</span>.</p></li>
+<li><p>The (relative) <em>condition number</em> <span class="math inline">\(\kappa=\kappa(\theta)\)</span> of a problem is defined by <span class="math display">\[
+  \kappa = \lim_{\delta\to 0}\sup_{\|\delta \theta\|\le \delta}\frac{\|\delta f\|/\|f(\theta)\|}{\|\delta \theta\|/\|\theta\|}
+  ,
+\]</span> where <span class="math inline">\(\delta f = f(\theta + \delta \theta) - f(\theta)\)</span>.</p></li>
+<li><p>For the problem of solving <span class="math inline">\(Ax=b\)</span> for fixed <span class="math inline">\(b\)</span>, <span class="math inline">\(f: A \mapsto A^{-1}b\)</span>, it can be shown that the condition number of <span class="math inline">\(f\)</span> is <span class="math display">\[
+  \kappa = \|A\|\|A^{-1}\| =: \kappa(A)
+  ,
+\]</span> where <span class="math inline">\(\|A\|\)</span> is the matrix norm induced by vector norm <span class="math inline">\(\|\cdot\|\)</span>, i.e., <span class="math display">\[
+  \|A\| = \sup_{x\neq 0} \frac{\|Ax\|}{\|x\|}.
+\]</span></p></li>
+<li><p>To see this, recall <span class="math inline">\(f(A) = A^{-1}b = x\)</span>. Since <span class="math inline">\(b = Ax\)</span> and the LHS is fixed, if a perturbation of the input <span class="math inline">\(A \to A + \delta A\)</span> yields a perturbation of the output <span class="math inline">\(x \to x + \delta x\)</span> or <span class="math inline">\(f \to f + \delta f\)</span>, then we have <span class="math display">\[
+  0 = (\delta A) x + A \delta x + (\delta A) \delta x
+\]</span> or <span class="math display">\[
+  \delta x = -A^{-1}(\delta A)x + o(\Vert \delta A \Vert)
+  .
+\]</span> That is, <span class="math inline">\(\delta f = f(A + \delta A) - f(A) = - A^{-1}(\delta A)A^{-1}b + o(\Vert \delta A \Vert)\)</span>. Then <span class="math display">\[
+\begin{aligned}
+  \kappa &amp;= \lim_{\delta\to 0}\sup_{\|\delta A\|\le \delta}\frac{(\Vert A^{-1}(\delta A)A^{-1}b\Vert + o(\Vert \delta A \Vert)\Vert) / \Vert A^{-1}b \Vert}{\Vert \delta A \Vert / \Vert A \Vert}
+  =
+  \lim_{\delta\to 0}\sup_{\|\delta A\|\le \delta} \frac{\Vert A^{-1}(\delta A)A^{-1}b\Vert / \Vert A^{-1}b \Vert}{\Vert \delta A \Vert / \Vert A \Vert} + o(1)
+  \\
+  &amp;=
+  \lim_{\delta\to 0}\sup_{\|\delta A\|\le \delta} \frac{\Vert A^{-1}(\delta A)A^{-1}b\Vert / \Vert A^{-1}b \Vert}{\Vert \delta A \Vert / \Vert A \Vert}
+  .
+\end{aligned}
+\]</span> From the property of a matrix norm (https://en.wikipedia.org/wiki/Matrix_norm), <span class="math display">\[
+  \frac{\Vert A^{-1}(\delta A)A^{-1}b\Vert / \Vert A^{-1}b \Vert}{\Vert \delta A \Vert / \Vert A \Vert}
+  \le
+  \frac{\Vert A^{-1} \Vert \Vert \delta A \Vert \Vert A^{-1}b\Vert / \Vert A^{-1}b \Vert}{\Vert \delta A \Vert / \Vert A \Vert}
+  = \Vert A^{-1} \Vert \Vert A \Vert
+  ,
+\]</span> hence <span class="math inline">\(\kappa \le \Vert A^{-1} \Vert \Vert A \Vert\)</span>.<br>
+It can be shown that for any invertible <span class="math inline">\(A\)</span> and <span class="math inline">\(b\)</span>, there exits a perturbation <span class="math inline">\(\delta A\)</span> such that <span class="math display">\[
+  \frac{\Vert A^{-1}(\delta A)A^{-1}b\Vert / \Vert A^{-1}b \Vert}{\Vert \delta A \Vert / \Vert A \Vert}
+  = \Vert A^{-1} \Vert \Vert A \Vert
+  .
+\]</span> It follows that <span class="math inline">\(\kappa \ge \Vert A^{-1} \Vert \Vert A \Vert\)</span>.</p></li>
+<li><p>If Euclidean norm is used, then <span class="math display">\[
+\kappa(A) = \sigma_{\max}(A)/\sigma_{\min}(A),
+\]</span> the ratio of the maximum and minimum singular values of <span class="math inline">\(A\)</span>.</p></li>
+</ul>
+<p>In the above problem, the condition number is matrix <span class="math inline">\(A\)</span> (w.r.t. Euclidean norm) is</p>
+<div class="cell" data-execution_count="40">
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb76-1"><a href="#cb76-1"></a><span class="im">using</span> <span class="bu">LinearAlgebra</span></span>
+<span id="cb76-2"><a href="#cb76-2"></a><span class="bu">LinearAlgebra</span>.<span class="fu">cond</span>(A)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="40">
+<pre><code>3611.5557231115513</code></pre>
+</div>
+</div>
+</section>
+<section id="further-readings" class="slide level2">
+<h2>Further readings</h2>
+<ul>
+<li><p>Section II.2, <a href="https://link.springer.com/book/10.1007%2F978-0-387-98144-4">Computational Statistics</a> by James Gentle (2009).</p></li>
+<li><p>Sections 1.5 and 2.2, <a href="https://doi.org/10.1137/1.9781611971446">Applied Numerical Linear Algebra</a> by James W. Demmel (1997).</p></li>
+<li><p><a href="https://www.itu.dk/~sestoft/bachelor/IEEE754_article.pdf">What every computer scientist should know about floating-point arithmetic</a> by David Goldberg (1991).</p></li>
+</ul>
+</section>
+<section id="acknowledgment" class="slide level2">
+<h2>Acknowledgment</h2>
+<p>Many parts of this lecture note is based on <a href="http://hua-zhou.github.io">Dr.&nbsp;Hua Zhou</a>’s 2019 Spring Statistical Computing course notes available at <a href="http://hua-zhou.github.io/teaching/biostatm280-2019spring/index.html" class="uri">http://hua-zhou.github.io/teaching/biostatm280-2019spring/index.html</a>.</p>
+<div class="footer footer-default">
+
+</div>
+</section></section>
+    </div>
+  </div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="arith_files/libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="arith_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="arith_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="arith_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="arith_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="arith_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="arith_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="arith_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="arith_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="arith_files/libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'smaller': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: false,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const isCodeAnnotation = (el) => {
+        for (const clz of el.classList) {
+          if (clz.startsWith('code-annotation-')) {                     
+            return true;
+          }
+        }
+        return false;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button', {
+        text: function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+      });
+      clipboard.on('success', function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copied!");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
+        setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      });
+      function tippyHover(el, contentFn) {
+        const config = {
+          allowHTML: true,
+          content: contentFn,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start'
+        };
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          return note.innerHTML;
+        });
+      }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
+          });
+        }
+      }
+    });
+    </script>
+    
+
+</body></html>
