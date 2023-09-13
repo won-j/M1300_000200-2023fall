@@ -434,11 +434,6 @@ Platform Info:
 </div>
 </div>
 </section>
-<section>
-<section id="computer-arithmetics" class="title-slide slide level1 center">
-<h1>Computer arithmetics</h1>
-
-</section>
 <section id="units-of-computer-storage" class="slide level2">
 <h2>Units of computer storage</h2>
 <ul>
@@ -646,16 +641,8 @@ Platform Info:
 <ul>
 <li>Julia has even more integer types:</li>
 </ul>
-<div class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb14-1"><a href="#cb14-1"></a><span class="im">using</span> <span class="bu">GraphRecipes</span>, <span class="bu">Plots</span></span>
-<span id="cb14-2"><a href="#cb14-2"></a><span class="co"># Source http://www.breloff.com/Graphs/</span></span>
-<span id="cb14-3"><a href="#cb14-3"></a><span class="fu">gr</span>(size<span class="op">=</span>(<span class="fl">600</span>, <span class="fl">400</span>))</span>
-<span id="cb14-4"><a href="#cb14-4"></a><span class="fu">theme</span>(<span class="op">:</span>default)</span>
-<span id="cb14-5"><a href="#cb14-5"></a></span>
-<span id="cb14-6"><a href="#cb14-6"></a><span class="fu">plot</span>(<span class="dt">Integer</span>, method<span class="op">=:</span>tree, fontsize<span class="op">=</span><span class="fl">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
-</div>
-<img data-src="arith_files/figure-revealjs/cell-9-output-1.svg" class="r-stretch"></section>
+<p><img src="1280px-Type-hierarchy-for-julia-numbers.png" width="1280" align="center"> <a href="https://en.wikibooks.org/wiki/Introducing_Julia/Types" class="uri">https://en.wikibooks.org/wiki/Introducing_Julia/Types</a></p>
+</section>
 <section class="slide level2">
 
 <h3 id="unsigned-integers">Unsigned integers</h3>
@@ -665,9 +652,9 @@ Platform Info:
 <li>Julia functions <code>typemin(T)</code> and <code>typemax(T)</code> give the lowest and highest representable number of a type <code>T</code> respectively</li>
 </ul>
 <div class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb15-1"><a href="#cb15-1"></a><span class="cf">for</span> t <span class="kw">in</span> [<span class="dt">UInt8</span>, <span class="dt">UInt16</span>, <span class="dt">UInt32</span>, <span class="dt">UInt64</span>, <span class="dt">UInt128</span>]</span>
-<span id="cb15-2"><a href="#cb15-2"></a>    <span class="fu">println</span>(t, <span class="ch">'\t'</span>, <span class="fu">typemin</span>(t), <span class="ch">'\t'</span>, <span class="fu">typemax</span>(t))</span>
-<span id="cb15-3"><a href="#cb15-3"></a><span class="cf">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb14-1"><a href="#cb14-1"></a><span class="cf">for</span> t <span class="kw">in</span> [<span class="dt">UInt8</span>, <span class="dt">UInt16</span>, <span class="dt">UInt32</span>, <span class="dt">UInt64</span>, <span class="dt">UInt128</span>]</span>
+<span id="cb14-2"><a href="#cb14-2"></a>    <span class="fu">println</span>(t, <span class="ch">'\t'</span>, <span class="fu">typemin</span>(t), <span class="ch">'\t'</span>, <span class="fu">typemax</span>(t))</span>
+<span id="cb14-3"><a href="#cb14-3"></a><span class="cf">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>UInt8   0   255
 UInt16  0   65535
@@ -687,7 +674,7 @@ UInt128 0   340282366920938463463374607431768211455</code></pre>
 <li><code>0</code> for nonnegative numbers</li>
 <li><code>1</code> for negative numbers</li>
 </ul></li>
-<li><p><strong>Two’s complement representation</strong> for negative numbers.</p>
+<li><p><strong>Two’s complement representation</strong> for negative numbers</p>
 <ul>
 <li>Set the sign bit to 1<br>
 </li>
@@ -701,12 +688,12 @@ UInt128 0   340282366920938463463374607431768211455</code></pre>
 <section class="slide level2">
 
 <div class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb17-1"><a href="#cb17-1"></a><span class="pp">@show</span> <span class="fu">typeof</span>(<span class="fl">5</span>)</span>
-<span id="cb17-2"><a href="#cb17-2"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="fl">5</span>)</span>
-<span id="cb17-3"><a href="#cb17-3"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="op">-</span><span class="fl">5</span>)</span>
-<span id="cb17-4"><a href="#cb17-4"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="fu">UInt64</span>(<span class="fu">Int128</span>(<span class="fl">2</span>)<span class="op">^</span><span class="fl">64</span> <span class="op">-</span> <span class="fl">5</span>)) <span class="op">==</span> <span class="fu">bitstring</span>(<span class="op">-</span><span class="fl">5</span>)</span>
-<span id="cb17-5"><a href="#cb17-5"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="fl">2</span> <span class="op">*</span> <span class="fl">5</span>) <span class="co"># shift bits of 5 to the left</span></span>
-<span id="cb17-6"><a href="#cb17-6"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="fl">2</span> <span class="op">*</span> <span class="op">-</span><span class="fl">5</span>); <span class="co"># shift bits of -5 to left</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb16-1"><a href="#cb16-1"></a><span class="pp">@show</span> <span class="fu">typeof</span>(<span class="fl">5</span>)</span>
+<span id="cb16-2"><a href="#cb16-2"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="fl">5</span>)</span>
+<span id="cb16-3"><a href="#cb16-3"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="op">-</span><span class="fl">5</span>)</span>
+<span id="cb16-4"><a href="#cb16-4"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="fu">UInt64</span>(<span class="fu">Int128</span>(<span class="fl">2</span>)<span class="op">^</span><span class="fl">64</span> <span class="op">-</span> <span class="fl">5</span>)) <span class="op">==</span> <span class="fu">bitstring</span>(<span class="op">-</span><span class="fl">5</span>)</span>
+<span id="cb16-5"><a href="#cb16-5"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="fl">2</span> <span class="op">*</span> <span class="fl">5</span>) <span class="co"># shift bits of 5 to the left</span></span>
+<span id="cb16-6"><a href="#cb16-6"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="fl">2</span> <span class="op">*</span> <span class="op">-</span><span class="fl">5</span>); <span class="co"># shift bits of -5 to left</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>typeof(5) = Int64
 bitstring(5) = "0000000000000000000000000000000000000000000000000000000000000101"
@@ -734,15 +721,15 @@ Source: <a href="http://users.dickinson.edu/~braught/courses/cs251f02/classes/no
 <li><strong>Range</strong> of representable integers by <span class="math inline">\(M\)</span>-bit <strong>signed integer</strong> is <span class="math inline">\([-2^{M-1},2^{M-1}-1]\)</span>:</li>
 </ul>
 <div class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb19-1"><a href="#cb19-1"></a><span class="fu">typemin</span>(<span class="dt">Int64</span>), <span class="fu">typemax</span>(<span class="dt">Int64</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">typemin</span>(<span class="dt">Int64</span>), <span class="fu">typemax</span>(<span class="dt">Int64</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="11">
 <pre><code>(-9223372036854775808, 9223372036854775807)</code></pre>
 </div>
 </div>
 <div class="cell" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb21-1"><a href="#cb21-1"></a><span class="cf">for</span> T <span class="kw">in</span> [<span class="dt">Int8</span>, <span class="dt">Int16</span>, <span class="dt">Int32</span>, <span class="dt">Int64</span>, <span class="dt">Int128</span>]</span>
-<span id="cb21-2"><a href="#cb21-2"></a>    <span class="fu">println</span>(T, <span class="ch">'\t'</span>, <span class="fu">typemin</span>(T), <span class="ch">'\t'</span>, <span class="fu">typemax</span>(T))</span>
-<span id="cb21-3"><a href="#cb21-3"></a><span class="cf">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb20-1"><a href="#cb20-1"></a><span class="cf">for</span> T <span class="kw">in</span> [<span class="dt">Int8</span>, <span class="dt">Int16</span>, <span class="dt">Int32</span>, <span class="dt">Int64</span>, <span class="dt">Int128</span>]</span>
+<span id="cb20-2"><a href="#cb20-2"></a>    <span class="fu">println</span>(T, <span class="ch">'\t'</span>, <span class="fu">typemin</span>(T), <span class="ch">'\t'</span>, <span class="fu">typemax</span>(T))</span>
+<span id="cb20-3"><a href="#cb20-3"></a><span class="cf">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Int8    -128    127
 Int16   -32768  32767
@@ -757,9 +744,9 @@ Int128  -170141183460469231731687303715884105728    1701411834604692317316873037
 <h3 id="bigint"><code>BigInt</code></h3>
 <p>Julia <code>BigInt</code> type is arbitrary precision.</p>
 <div class="cell" data-execution_count="13">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb23-1"><a href="#cb23-1"></a><span class="pp">@show</span> <span class="fu">typemax</span>(<span class="dt">Int128</span>)</span>
-<span id="cb23-2"><a href="#cb23-2"></a><span class="pp">@show</span> <span class="fu">typemax</span>(<span class="dt">Int128</span>) <span class="op">+</span> <span class="fl">1</span> <span class="co"># overflow!</span></span>
-<span id="cb23-3"><a href="#cb23-3"></a><span class="pp">@show</span> <span class="fu">BigInt</span>(<span class="fu">typemax</span>(<span class="dt">Int128</span>)) <span class="op">+</span> <span class="fl">1</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb22-1"><a href="#cb22-1"></a><span class="pp">@show</span> <span class="fu">typemax</span>(<span class="dt">Int128</span>)</span>
+<span id="cb22-2"><a href="#cb22-2"></a><span class="pp">@show</span> <span class="fu">typemax</span>(<span class="dt">Int128</span>) <span class="op">+</span> <span class="fl">1</span> <span class="co"># overflow!</span></span>
+<span id="cb22-3"><a href="#cb22-3"></a><span class="pp">@show</span> <span class="fu">BigInt</span>(<span class="fu">typemax</span>(<span class="dt">Int128</span>)) <span class="op">+</span> <span class="fl">1</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>typemax(Int128) = 170141183460469231731687303715884105727
 typemax(Int128) + 1 = -170141183460469231731687303715884105728
@@ -772,37 +759,37 @@ BigInt(typemax(Int128)) + 1 = 170141183460469231731687303715884105728</code></pr
 <h3 id="overflow-in-integer-arithmetic">Overflow in integer arithmetic</h3>
 <p>R reports <code>NA</code> for integer overflow. <strong>Julia outputs the result according to modular arithmetic.</strong></p>
 <div class="cell" data-execution_count="14">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb25-1"><a href="#cb25-1"></a><span class="pp">@show</span> <span class="fu">typemax</span>(<span class="dt">Int32</span>)</span>
-<span id="cb25-2"><a href="#cb25-2"></a><span class="pp">@show</span> <span class="fu">typemax</span>(<span class="dt">Int32</span>) <span class="op">+</span> <span class="fu">Int32</span>(<span class="fl">1</span>); <span class="co"># modular arithmetics!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb24-1"><a href="#cb24-1"></a><span class="pp">@show</span> <span class="fu">typemax</span>(<span class="dt">Int32</span>)</span>
+<span id="cb24-2"><a href="#cb24-2"></a><span class="pp">@show</span> <span class="fu">typemax</span>(<span class="dt">Int32</span>) <span class="op">+</span> <span class="fu">Int32</span>(<span class="fl">1</span>); <span class="co"># modular arithmetics!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>typemax(Int32) = 2147483647
 typemax(Int32) + Int32(1) = -2147483648</code></pre>
 </div>
 </div>
 <div class="cell" data-execution_count="15">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb27-1"><a href="#cb27-1"></a><span class="im">using</span> <span class="bu">RCall</span></span>
-<span id="cb27-2"><a href="#cb27-2"></a><span class="co"># The largest integer R can hold</span></span>
-<span id="cb27-3"><a href="#cb27-3"></a>R<span class="st">"""</span></span>
-<span id="cb27-4"><a href="#cb27-4"></a><span class="st">.Machine</span><span class="sc">$</span>integer<span class="st">.max </span></span>
-<span id="cb27-5"><a href="#cb27-5"></a><span class="st">"""</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb26-1"><a href="#cb26-1"></a><span class="im">using</span> <span class="bu">RCall</span></span>
+<span id="cb26-2"><a href="#cb26-2"></a><span class="co"># The largest integer R can hold</span></span>
+<span id="cb26-3"><a href="#cb26-3"></a>R<span class="st">"""</span></span>
+<span id="cb26-4"><a href="#cb26-4"></a><span class="st">.Machine</span><span class="sc">$</span>integer<span class="st">.max </span></span>
+<span id="cb26-5"><a href="#cb26-5"></a><span class="st">"""</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="15">
 <pre><code>RObject{IntSxp}
 [1] 2147483647</code></pre>
 </div>
 </div>
 <div class="cell" data-execution_count="17">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb29-1"><a href="#cb29-1"></a>R<span class="st">"""</span></span>
-<span id="cb29-2"><a href="#cb29-2"></a><span class="st">as.integer(big+1)</span></span>
-<span id="cb29-3"><a href="#cb29-3"></a><span class="st">"""</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb28-1"><a href="#cb28-1"></a>R<span class="st">"""</span></span>
+<span id="cb28-2"><a href="#cb28-2"></a><span class="st">as.integer(big+1)</span></span>
+<span id="cb28-3"><a href="#cb28-3"></a><span class="st">"""</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="17">
 <pre><code>RObject{IntSxp}
 [1] NA</code></pre>
 </div>
 </div>
 </section>
-<section id="real-numbers-floating-point-number-system" class="slide level2">
-<h2>Real numbers: floating-point number system</h2>
-<p>Floating-point number system is a computer model for the real line <span class="math inline">\(\mathbb{R}\)</span>.</p>
+<section id="reals-floating-point-number-system" class="slide level2">
+<h2>Reals: floating-point number system</h2>
+<p>Floating-point number system is a computer model for <span class="math inline">\(\mathbb{R}\)</span>.</p>
 <ul>
 <li><p>Most computer systems adopt the <a href="https://en.wikipedia.org/wiki/IEEE_floating_point">IEEE 754 standard</a>, established in 1985, for floating-point arithmetics.<br>
 For the history, see an <a href="http://www.cs.berkeley.edu/~wkahan/ieee754status/754story.html">interview with William Kahan</a>.</p></li>
@@ -810,38 +797,49 @@ For the history, see an <a href="http://www.cs.berkeley.edu/~wkahan/ieee754statu
 \pm d_1.d_2d_3 \cdots d_p \times b^e, \quad 0 \le d_i &lt; b.
 \]</span> Humans use the <em>base</em> <span class="math inline">\(b=10\)</span> and <em>digits</em> <span class="math inline">\(d_i=0, 1, \dotsc, 9\)</span>.<br>
 In computer, the base is <span class="math inline">\(b=2\)</span> and the digits <span class="math inline">\(d_i\)</span> are 0 or 1. The <em>exponent</em> <span class="math inline">\(e\)</span> is between <span class="math inline">\(e_{\min}\)</span> and <span class="math inline">\(e_{\max}\)</span>.</p></li>
-<li><p><strong>Normalized</strong> vs <strong>denormalized</strong> numbers. For example, decimal number 18 is <span class="math display">\[ +1.0010 \times 2^4 \quad (\text{normalized})\]</span> or, equivalently, <span class="math display">\[ +0.1001 \times 2^5 \quad (\text{denormalized}).\]</span></p></li>
-<li><p>In the floating-number system, computer stores</p>
+</ul>
+</section>
+<section class="slide level2">
+
+<ul>
+<li><strong>Normalized</strong> vs <strong>denormalized</strong> numbers. For example, decimal number 18 is <span class="math display">\[ +1.0010 \times 2^4 \quad (\text{normalized})\]</span> or, equivalently, <span class="math display">\[ +0.1001 \times 2^5 \quad (\text{denormalized}).\]</span></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<ul>
+<li>In the floating-number system, computer stores
 <ul>
 <li>sign bit<br>
 </li>
 <li>the <em>fraction</em> (or <em>mantissa</em>, or <em>significand</em>) of the <strong>normalized</strong> representation (except some special cases)</li>
-<li>the actual exponent plus a <em>bias</em>
+<li>the actual exponent <em>plus a bias</em>
 <ul>
 <li>Because <span class="math inline">\(e_{\min}\)</span> is likely negative and <span class="math inline">\(e_{\max}\)</span> is positive, the exponent requires a sign. IEEE 754 handles the sign of the exponent by subtracting the bias from the value of the exponent evaluated as an unsigned integer.</li>
 </ul></li>
 </ul></li>
-<li><p>Julia provides <code>Float16</code> (half precision, implemented in software using <code>Float32</code>), <code>Float32</code> (single precision), <code>Float64</code> (double precision), and <code>BigFloat</code> (arbitrary precision).</p></li>
+<li>Julia provides <code>Float16</code> (half precision, implemented in software), <code>Float32</code> (single precision), <code>Float64</code> (double precision), and <code>BigFloat</code> (arbitrary precision).</li>
 </ul>
-<div class="cell" data-execution_count="18">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb31-1"><a href="#cb31-1"></a><span class="im">using</span> <span class="bu">GraphRecipes</span>, <span class="bu">Plots</span></span>
-<span id="cb31-2"><a href="#cb31-2"></a></span>
-<span id="cb31-3"><a href="#cb31-3"></a><span class="co">#pyplot(size=(800, 600))</span></span>
-<span id="cb31-4"><a href="#cb31-4"></a><span class="fu">gr</span>(size<span class="op">=</span>(<span class="fl">600</span>, <span class="fl">400</span>))</span>
-<span id="cb31-5"><a href="#cb31-5"></a><span class="fu">theme</span>(<span class="op">:</span>default)</span>
-<span id="cb31-6"><a href="#cb31-6"></a></span>
-<span id="cb31-7"><a href="#cb31-7"></a><span class="fu">plot</span>(<span class="dt">AbstractFloat</span>, method<span class="op">=:</span>tree, fontsize<span class="op">=</span><span class="fl">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="18">
-<p><img data-src="arith_files/figure-revealjs/cell-18-output-1.svg"></p>
-</div>
-</div>
+</section>
+<section class="slide level2">
+
+</section>
+<section class="slide level2">
+
 <h3 id="half-precision-float16">Half precision (Float16)</h3>
-<p><img src="./half-precision-numbers.png" width="300" align="center"></p>
-<p>Source: <a href="https://en.wikipedia.org/wiki/Half-precision_floating-point_format" class="uri">https://en.wikipedia.org/wiki/Half-precision_floating-point_format</a></p>
+
+<img data-src="./half-precision-numbers.png" width="500" class="r-stretch quarto-figure-center"><div style="font-size: 50%;">
+<p><a href="https://en.wikipedia.org/wiki/Half-precision_floating-point_format" class="uri">https://en.wikipedia.org/wiki/Half-precision_floating-point_format</a></p>
+</div>
 <ul>
 <li><p>In Julia, <code>Float16</code> is the type for half precision numbers.</p></li>
 <li><p>MSB is the sign bit.</p></li>
 <li><p>10 significand bits (<strong>fraction</strong>=<strong>mantissa</strong>), hence <span class="math inline">\(p=11\)</span> (why?)</p></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<ul>
 <li><p>5 exponent bits: <span class="math inline">\(e_{\max}=15\)</span>, <span class="math inline">\(e_{\min}=-14\)</span>, <strong>bias</strong>=15 = <span class="math inline">\(01111_2\)</span> for encoding:</p>
 <ul>
 <li><span class="math inline">\(e_{\min} = \mathbf{00001_2} - 01111_2 = -14_{10}\)</span></li>
@@ -849,113 +847,144 @@ In computer, the base is <span class="math inline">\(b=2\)</span> and the digits
 </ul></li>
 <li><p><span class="math inline">\(e_{\text{min}}-1\)</span> and <span class="math inline">\(e_{\text{max}}+1\)</span> are reserved for special numbers.</p></li>
 <li><p>range of <strong>magnitude</strong>: <span class="math inline">\(10^{\pm 4}\)</span> in decimal because <span class="math inline">\(\log_{10} (2^{15}) \approx 4\)</span>.</p></li>
-<li><p><strong>Precision</strong>: <span class="math inline">\(\log_{10}2^{11} \approx 3.311\)</span> decimal digits.</p></li>
+<li><p><strong>Precision</strong>: <span class="math inline">\(\log_{10}2^{11} \approx 3.311\)</span> decimal digits. <span class="math display">\[
+  (value) = (-1)^{b_{15}}\times 2^{(\sum_{j=1}^5 b_{15-j}2^{5-j}) - 15} \times \left( 1 + \sum_{i=1}^{10}\frac{b_{10-i}}{2^i}\right)
+  \]</span></p></li>
 </ul>
-<p><span class="math display">\[
-(value) = (-1)^{b_{15}}\times 2^{(\sum_{j=1}^5 b_{15-j}2^{5-j}) - 15} \times \left( 1 + \sum_{i=1}^{10}\frac{b_{10-i}}{2^i}\right)
-\]</span></p>
+</section>
+<section class="slide level2">
+
 <div class="cell" data-execution_count="19">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb32-1"><a href="#cb32-1"></a><span class="fu">println</span>(<span class="st">"Half precision:"</span>)</span>
-<span id="cb32-2"><a href="#cb32-2"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="fu">Float16</span>(<span class="fl">5</span>)) <span class="co"># 5 in half precision</span></span>
-<span id="cb32-3"><a href="#cb32-3"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="fu">Float16</span>(<span class="op">-</span><span class="fl">5</span>)); <span class="co"># -5 in half precision</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb30-1"><a href="#cb30-1"></a><span class="fu">println</span>(<span class="st">"Half precision:"</span>)</span>
+<span id="cb30-2"><a href="#cb30-2"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="fu">Float16</span>(<span class="fl">5</span>)) <span class="co"># 5 in half precision</span></span>
+<span id="cb30-3"><a href="#cb30-3"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="fu">Float16</span>(<span class="op">-</span><span class="fl">5</span>)); <span class="co"># -5 in half precision</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Half precision:
 bitstring(Float16(5)) = "0100010100000000"
 bitstring(Float16(-5)) = "1100010100000000"</code></pre>
 </div>
 </div>
+</section>
+<section class="slide level2">
+
 <h3 id="single-precision-float32">Single precision (Float32)</h3>
-<p><img src="./single-precision-numbers.png" width="600" align="center"></p>
-<p>Source: <a href="https://en.wikipedia.org/wiki/Single-precision_floating-point_format" class="uri">https://en.wikipedia.org/wiki/Single-precision_floating-point_format</a></p>
+
+<img data-src="./single-precision-numbers.png" width="800" class="r-stretch quarto-figure-center"><div style="font-size: 50%;">
+<p><a href="https://en.wikipedia.org/wiki/Single-precision_floating-point_format" class="uri">https://en.wikipedia.org/wiki/Single-precision_floating-point_format</a></p>
+</div>
 <ul>
 <li><p>In Julia, <code>Float32</code> is the type for single precision numbers.</p></li>
 <li><p>MSB is the sign bit.</p></li>
 <li><p>23 significand bits (<span class="math inline">\(p=24\)</span>).</p></li>
 <li><p>8 exponent bits: <span class="math inline">\(e_{\max}=127\)</span>, <span class="math inline">\(e_{\min}=-126\)</span>, <strong>bias</strong>=127.</p></li>
 <li><p><span class="math inline">\(e_{\text{min}}-1\)</span> and <span class="math inline">\(e_{\text{max}}+1\)</span> are reserved for special numbers.</p></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<ul>
 <li><p>range of <strong>magnitude</strong>: <span class="math inline">\(10^{\pm 38}\)</span> in decimal because <span class="math inline">\(\log_{10} (2^{127}) \approx 38\)</span>.</p></li>
 <li><p><strong>precision</strong>: <span class="math inline">\(\log_{10}(2^{24}) \approx 7.225\)</span> decimal digits.</p></li>
 </ul>
 <div class="cell" data-execution_count="20">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb34-1"><a href="#cb34-1"></a><span class="fu">println</span>(<span class="st">"Single precision:"</span>)</span>
-<span id="cb34-2"><a href="#cb34-2"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="fu">Float32</span>(<span class="fl">5</span>)) <span class="co"># 5 in single precision</span></span>
-<span id="cb34-3"><a href="#cb34-3"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="fu">Float32</span>(<span class="op">-</span><span class="fl">5</span>)); <span class="co"># -5 in single precision</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb32-1"><a href="#cb32-1"></a><span class="fu">println</span>(<span class="st">"Single precision:"</span>)</span>
+<span id="cb32-2"><a href="#cb32-2"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="fu">Float32</span>(<span class="fl">5</span>)) <span class="co"># 5 in single precision</span></span>
+<span id="cb32-3"><a href="#cb32-3"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="fu">Float32</span>(<span class="op">-</span><span class="fl">5</span>)); <span class="co"># -5 in single precision</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Single precision:
 bitstring(Float32(5)) = "01000000101000000000000000000000"
 bitstring(Float32(-5)) = "11000000101000000000000000000000"</code></pre>
 </div>
 </div>
+</section>
+<section class="slide level2">
+
 <h3 id="double-precision-float64">Double precision (Float64)</h3>
-<p><img src="./double-precision-numbers.png" width="600" align="center"></p>
-<p>Source: <a href="https://en.wikipedia.org/wiki/Double-precision_floating-point_format" class="uri">https://en.wikipedia.org/wiki/Double-precision_floating-point_format</a></p>
+
+<img data-src="./double-precision-numbers.png" width="800" class="r-stretch quarto-figure-center"><div style="font-size: 50%;">
+<p><a href="https://en.wikipedia.org/wiki/Double-precision_floating-point_format" class="uri">https://en.wikipedia.org/wiki/Double-precision_floating-point_format</a></p>
+</div>
 <ul>
 <li><p>Double precision (64 bits = 8 bytes) numbers are the dominant data type in scientific computing.</p></li>
 <li><p>In Julia, <code>Float64</code> is the type for double precision numbers.</p></li>
 <li><p>MSB is the sign bit.</p></li>
 <li><p>52 significand bits (<span class="math inline">\(p=53\)</span>).</p></li>
 <li><p>11 exponent bits: <span class="math inline">\(e_{\max}=1023\)</span>, <span class="math inline">\(e_{\min}=-1022\)</span>, <strong>bias</strong>=1023.</p></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<ul>
 <li><p><span class="math inline">\(e_{\text{min}}-1\)</span> and <span class="math inline">\(e_{\text{max}}+1\)</span> are reserved for special numbers.</p></li>
 <li><p>range of <strong>magnitude</strong>: <span class="math inline">\(10^{\pm 308}\)</span> in decimal because <span class="math inline">\(\log_{10} (2^{1023}) \approx 308\)</span>.</p></li>
 <li><p><strong>precision</strong> to the <span class="math inline">\(\log_{10}(2^{53}) \approx 15.95\)</span> decimal point.</p></li>
 </ul>
 <div class="cell" data-execution_count="21">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb36-1"><a href="#cb36-1"></a><span class="fu">println</span>(<span class="st">"Double precision:"</span>)</span>
-<span id="cb36-2"><a href="#cb36-2"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="fu">Float64</span>(<span class="fl">5</span>)) <span class="co"># 5 in double precision</span></span>
-<span id="cb36-3"><a href="#cb36-3"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="fu">Float64</span>(<span class="op">-</span><span class="fl">5</span>)); <span class="co"># -5 in double precision</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb34-1"><a href="#cb34-1"></a><span class="fu">println</span>(<span class="st">"Double precision:"</span>)</span>
+<span id="cb34-2"><a href="#cb34-2"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="fu">Float64</span>(<span class="fl">5</span>)) <span class="co"># 5 in double precision</span></span>
+<span id="cb34-3"><a href="#cb34-3"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="fu">Float64</span>(<span class="op">-</span><span class="fl">5</span>)); <span class="co"># -5 in double precision</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Double precision:
 bitstring(Float64(5)) = "0100000000010100000000000000000000000000000000000000000000000000"
 bitstring(Float64(-5)) = "1100000000010100000000000000000000000000000000000000000000000000"</code></pre>
 </div>
 </div>
+</section>
+<section class="slide level2">
+
 <h3 id="special-floating-point-numbers">Special floating-point numbers</h3>
 <ul>
 <li>Exponent <span class="math inline">\(e_{\max}+1\)</span> plus a zero mantissa means <span class="math inline">\(\pm \infty\)</span>.</li>
 </ul>
 <div class="cell" data-execution_count="22">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb38-1"><a href="#cb38-1"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="cn">Inf</span>) <span class="co"># Inf in double precision</span></span>
-<span id="cb38-2"><a href="#cb38-2"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="op">-</span><span class="cn">Inf</span>); <span class="co"># -Inf in double precision</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb36-1"><a href="#cb36-1"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="cn">Inf</span>) <span class="co"># Inf in double precision</span></span>
+<span id="cb36-2"><a href="#cb36-2"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="op">-</span><span class="cn">Inf</span>); <span class="co"># -Inf in double precision</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>bitstring(Inf) = "0111111111110000000000000000000000000000000000000000000000000000"
 bitstring(-Inf) = "1111111111110000000000000000000000000000000000000000000000000000"</code></pre>
 </div>
 </div>
+</section>
+<section class="slide level2">
+
 <ul>
 <li><p>Exponent <span class="math inline">\(e_{\max}+1\)</span> plus a nonzero mantissa means <code>NaN</code>. <code>NaN</code> could be produced from <code>0 / 0</code>, <code>0 * Inf</code>, …</p></li>
 <li><p>In general <code>NaN ≠ NaN</code> bitwise. Test whether a number is <code>NaN</code> by <code>isnan</code> function.</p></li>
 </ul>
 <div class="cell" data-execution_count="23">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb40-1"><a href="#cb40-1"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="fl">0</span> <span class="op">/</span> <span class="fl">0</span>) <span class="co"># NaN</span></span>
-<span id="cb40-2"><a href="#cb40-2"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="fl">0</span> <span class="op">*</span> <span class="cn">Inf</span>); <span class="co"># NaN</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb38-1"><a href="#cb38-1"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="fl">0</span> <span class="op">/</span> <span class="fl">0</span>) <span class="co"># NaN</span></span>
+<span id="cb38-2"><a href="#cb38-2"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="fl">0</span> <span class="op">*</span> <span class="cn">Inf</span>); <span class="co"># NaN</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>bitstring(0 / 0) = "1111111111111000000000000000000000000000000000000000000000000000"
 bitstring(0Inf) = "1111111111111000000000000000000000000000000000000000000000000000"</code></pre>
 </div>
 </div>
 <ul>
-<li>Exponent <span class="math inline">\(e_{\min}-1\)</span> with a zero mantissa represents the real number 0 (“exact zero”).
-<ul>
-<li>Why do we need an exact zero?</li>
-</ul></li>
+<li>Exponent <span class="math inline">\(e_{\min}-1\)</span> with a zero mantissa represents the real number 0 (“exact zero”).</li>
 </ul>
 <div class="cell" data-execution_count="24">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb42-1"><a href="#cb42-1"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="fl">0.0</span>); <span class="co"># 0 in double precision </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb40-1"><a href="#cb40-1"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="fl">0.0</span>); <span class="co"># 0 in double precision </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>bitstring(0.0) = "0000000000000000000000000000000000000000000000000000000000000000"</code></pre>
 </div>
 </div>
+</section>
+<section class="slide level2">
+
 <ul>
 <li>Exponent <span class="math inline">\(e_{\min}-1\)</span> with a nonzero mantissa are for numbers less than <span class="math inline">\(b^{e_{\min}}\)</span> (subnormal numbers).</li>
 <li>Numbers are <em>denormalized</em> in the range <span class="math inline">\((0,b^{e_{\min}})\)</span> – <strong>gradual underflow</strong>.</li>
 <li>For example, in half-precision, <span class="math inline">\(e_{\min}=-14\)</span> but <span class="math inline">\(2^{-24}\)</span> is represented by <span class="math inline">\(0.0000000001_2 \times 2^{-14}\)</span>.</li>
 <li>If floating point numbers are all normalized, the spacing between 0 and <span class="math inline">\(b^{e_{\min}}\)</span> is just <span class="math inline">\(b^{e_{\min}}\)</span>, whereas the spacing between <span class="math inline">\(b^{e_{\min}}\)</span> and <span class="math inline">\(b^{e_{\min}+1}\)</span> is <span class="math inline">\(b^{e_{\min}-p+1}\)</span>. With subnormal numbers, the spacing between 0 and <span class="math inline">\(b^{e_{\min}}\)</span> can be <span class="math inline">\(b^{e_{\min}-p+1}\)</span>, which is consistent with the spacing just above <span class="math inline">\(b^{e_{\min}}\)</span>.</li>
 </ul>
+</section>
+<section class="slide level2">
+
 <div class="cell" data-execution_count="25">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb44-1"><a href="#cb44-1"></a><span class="pp">@show</span> <span class="fu">Float16</span>(<span class="fl">2</span><span class="op">^</span>(<span class="op">-</span><span class="fl">14</span>))  <span class="co"># emin=-14</span></span>
-<span id="cb44-2"><a href="#cb44-2"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="fu">Float16</span>(<span class="fl">2</span><span class="op">^</span>(<span class="op">-</span><span class="fl">14</span>)));</span>
-<span id="cb44-3"><a href="#cb44-3"></a><span class="pp">@show</span> <span class="fu">Float16</span>(<span class="fl">2</span><span class="op">^</span>(<span class="op">-</span><span class="fl">24</span>))  <span class="co"># emin=-14</span></span>
-<span id="cb44-4"><a href="#cb44-4"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="fu">Float16</span>(<span class="fl">2</span><span class="op">^</span>(<span class="op">-</span><span class="fl">24</span>))); <span class="co"># denormalized</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb42-1"><a href="#cb42-1"></a><span class="pp">@show</span> <span class="fu">Float16</span>(<span class="fl">2</span><span class="op">^</span>(<span class="op">-</span><span class="fl">14</span>))  <span class="co"># emin=-14</span></span>
+<span id="cb42-2"><a href="#cb42-2"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="fu">Float16</span>(<span class="fl">2</span><span class="op">^</span>(<span class="op">-</span><span class="fl">14</span>)));</span>
+<span id="cb42-3"><a href="#cb42-3"></a><span class="pp">@show</span> <span class="fu">Float16</span>(<span class="fl">2</span><span class="op">^</span>(<span class="op">-</span><span class="fl">24</span>))  <span class="co"># emin=-14</span></span>
+<span id="cb42-4"><a href="#cb42-4"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="fu">Float16</span>(<span class="fl">2</span><span class="op">^</span>(<span class="op">-</span><span class="fl">24</span>))); <span class="co"># denormalized</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Float16(2 ^ -14) = Float16(6.104e-5)
 bitstring(Float16(2 ^ -14)) = "0000010000000000"
@@ -964,87 +993,125 @@ bitstring(Float16(2 ^ -24)) = "0000000000000001"</code></pre>
 </div>
 </div>
 <div class="cell" data-execution_count="26">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb46-1"><a href="#cb46-1"></a><span class="pp">@show</span> <span class="fu">nextfloat</span>(<span class="fu">Float16</span>(<span class="fl">0.0</span>)) <span class="co"># next representable number</span></span>
-<span id="cb46-2"><a href="#cb46-2"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="fu">nextfloat</span>(<span class="fu">Float16</span>(<span class="fl">0.0</span>))); <span class="co"># denormalized</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb44-1"><a href="#cb44-1"></a><span class="pp">@show</span> <span class="fu">nextfloat</span>(<span class="fu">Float16</span>(<span class="fl">0.0</span>)) <span class="co"># next representable number</span></span>
+<span id="cb44-2"><a href="#cb44-2"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="fu">nextfloat</span>(<span class="fu">Float16</span>(<span class="fl">0.0</span>))); <span class="co"># denormalized</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>nextfloat(Float16(0.0)) = Float16(6.0e-8)
 bitstring(nextfloat(Float16(0.0))) = "0000000000000001"</code></pre>
 </div>
 </div>
+</section>
+<section class="slide level2">
+
 <h3 id="rounding">Rounding</h3>
 <ul>
 <li><p>Rounding is necessary whenever a number has more than <span class="math inline">\(p\)</span> significand bits. Most computer systems use the default IEEE 754 <em>round to nearest</em> mode (also called <em>ties to even</em> mode). Julia offers several <a href="https://docs.julialang.org/en/v1/base/math/#Base.Rounding.RoundingMode">rounding modes</a>, the default being <a href="https://docs.julialang.org/en/v1/base/math/#Base.Rounding.RoundNearest"><code>RoundNearest</code></a>.</p></li>
 <li><p>“<em>Round to nearest, ties to even</em>” rule: rounds to the nearest value; if the number falls midway, it is rounded to the nearest value with an even least significant digit (i.e., zero; default for IEEE 754 binary floating point numbers)</p></li>
-<li><p>For example, the number 1/10 cannot be represented accurately as a (binary) floating point number: <span class="math display">\[ 0.1 = 1.10011001\dotsc_2 \times 2^{-4} \]</span></p></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<ul>
+<li>For example, the number 1/10 cannot be represented accurately as a (binary) floating point number: <span class="math display">\[ 0.1 = 1.10011001\dotsc_2 \times 2^{-4} \]</span></li>
 </ul>
 <div class="cell" data-execution_count="27">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb48-1"><a href="#cb48-1"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="fl">0.1</span>);  <span class="co"># double precision Float64</span></span>
-<span id="cb48-2"><a href="#cb48-2"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="fl">0.1f0</span>); <span class="co"># single precision Float32, 1001 gets rounded to 101(0)</span></span>
-<span id="cb48-3"><a href="#cb48-3"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="fu">Float16</span>(<span class="fl">0.1</span>)); <span class="co"># half precision Float16, 1001 gets rounded to 101(0)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb46-1"><a href="#cb46-1"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="fl">0.1</span>);  <span class="co"># double precision Float64</span></span>
+<span id="cb46-2"><a href="#cb46-2"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="fl">0.1f0</span>); <span class="co"># single precision Float32, 1001 gets rounded to 101(0)</span></span>
+<span id="cb46-3"><a href="#cb46-3"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="fu">Float16</span>(<span class="fl">0.1</span>)); <span class="co"># half precision Float16, 1001 gets rounded to 101(0)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>bitstring(0.1) = "0011111110111001100110011001100110011001100110011001100110011010"
 bitstring(0.1f0) = "00111101110011001100110011001101"
 bitstring(Float16(0.1)) = "0010111001100110"</code></pre>
 </div>
 </div>
+</section>
+<section class="slide level2">
+
 <h3 id="errors">Errors</h3>
 <p>Rounding (more fundamentally, finite precision) incurs errors in floating porint computation. If a real number <span class="math inline">\(x\)</span> is represented by a floating point number <span class="math inline">\([x]\)</span>, then</p>
 <ul>
-<li><p>Absolute error <span class="math display">\[
-  | [x] - x |
-\]</span></p></li>
-<li><p>Relative error <span class="math display">\[
-  \frac{| [x] - x |}{|x|}
-\]</span> (if <span class="math inline">\(x \neq 0\)</span>).</p></li>
+<li><p>Absolute error: <span class="math inline">\(| [x] - x |\)</span></p></li>
+<li><p>Relative error: <span class="math inline">\(\frac{| [x] - x |}{|x|}\)</span> (if <span class="math inline">\(x \neq 0\)</span>).</p></li>
 </ul>
 <p>Of course, we want to ensure that the error after a computation is small.</p>
+</section>
+<section class="slide level2">
+
 <h3 id="machine-epsilons">Machine epsilons</h3>
 <ul>
-<li>Floating-point numbers do not occur uniformly over the real number line <img src="http://www.volkerschatz.com/science/pics/fltscale-wh.png" width="700" align="center"></li>
+<li>Floating-point numbers do not occur uniformly over the real number line</li>
 </ul>
+
+<img data-src="./fltscale.png" width="800" class="r-stretch quarto-figure-center"><div style="font-size: 50%;">
 <p>Source: <a href="http://www.volkerschatz.com/science/float.html">What you never wanted to know about floating point but will be forced to find out</a></p>
+</div>
 <ul>
-<li><p>Same number of representible numbers in <span class="math inline">\((2^i, 2^{i+1}]\)</span> as in <span class="math inline">\((2^{i+1}, 2^{i+2}]\)</span>. Within an interval, they are uniformly distributed.</p></li>
-<li><p><strong>Machine epsilons</strong> are the spacings of numbers around 1:</p>
+<li>Same number of representible numbers in <span class="math inline">\((2^i, 2^{i+1}]\)</span> as in <span class="math inline">\((2^{i+1}, 2^{i+2}]\)</span>. Within an interval, they are uniformly distributed.</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<ul>
+<li><strong>Machine epsilons</strong> are the spacings of numbers around 1:
 <ul>
 <li><span class="math inline">\(\epsilon_{\max}\)</span> = (smallest positive floating point number that added to 1 will give a result different from 1) = <span class="math inline">\(\frac{1}{2^p} + \frac{1}{2^{2p-1}}\)</span></li>
 <li><span class="math inline">\(\epsilon_{\min}\)</span> = (smallest positive floating point number that subtracted from 1 will give a result different from 1) = <span class="math inline">\(\frac{1}{2^{p+1}} + \frac{1}{2^{2p}}\)</span>.</li>
 <li>That is, <span class="math inline">\(1 + \epsilon_{\max}\)</span> is the number in the “midway” between 1 and the floating point number right next to it, etc.</li>
+</ul></li>
 </ul>
-<p><img src="./machine_epsilons.png" width="500" align="center"></p></li>
-</ul>
+
+<img data-src="./machine_epsilons.png" width="1000" class="r-stretch quarto-figure-center"><div style="font-size: 50%;">
 <p>Source: <em>Computational Statistics</em>, James Gentle, Springer, New York, 2009.</p>
 <p><em>Caution: the definition of <span class="math inline">\(\epsilon_{\max}\)</span> and <span class="math inline">\(\epsilon_{\min}\)</span> in this book is different from the lecture note.</em></p>
+</div>
+</section>
+<section class="slide level2">
+
 <ul>
 <li><p>Any real number in the interval <span class="math inline">\(\left[1 - \frac{1}{2^{p+1}}, 1 + \frac{1}{2^p}\right]=[1.111\dotsb1|1_2 \times 2^{-1}, 1.000\dotsb 0|1 \times 2^0]\)</span> is represented by a floating point number <span class="math inline">\(1 = 1.00\dotsc 0_2 \times 2^0\)</span> (assuming the “ties to even” rule: consider <span class="math inline">\(p=2\)</span> case).</p></li>
 <li><p>Adding <span class="math inline">\(\frac{1}{2^p}\)</span> to 1 won’t reach the next representable floating point number <span class="math inline">\(1.00\dotsc 01_2 \times 2^0 = 1 + \frac{1}{2^{p-1}}\)</span>. Hence <span class="math inline">\(\epsilon_{\max} &gt; \frac{1}{2^p} = 1.00\dotsc 0_2 \times 2^{-p}\)</span>.</p></li>
 <li><p>Adding the floating point number <em>next to</em> <span class="math inline">\(\frac{1}{2^p} = 1.00\dotsc 0_2 \times 2^{-p}\)</span> to 1 WILL result in <span class="math inline">\(1.00\dotsc 01_2 \times 2^0 = 1 + \frac{1}{2^{p-1}}\)</span>, hence <span class="math inline">\(\epsilon_{\max} = 1.00\dotsb 01_2 \times 2^{-p} = \frac{1}{2^p} + \frac{1}{2^{p+p-1}}\)</span>.</p></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<ul>
 <li><p>Subtracting <span class="math inline">\(\frac{1}{2^{p+1}}\)</span> from 1 results in <span class="math inline">\(1-\frac{1}{2^{p+1}} = \frac{1}{2} + \frac{1}{2^2} + \dotsb + \frac{1}{2^p} + \frac{1}{2^{p+1}}\)</span>, which is represented by the floating point number <span class="math inline">\(1.00\dotsb 0_2 \times 2^{0} = 1\)</span> by the “ties to even” rule. Hence <span class="math inline">\(\epsilon_{\min} &gt; \frac{1}{2^{p+1}}\)</span>.</p></li>
 <li><p>The smallest positive floating point number larger than <span class="math inline">\(\frac{1}{2^{p+1}}\)</span> is <span class="math inline">\(\frac{1}{2^{p+1}} + \frac{1}{2^{2p}}=1.00\dotsc 1_2 \times 2^{-p-1}\)</span>. Thus <span class="math inline">\(\epsilon_{\min} = \frac{1}{2^{p+1}} + \frac{1}{2^{2p}}\)</span>.</p></li>
 </ul>
+</section>
+<section class="slide level2">
+
 <h3 id="machine-precision">Machine precision</h3>
 <ul>
 <li><p>Machine epsilon is often called the machine precision.</p></li>
 <li><p>If a positive real number <span class="math inline">\(x \in \mathbb{R}\)</span> is represented by <span class="math inline">\([x]\)</span> in the floating point arithmetic, then <span class="math display">\[
   [x] = \left( 1 + \sum_{i=1}^{p-1}\frac{d_{i+1}}{2^i}\right) \times 2^e.
-\]</span> Thus <span class="math inline">\(x - \frac{2^e}{2^p} \le [x] \le x + \frac{2^e}{2^p}\)</span>, and <span class="math display">\[
-  \begin{split}
-  \frac{| x - [x] |}{|x|} &amp;\le \frac{2^e}{2^p|x|} \le \frac{2^e}{2^p}\frac{1}{[x]-2^e/2^p} \\
-                          &amp;\le \frac{2^e}{2^p}\frac{1}{2^e(1-1/2^p)}  \quad (\because [x] \ge 2^e) \\
-                          &amp;\le \frac{2^e}{2^p}\frac{1}{2^e}(1 + \frac{1}{2^{p-1}}) \\
-                          &amp;= \frac{1}{2^p} + \frac{1}{2^{2p-1}} = \epsilon_{\max}.
-  \end{split}
-\]</span> That is, the <strong>relative error</strong> of the floating point representation <span class="math inline">\([x]\)</span> of real number <span class="math inline">\(x\)</span> is bounded by <span class="math inline">\(\epsilon_{\max}\)</span>.</p></li>
+  \]</span></p></li>
 </ul>
+</section>
+<section class="slide level2">
+
+<p>Thus <span class="math inline">\(x - \frac{2^e}{2^p} \le [x] \le x + \frac{2^e}{2^p}\)</span>, and <span class="math display">\[
+    \begin{split}
+    \frac{| x - [x] |}{|x|} &amp;\le \frac{2^e}{2^p|x|} \le \frac{2^e}{2^p}\frac{1}{[x]-2^e/2^p} \\
+                            &amp;\le \frac{2^e}{2^p}\frac{1}{2^e(1-1/2^p)}  \quad (\because [x] \ge 2^e) \\
+                            &amp;\le \frac{2^e}{2^p}\frac{1}{2^e}(1 + \frac{1}{2^{p-1}}) \\
+                            &amp;= \frac{1}{2^p} + \frac{1}{2^{2p-1}} = \epsilon_{\max}.
+    \end{split}
+    \]</span> That is, the <strong>relative error</strong> of the floating point representation <span class="math inline">\([x]\)</span> of real number <span class="math inline">\(x\)</span> is bounded by <span class="math inline">\(\epsilon_{\max}\)</span>.</p>
+</section>
+<section class="slide level2">
+
 <div class="cell" data-execution_count="28">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb50-1"><a href="#cb50-1"></a><span class="pp">@show</span> <span class="fl">2</span><span class="op">^</span>(<span class="op">-</span><span class="fl">53</span>) <span class="op">+</span> <span class="fl">2</span><span class="op">^</span>(<span class="op">-</span><span class="fl">105</span>);   <span class="co"># epsilon_max for Float64</span></span>
-<span id="cb50-2"><a href="#cb50-2"></a><span class="pp">@show</span> <span class="fl">1.0</span> <span class="op">+</span> <span class="fl">2</span><span class="op">^</span>(<span class="op">-</span><span class="fl">53</span>);</span>
-<span id="cb50-3"><a href="#cb50-3"></a><span class="pp">@show</span> <span class="fl">1.0</span> <span class="op">+</span> (<span class="fl">2</span><span class="op">^</span>(<span class="op">-</span><span class="fl">53</span>) <span class="op">+</span> <span class="fl">2</span><span class="op">^</span>(<span class="op">-</span><span class="fl">105</span>));</span>
-<span id="cb50-4"><a href="#cb50-4"></a><span class="pp">@show</span> <span class="fl">1.0</span> <span class="op">+</span> <span class="fl">2</span><span class="op">^</span>(<span class="op">-</span><span class="fl">53</span>) <span class="op">+</span> <span class="fl">2</span><span class="op">^</span>(<span class="op">-</span><span class="fl">105</span>);  <span class="co"># why is the result?  See "Catastrophic cancellation"</span></span>
-<span id="cb50-5"><a href="#cb50-5"></a></span>
-<span id="cb50-6"><a href="#cb50-6"></a><span class="pp">@show</span> <span class="fu">Float32</span>(<span class="fl">2</span><span class="op">^</span>(<span class="op">-</span><span class="fl">24</span>) <span class="op">+</span> <span class="fl">2</span><span class="op">^</span>(<span class="op">-</span><span class="fl">47</span>)); <span class="co"># epsilon_max for Float32</span></span>
-<span id="cb50-7"><a href="#cb50-7"></a><span class="pp">@show</span> <span class="fl">1.0f0</span> <span class="op">+</span> <span class="fu">Float32</span>(<span class="fl">2</span><span class="op">^</span>(<span class="op">-</span><span class="fl">24</span>));</span>
-<span id="cb50-8"><a href="#cb50-8"></a><span class="pp">@show</span> <span class="fl">1.0f0</span> <span class="op">+</span> <span class="fu">Float32</span>(<span class="fl">2</span><span class="op">^</span>(<span class="op">-</span><span class="fl">24</span>) <span class="op">+</span> <span class="fl">2</span><span class="op">^</span>(<span class="op">-</span><span class="fl">47</span>));</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb48-1"><a href="#cb48-1"></a><span class="pp">@show</span> <span class="fl">2</span><span class="op">^</span>(<span class="op">-</span><span class="fl">53</span>) <span class="op">+</span> <span class="fl">2</span><span class="op">^</span>(<span class="op">-</span><span class="fl">105</span>);   <span class="co"># epsilon_max for Float64</span></span>
+<span id="cb48-2"><a href="#cb48-2"></a><span class="pp">@show</span> <span class="fl">1.0</span> <span class="op">+</span> <span class="fl">2</span><span class="op">^</span>(<span class="op">-</span><span class="fl">53</span>);</span>
+<span id="cb48-3"><a href="#cb48-3"></a><span class="pp">@show</span> <span class="fl">1.0</span> <span class="op">+</span> (<span class="fl">2</span><span class="op">^</span>(<span class="op">-</span><span class="fl">53</span>) <span class="op">+</span> <span class="fl">2</span><span class="op">^</span>(<span class="op">-</span><span class="fl">105</span>));</span>
+<span id="cb48-4"><a href="#cb48-4"></a><span class="pp">@show</span> <span class="fl">1.0</span> <span class="op">+</span> <span class="fl">2</span><span class="op">^</span>(<span class="op">-</span><span class="fl">53</span>) <span class="op">+</span> <span class="fl">2</span><span class="op">^</span>(<span class="op">-</span><span class="fl">105</span>);  <span class="co"># why is the result?  See "Catastrophic cancellation"</span></span>
+<span id="cb48-5"><a href="#cb48-5"></a></span>
+<span id="cb48-6"><a href="#cb48-6"></a><span class="pp">@show</span> <span class="fu">Float32</span>(<span class="fl">2</span><span class="op">^</span>(<span class="op">-</span><span class="fl">24</span>) <span class="op">+</span> <span class="fl">2</span><span class="op">^</span>(<span class="op">-</span><span class="fl">47</span>)); <span class="co"># epsilon_max for Float32</span></span>
+<span id="cb48-7"><a href="#cb48-7"></a><span class="pp">@show</span> <span class="fl">1.0f0</span> <span class="op">+</span> <span class="fu">Float32</span>(<span class="fl">2</span><span class="op">^</span>(<span class="op">-</span><span class="fl">24</span>));</span>
+<span id="cb48-8"><a href="#cb48-8"></a><span class="pp">@show</span> <span class="fl">1.0f0</span> <span class="op">+</span> <span class="fu">Float32</span>(<span class="fl">2</span><span class="op">^</span>(<span class="op">-</span><span class="fl">24</span>) <span class="op">+</span> <span class="fl">2</span><span class="op">^</span>(<span class="op">-</span><span class="fl">47</span>));</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>2 ^ -53 + 2 ^ -105 = 1.1102230246251568e-16
 1.0 + 2 ^ -53 = 1.0
@@ -1055,11 +1122,14 @@ Float32(2 ^ -24 + 2 ^ -47) = 5.960465f-8
 1.0f0 + Float32(2 ^ -24 + 2 ^ -47) = 1.0000001f0</code></pre>
 </div>
 </div>
+</section>
+<section class="slide level2">
+
 <div class="cell" data-execution_count="29">
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb52-1"><a href="#cb52-1"></a><span class="pp">@show</span> <span class="fl">2</span><span class="op">^</span>(<span class="op">-</span><span class="fl">54</span>) <span class="op">+</span> <span class="fl">2</span><span class="op">^</span>(<span class="op">-</span><span class="fl">106</span>);  <span class="co"># epsilon_min for Float64</span></span>
-<span id="cb52-2"><a href="#cb52-2"></a><span class="pp">@show</span> <span class="fl">1</span> <span class="op">-</span> (<span class="fl">2</span><span class="op">^</span>(<span class="op">-</span><span class="fl">54</span>) <span class="op">+</span> <span class="fl">2</span><span class="op">^</span>(<span class="op">-</span><span class="fl">106</span>))</span>
-<span id="cb52-3"><a href="#cb52-3"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="fl">1.0</span>)</span>
-<span id="cb52-4"><a href="#cb52-4"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="fl">1</span> <span class="op">-</span> (<span class="fl">2</span><span class="op">^</span>(<span class="op">-</span><span class="fl">54</span>) <span class="op">+</span> <span class="fl">2</span><span class="op">^</span>(<span class="op">-</span><span class="fl">106</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb50-1"><a href="#cb50-1"></a><span class="pp">@show</span> <span class="fl">2</span><span class="op">^</span>(<span class="op">-</span><span class="fl">54</span>) <span class="op">+</span> <span class="fl">2</span><span class="op">^</span>(<span class="op">-</span><span class="fl">106</span>);  <span class="co"># epsilon_min for Float64</span></span>
+<span id="cb50-2"><a href="#cb50-2"></a><span class="pp">@show</span> <span class="fl">1</span> <span class="op">-</span> (<span class="fl">2</span><span class="op">^</span>(<span class="op">-</span><span class="fl">54</span>) <span class="op">+</span> <span class="fl">2</span><span class="op">^</span>(<span class="op">-</span><span class="fl">106</span>))</span>
+<span id="cb50-3"><a href="#cb50-3"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="fl">1.0</span>)</span>
+<span id="cb50-4"><a href="#cb50-4"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="fl">1</span> <span class="op">-</span> (<span class="fl">2</span><span class="op">^</span>(<span class="op">-</span><span class="fl">54</span>) <span class="op">+</span> <span class="fl">2</span><span class="op">^</span>(<span class="op">-</span><span class="fl">106</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>2 ^ -54 + 2 ^ -106 = 5.551115123125784e-17
 1 - (2 ^ -54 + 2 ^ -106) = 0.9999999999999999
@@ -1070,19 +1140,22 @@ bitstring(1 - (2 ^ -54 + 2 ^ -106)) = "00111111111011111111111111111111111111111
 <pre><code>"0011111111101111111111111111111111111111111111111111111111111111"</code></pre>
 </div>
 </div>
+</section>
+<section class="slide level2">
+
 <p>In Julia, <code>eps(x)</code> gives the distance between consecutive representable floating point values at <code>x</code>, i.e.,</p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb55-1"><a href="#cb55-1"></a><span class="fu">eps</span>(x) <span class="op">==</span> <span class="fu">max</span>(<span class="fu">x-prevfloat</span>(x), <span class="fu">nextfloat</span>(x)<span class="op">-</span>x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb53-1"><a href="#cb53-1"></a><span class="fu">eps</span>(x) <span class="op">==</span> <span class="fu">max</span>(<span class="fu">x-prevfloat</span>(x), <span class="fu">nextfloat</span>(x)<span class="op">-</span>x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>which is roughly twice the <span class="math inline">\(\epsilon_{\max}\)</span>.</p>
 <div class="cell" data-execution_count="30">
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb56-1"><a href="#cb56-1"></a><span class="pp">@show</span> <span class="fu">eps</span>(<span class="dt">Float32</span>)  <span class="co"># machine epsilon for a floating point type, roughly twice our \epsilon_{\max}</span></span>
-<span id="cb56-2"><a href="#cb56-2"></a><span class="pp">@show</span> <span class="fu">eps</span>(<span class="dt">Float64</span>)  <span class="co"># same as eps()</span></span>
-<span id="cb56-3"><a href="#cb56-3"></a><span class="co"># eps(x) is the spacing after x</span></span>
-<span id="cb56-4"><a href="#cb56-4"></a><span class="pp">@show</span> <span class="fu">eps</span>(<span class="fl">100.0</span>)</span>
-<span id="cb56-5"><a href="#cb56-5"></a><span class="pp">@show</span> <span class="fu">eps</span>(<span class="fl">0.0</span>)</span>
-<span id="cb56-6"><a href="#cb56-6"></a><span class="co"># nextfloat(x) and prevfloat(x) give the neighbors of x</span></span>
-<span id="cb56-7"><a href="#cb56-7"></a><span class="pp">@show</span> x <span class="op">=</span> <span class="fl">1.25f0</span></span>
-<span id="cb56-8"><a href="#cb56-8"></a><span class="pp">@show</span> <span class="fu">prevfloat</span>(x), x, <span class="fu">nextfloat</span>(x)</span>
-<span id="cb56-9"><a href="#cb56-9"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="fu">prevfloat</span>(x)), <span class="fu">bitstring</span>(x), <span class="fu">bitstring</span>(<span class="fu">nextfloat</span>(x));</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb54-1"><a href="#cb54-1"></a><span class="pp">@show</span> <span class="fu">eps</span>(<span class="dt">Float32</span>)  <span class="co"># machine epsilon for a floating point type, roughly twice our \epsilon_{\max}</span></span>
+<span id="cb54-2"><a href="#cb54-2"></a><span class="pp">@show</span> <span class="fu">eps</span>(<span class="dt">Float64</span>)  <span class="co"># same as eps()</span></span>
+<span id="cb54-3"><a href="#cb54-3"></a><span class="co"># eps(x) is the spacing after x</span></span>
+<span id="cb54-4"><a href="#cb54-4"></a><span class="pp">@show</span> <span class="fu">eps</span>(<span class="fl">100.0</span>)</span>
+<span id="cb54-5"><a href="#cb54-5"></a><span class="pp">@show</span> <span class="fu">eps</span>(<span class="fl">0.0</span>)</span>
+<span id="cb54-6"><a href="#cb54-6"></a><span class="co"># nextfloat(x) and prevfloat(x) give the neighbors of x</span></span>
+<span id="cb54-7"><a href="#cb54-7"></a><span class="pp">@show</span> x <span class="op">=</span> <span class="fl">1.25f0</span></span>
+<span id="cb54-8"><a href="#cb54-8"></a><span class="pp">@show</span> <span class="fu">prevfloat</span>(x), x, <span class="fu">nextfloat</span>(x)</span>
+<span id="cb54-9"><a href="#cb54-9"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(<span class="fu">prevfloat</span>(x)), <span class="fu">bitstring</span>(x), <span class="fu">bitstring</span>(<span class="fu">nextfloat</span>(x));</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>eps(Float32) = 1.1920929f-7
 eps(Float64) = 2.220446049250313e-16
@@ -1093,13 +1166,16 @@ x = 1.25f0 = 1.25f0
 (bitstring(prevfloat(x)), bitstring(x), bitstring(nextfloat(x))) = ("00111111100111111111111111111111", "00111111101000000000000000000000", "00111111101000000000000000000001")</code></pre>
 </div>
 </div>
+</section>
+<section class="slide level2">
+
 <ul>
 <li>In R, the variable <code>.Machine</code> contains numerical characteristics of the machine. <code>double.eps</code> and <code>double.neg.eps</code> are roughly twice our <span class="math inline">\(\epsilon_{\max}\)</span> and <span class="math inline">\(\epsilon_{\min}\)</span>, respectively.</li>
 </ul>
 <div class="cell" data-execution_count="31">
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb58-1"><a href="#cb58-1"></a>R<span class="st">"""</span></span>
-<span id="cb58-2"><a href="#cb58-2"></a><span class="st">.Machine</span></span>
-<span id="cb58-3"><a href="#cb58-3"></a><span class="st">"""</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb56-1"><a href="#cb56-1"></a>R<span class="st">"""</span></span>
+<span id="cb56-2"><a href="#cb56-2"></a><span class="st">.Machine</span></span>
+<span id="cb56-3"><a href="#cb56-3"></a><span class="st">"""</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="31">
 <pre><code>RObject{VecSxp}
 $double.eps
@@ -1188,17 +1264,25 @@ $longdouble.max.exp
 </code></pre>
 </div>
 </div>
-<h3 id="overflow-and-underflow-of-floating-point-number">Overflow and underflow of floating-point number</h3>
+</section>
+<section class="slide level2">
+
+<h3 id="overflow-and-underflow">Overflow and underflow</h3>
 <ul>
 <li><p>For double precision, the range is <span class="math inline">\(\pm 10^{\pm 308}\)</span>. In most situations, underflow (magnitude of result is less than <span class="math inline">\(10^{-308}\)</span>) is preferred over overflow (magnitude of result is larger than <span class="math inline">\(10^{+308}\)</span>). Overflow produces <span class="math inline">\(\pm \inf\)</span>. Underflow yields zeros or subnormal numbers.</p></li>
-<li><p>E.g., the logit link function is <span class="math display">\[p = \frac{\exp (x^T \beta)}{1 + \exp (x^T \beta)} = \frac{1}{1+\exp(- x^T \beta)}.\]</span> The former expression can easily lead to <code>Inf / Inf = NaN</code>, while the latter expression leads to gradual underflow.</p></li>
-<li><p><code>floatmin</code> and <code>floatmax</code> functions gives largest and smallest <em>non-subnormal</em> number represented by the given floating point type.</p></li>
+<li><p>Example: the logit link function is <span class="math display">\[p = \frac{\exp (x^T \beta)}{1 + \exp (x^T \beta)} = \frac{1}{1+\exp(- x^T \beta)}.\]</span> The former expression can easily lead to <code>Inf / Inf = NaN</code>, while the latter expression leads to gradual underflow.</p></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<ul>
+<li><code>floatmin</code> and <code>floatmax</code> functions gives largest and smallest <em>non-subnormal</em> number represented by the given floating point type.</li>
 </ul>
 <div class="cell" data-execution_count="32">
-<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb60-1"><a href="#cb60-1"></a><span class="cf">for</span> T <span class="kw">in</span> [<span class="dt">Float16</span>, <span class="dt">Float32</span>, <span class="dt">Float64</span>]</span>
-<span id="cb60-2"><a href="#cb60-2"></a>    <span class="fu">println</span>(T, <span class="ch">'\t'</span>, <span class="fu">floatmin</span>(T), <span class="ch">'\t'</span>, <span class="fu">floatmax</span>(T), <span class="ch">'\t'</span>, <span class="fu">typemin</span>(T), </span>
-<span id="cb60-3"><a href="#cb60-3"></a>        <span class="ch">'\t'</span>, <span class="fu">typemax</span>(T), <span class="ch">'\t'</span>, <span class="fu">eps</span>(T))</span>
-<span id="cb60-4"><a href="#cb60-4"></a><span class="cf">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb58-1"><a href="#cb58-1"></a><span class="cf">for</span> T <span class="kw">in</span> [<span class="dt">Float16</span>, <span class="dt">Float32</span>, <span class="dt">Float64</span>]</span>
+<span id="cb58-2"><a href="#cb58-2"></a>    <span class="fu">println</span>(T, <span class="ch">'\t'</span>, <span class="fu">floatmin</span>(T), <span class="ch">'\t'</span>, <span class="fu">floatmax</span>(T), <span class="ch">'\t'</span>, <span class="fu">typemin</span>(T), </span>
+<span id="cb58-3"><a href="#cb58-3"></a>        <span class="ch">'\t'</span>, <span class="fu">typemax</span>(T), <span class="ch">'\t'</span>, <span class="fu">eps</span>(T))</span>
+<span id="cb58-4"><a href="#cb58-4"></a><span class="cf">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Float16 6.104e-5    6.55e4  -Inf    Inf 0.000977
 Float32 1.1754944e-38   3.4028235e38    -Inf    Inf 1.1920929e-7
@@ -1209,21 +1293,24 @@ Float64 2.2250738585072014e-308 1.7976931348623157e308  -Inf    Inf 2.2204460492
 <li><code>BigFloat</code> in Julia offers arbitrary precision.</li>
 </ul>
 <div class="cell" data-execution_count="33">
-<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb62-1"><a href="#cb62-1"></a><span class="pp">@show</span> <span class="fu">precision</span>(<span class="dt">BigFloat</span>)</span>
-<span id="cb62-2"><a href="#cb62-2"></a><span class="pp">@show</span> <span class="fu">floatmin</span>(<span class="dt">BigFloat</span>)</span>
-<span id="cb62-3"><a href="#cb62-3"></a><span class="pp">@show</span> <span class="fu">floatmax</span>(<span class="dt">BigFloat</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb60-1"><a href="#cb60-1"></a><span class="pp">@show</span> <span class="fu">precision</span>(<span class="dt">BigFloat</span>)</span>
+<span id="cb60-2"><a href="#cb60-2"></a><span class="pp">@show</span> <span class="fu">floatmin</span>(<span class="dt">BigFloat</span>)</span>
+<span id="cb60-3"><a href="#cb60-3"></a><span class="pp">@show</span> <span class="fu">floatmax</span>(<span class="dt">BigFloat</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>precision(BigFloat) = 256
 floatmin(BigFloat) = 8.50969131174083613912978790962048280567755996982969624908264897850135431080301e-1388255822130839284
 floatmax(BigFloat) = 5.875653789111587590936911998878442589938516392745498308333779606469323584389875e+1388255822130839282</code></pre>
 </div>
 </div>
+</section>
+<section class="slide level2">
+
 <div class="cell" data-execution_count="34">
-<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb64-1"><a href="#cb64-1"></a><span class="pp">@show</span> <span class="fu">BigFloat</span>(<span class="cn">π</span>); <span class="co"># default precision for BigFloat is 256 bits</span></span>
-<span id="cb64-2"><a href="#cb64-2"></a><span class="co"># set precision to 1024 bits</span></span>
-<span id="cb64-3"><a href="#cb64-3"></a><span class="fu">setprecision</span>(<span class="dt">BigFloat</span>, <span class="fl">1024</span>) <span class="cf">do</span> </span>
-<span id="cb64-4"><a href="#cb64-4"></a>    <span class="pp">@show</span> <span class="fu">BigFloat</span>(<span class="cn">π</span>)</span>
-<span id="cb64-5"><a href="#cb64-5"></a><span class="cf">end</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb62-1"><a href="#cb62-1"></a><span class="pp">@show</span> <span class="fu">BigFloat</span>(<span class="cn">π</span>); <span class="co"># default precision for BigFloat is 256 bits</span></span>
+<span id="cb62-2"><a href="#cb62-2"></a><span class="co"># set precision to 1024 bits</span></span>
+<span id="cb62-3"><a href="#cb62-3"></a><span class="fu">setprecision</span>(<span class="dt">BigFloat</span>, <span class="fl">1024</span>) <span class="cf">do</span> </span>
+<span id="cb62-4"><a href="#cb62-4"></a>    <span class="pp">@show</span> <span class="fu">BigFloat</span>(<span class="cn">π</span>)</span>
+<span id="cb62-5"><a href="#cb62-5"></a><span class="cf">end</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>BigFloat(π) = 3.141592653589793238462643383279502884197169399375105820974944592307816406286198
 BigFloat(π) = 3.141592653589793238462643383279502884197169399375105820974944592307816406286208998628034825342117067982148086513282306647093844609550582231725359408128481117450284102701938521105559644622948954930381964428810975665933446128475648233786783165271201909145648566923460348610454326648213393607260249141273724586997</code></pre>
@@ -1236,17 +1323,20 @@ BigFloat(π) = 3.141592653589793238462643383279502884197169399375105820974944592
 <p>The result of computation is just the digits that represented the rounding.</p>
 </blockquote>
 <ul>
-<li><strong>Scenario 1</strong> (benign cancellation): Addition or subtraction of two numbers of widely different magnitudes: <span class="math inline">\(a+b\)</span> or <span class="math inline">\(a-b\)</span> where <span class="math inline">\(a \gg b\)</span> or <span class="math inline">\(a \ll b\)</span>. We lose the precision in the number of smaller magnitude. Consider <span class="math display">\[\begin{eqnarray*}
-  a &amp;=&amp; x.xxx ... \times 2^{30} \\  
-  b &amp;=&amp; y.yyy... \times 2^{-30}
-\end{eqnarray*}\]</span> What happens when computer calculates <span class="math inline">\(a+b\)</span>? We get <span class="math inline">\(a+b=a\)</span>!</li>
+<li><strong>Scenario 1</strong> (benign cancellation): Addition or subtraction of two numbers of widely different magnitudes: <span class="math inline">\(a+b\)</span> or <span class="math inline">\(a-b\)</span> where <span class="math inline">\(a \gg b\)</span> or <span class="math inline">\(a \ll b\)</span>. We lose the precision in the number of smaller magnitude. Consider <span class="math display">\[
+  a = x.xxx ... \times 2^{30}, \quad
+  b = y.yyy... \times 2^{-30}
+  \]</span> What happens when computer calculates <span class="math inline">\(a+b\)</span>? We get <span class="math inline">\(a+b=a\)</span>!</li>
 </ul>
+</section>
+<section class="slide level2">
+
 <div class="cell" data-execution_count="35">
-<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb66-1"><a href="#cb66-1"></a><span class="pp">@show</span> a <span class="op">=</span> <span class="fl">2.0</span><span class="op">^</span><span class="fl">30</span></span>
-<span id="cb66-2"><a href="#cb66-2"></a><span class="pp">@show</span> b <span class="op">=</span> <span class="fl">2.0</span><span class="op">^-</span><span class="fl">30</span></span>
-<span id="cb66-3"><a href="#cb66-3"></a><span class="pp">@show</span> a <span class="op">+</span> b <span class="op">==</span> a</span>
-<span id="cb66-4"><a href="#cb66-4"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(a)</span>
-<span id="cb66-5"><a href="#cb66-5"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(a <span class="op">+</span> b);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb64-1"><a href="#cb64-1"></a><span class="pp">@show</span> a <span class="op">=</span> <span class="fl">2.0</span><span class="op">^</span><span class="fl">30</span></span>
+<span id="cb64-2"><a href="#cb64-2"></a><span class="pp">@show</span> b <span class="op">=</span> <span class="fl">2.0</span><span class="op">^-</span><span class="fl">30</span></span>
+<span id="cb64-3"><a href="#cb64-3"></a><span class="pp">@show</span> a <span class="op">+</span> b <span class="op">==</span> a</span>
+<span id="cb64-4"><a href="#cb64-4"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(a)</span>
+<span id="cb64-5"><a href="#cb64-5"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(a <span class="op">+</span> b);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>a = 2.0 ^ 30 = 1.073741824e9
 b = 2.0 ^ -30 = 9.313225746154785e-10
@@ -1255,6 +1345,9 @@ bitstring(a) = "0100000111010000000000000000000000000000000000000000000000000000
 bitstring(a + b) = "0100000111010000000000000000000000000000000000000000000000000000"</code></pre>
 </div>
 </div>
+</section>
+<section class="slide level2">
+
 <p>Analysis: suppose we want to compute <span class="math inline">\(x + y\)</span>, <span class="math inline">\(x, y &gt; 0\)</span>. Let the relative error of <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> be <span class="math display">\[
 \delta_x = \frac{[x] - x}{x},
 \quad
@@ -1264,7 +1357,11 @@ bitstring(a + b) = "010000011101000000000000000000000000000000000000000000000000
 \delta_{\text{sum}} = \frac{[[x]+[y]] - ([x]+[y])}{[x]+[y]}
 .
 \]</span> Recall that <span class="math inline">\(|\delta_x|, |\delta_y|, |\delta_{\text{sum}}| \le \epsilon_{\max}\)</span>.</p>
+</section>
+<section class="slide level2">
+
 <p>We want to find a bound of the relative error of <span class="math inline">\([[x]+[y]]\)</span> with respect to <span class="math inline">\(x+y\)</span>. Since <span class="math inline">\(|[x]+[y]| = |x(1+\delta_x) + y(1+\delta_y)| \le |x+y|(1+\epsilon_{\max})\)</span>, we have <span class="math display">\[
+\small
 \begin{split}
 | [[x]+[y]]-(x+y) | &amp;= | [[x]+[y]] - [x] - [y] + [x] - x + [y] - y | \\
                    &amp;\le | [[x]+[y]] - [x] - [y] | +  | [x] - x | + | [y] - y | \\
@@ -1272,23 +1369,30 @@ bitstring(a + b) = "010000011101000000000000000000000000000000000000000000000000
                    &amp;\le \epsilon_{\max}(x+y)(1+\epsilon_{\max}) + \epsilon_{\max}x + \epsilon_{\max}y \\
                    &amp;\approx 2\epsilon_{\max}(x+y)
 \end{split}
-\]</span> because <span class="math inline">\(\epsilon_{\max}^2 \approx 0\)</span>. Thus <span class="math display">\[
+\]</span> because <span class="math inline">\(\epsilon_{\max}^2 \approx 0\)</span>.</p>
+</section>
+<section class="slide level2">
+
+<p>Thus <span class="math display">\[
 \frac{| [[x]+[y]]-(x+y) |}{|x+y|} \le 2\epsilon_{\max}
 \]</span> approximately.</p>
+</section>
+<section class="slide level2">
+
 <ul>
-<li><strong>Scenario 2</strong> (catastrophic cancellation): Subtraction of two nearly equal numbers eliminates significant digits. <span class="math inline">\(a-b\)</span> where <span class="math inline">\(a \approx b\)</span>. Consider <span class="math display">\[\begin{eqnarray*}
-  a &amp;=&amp; x.xxxxxxxxxx1ssss  \\
-  b &amp;=&amp; x.xxxxxxxxxx0tttt
-\end{eqnarray*}\]</span> The result is <span class="math inline">\(1.vvvvu...u\)</span> where <span class="math inline">\(u\)</span> are unassigned digits.</li>
+<li><strong>Scenario 2</strong> (catastrophic cancellation): Subtraction of two nearly equal numbers eliminates significant digits. <span class="math inline">\(a-b\)</span> where <span class="math inline">\(a \approx b\)</span>. Consider <span class="math display">\[
+  a = x.xxxxxxxxxx1ssss  \quad
+  b = x.xxxxxxxxxx0tttt
+  \]</span> The result is <span class="math inline">\(1.vvvvu...u\)</span> where <span class="math inline">\(u\)</span> are unassigned digits.</li>
 </ul>
 <div class="cell" data-execution_count="36">
-<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb68-1"><a href="#cb68-1"></a>a <span class="op">=</span> <span class="fl">1.2345678f0</span> <span class="co"># rounding</span></span>
-<span id="cb68-2"><a href="#cb68-2"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(a) <span class="co"># rounding</span></span>
-<span id="cb68-3"><a href="#cb68-3"></a>b <span class="op">=</span> <span class="fl">1.2345677f0</span></span>
-<span id="cb68-4"><a href="#cb68-4"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(b)</span>
-<span id="cb68-5"><a href="#cb68-5"></a><span class="pp">@show</span> a <span class="op">-</span> b <span class="co"># correct result should be 1f-7</span></span>
-<span id="cb68-6"><a href="#cb68-6"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(a <span class="op">-</span> b)   <span class="co"># must be 1.0000...0 x 2^(-23)</span></span>
-<span id="cb68-7"><a href="#cb68-7"></a><span class="pp">@show</span> <span class="fu">Float32</span>(<span class="fl">1</span><span class="op">/</span><span class="fl">2</span><span class="op">^</span><span class="fl">23</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb66-1"><a href="#cb66-1"></a>a <span class="op">=</span> <span class="fl">1.2345678f0</span> <span class="co"># rounding</span></span>
+<span id="cb66-2"><a href="#cb66-2"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(a) <span class="co"># rounding</span></span>
+<span id="cb66-3"><a href="#cb66-3"></a>b <span class="op">=</span> <span class="fl">1.2345677f0</span></span>
+<span id="cb66-4"><a href="#cb66-4"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(b)</span>
+<span id="cb66-5"><a href="#cb66-5"></a><span class="pp">@show</span> a <span class="op">-</span> b <span class="co"># correct result should be 1f-7</span></span>
+<span id="cb66-6"><a href="#cb66-6"></a><span class="pp">@show</span> <span class="fu">bitstring</span>(a <span class="op">-</span> b)   <span class="co"># must be 1.0000...0 x 2^(-23)</span></span>
+<span id="cb66-7"><a href="#cb66-7"></a><span class="pp">@show</span> <span class="fu">Float32</span>(<span class="fl">1</span><span class="op">/</span><span class="fl">2</span><span class="op">^</span><span class="fl">23</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>bitstring(a) = "00111111100111100000011001010001"
 bitstring(b) = "00111111100111100000011001010000"
@@ -1297,19 +1401,27 @@ bitstring(a - b) = "00110100000000000000000000000000"
 Float32(1 / 2 ^ 23) = 1.1920929f-7</code></pre>
 </div>
 </div>
+</section>
+<section class="slide level2">
+
 <p>Analysis: Let <span class="math display">\[
-[x] = 1 + \sum_{i=1}^{p-2}\frac{d_{i+1}}{2^i} + \frac{1}{2^{p-1}},
-\quad
-[y] = 1 + \sum_{i=1}^{p-2}\frac{d_{i+1}}{2^i} + \frac{0}{2^{p-1}}
-.
-\]</span></p>
+    [x] = 1 + \sum_{i=1}^{p-2}\frac{d_{i+1}}{2^i} + \frac{1}{2^{p-1}},
+    \quad
+    [y] = 1 + \sum_{i=1}^{p-2}\frac{d_{i+1}}{2^i} + \frac{0}{2^{p-1}}
+    .
+    \]</span></p>
 <ul>
 <li><p><span class="math inline">\([x]-[y] = \frac{1}{2^{p-1}} = [[x]-[y]]\)</span>.</p></li>
 <li><p>The true difference <span class="math inline">\(x-y\)</span> may lie anywhere in <span class="math inline">\((0, \frac{1}{2^{p-2}}]\)</span>.</p></li>
 <li><p>Relative error <span class="math display">\[
 \frac{|x-y -[[x]-[y]]|}{|x-y|}
 \]</span> is unbounded – no guarantee of any significant digit!</p></li>
-<li><p>Implications for numerical computation</p>
+</ul>
+</section>
+<section class="slide level2">
+
+<ul>
+<li>Implications for numerical computation
 <ul>
 <li>Rule 1: add small numbers together before adding larger ones<br>
 </li>
@@ -1318,6 +1430,9 @@ Float32(1 / 2 ^ 23) = 1.1920929f-7</code></pre>
 <li>Rule 3: avoid substraction of two numbers that are nearly equal</li>
 </ul></li>
 </ul>
+</section>
+<section class="slide level2">
+
 <h3 id="algebraic-laws">Algebraic laws</h3>
 <p>Floating-point numbers may violate many algebraic laws we are familiar with, such associative and distributive laws. See the example in the Machine Epsilon section and HW1.</p>
 </section>
@@ -1333,13 +1448,16 @@ Float32(1 / 2 ^ 23) = 1.1920929f-7</code></pre>
 \]</span></p>
 <p>whose solution is <span class="math inline">\((x_1, x_2) = (1.000, 1.000)\)</span>.</p>
 <div class="cell" data-execution_count="37">
-<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb70-1"><a href="#cb70-1"></a>A<span class="op">=</span>[<span class="fl">1.0</span> <span class="fl">0.5</span>; <span class="fl">0.667</span> <span class="fl">0.333</span>]; b <span class="op">=</span> [<span class="fl">1.5</span>, <span class="fl">1.0</span>]; A<span class="op">\</span>b</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb68-1"><a href="#cb68-1"></a>A<span class="op">=</span>[<span class="fl">1.0</span> <span class="fl">0.5</span>; <span class="fl">0.667</span> <span class="fl">0.333</span>]; b <span class="op">=</span> [<span class="fl">1.5</span>, <span class="fl">1.0</span>]; A<span class="op">\</span>b</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="37">
 <pre><code>2-element Vector{Float64}:
  0.9999999999998335
  1.000000000000333</code></pre>
 </div>
 </div>
+</section>
+<section class="slide level2">
+
 <p>If we <em>perturb</em> <span class="math inline">\(b\)</span> by 0.001, i.e., solve</p>
 <p><span class="math display">\[
 \begin{bmatrix} 1.000 &amp; 0.500 \\ 0.667 &amp; 0.333 \end{bmatrix}
@@ -1350,13 +1468,16 @@ Float32(1 / 2 ^ 23) = 1.1920929f-7</code></pre>
 \]</span></p>
 <p>then the solution changes to <span class="math inline">\((x_1, x_2) = (0.000, 3.000)\)</span>.</p>
 <div class="cell" data-execution_count="38">
-<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb72-1"><a href="#cb72-1"></a>b1 <span class="op">=</span> [<span class="fl">1.5</span>, <span class="fl">0.999</span>]; A<span class="op">\</span>b1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb70-1"><a href="#cb70-1"></a>b1 <span class="op">=</span> [<span class="fl">1.5</span>, <span class="fl">0.999</span>]; A<span class="op">\</span>b1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="38">
 <pre><code>2-element Vector{Float64}:
  -1.6653345369377348e-13
   3.000000000000333</code></pre>
 </div>
 </div>
+</section>
+<section class="slide level2">
+
 <p>If we instead perturb <span class="math inline">\(A\)</span> by 0.001, i.e., solve</p>
 <p><span class="math display">\[
 \begin{bmatrix} 1.000 &amp; 0.500 \\ 0.667 &amp; 0.334 \end{bmatrix}
@@ -1367,7 +1488,7 @@ Float32(1 / 2 ^ 23) = 1.1920929f-7</code></pre>
 \]</span></p>
 <p>then this time the solution changes to <span class="math inline">\((x_1, x_2) = (2.000, -1.000)\)</span>.</p>
 <div class="cell" data-execution_count="39">
-<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb74-1"><a href="#cb74-1"></a>A1<span class="op">=</span>[<span class="fl">1.0</span> <span class="fl">0.5</span>; <span class="fl">0.667</span> <span class="fl">0.334</span>]; A1<span class="op">\</span>b</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb72-1"><a href="#cb72-1"></a>A1<span class="op">=</span>[<span class="fl">1.0</span> <span class="fl">0.5</span>; <span class="fl">0.667</span> <span class="fl">0.334</span>]; A1<span class="op">\</span>b</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="39">
 <pre><code>2-element Vector{Float64}:
   2.0000000000001665
@@ -1375,60 +1496,100 @@ Float32(1 / 2 ^ 23) = 1.1920929f-7</code></pre>
 </div>
 </div>
 <p>In other words, an input perturbation of order <span class="math inline">\(10^{-3}\)</span> yield an output perturbation of order <span class="math inline">\(10^0\)</span>. Thats 3 orders of magnutide of relative change!</p>
-<p>Floating point representation <span class="math inline">\([x]\)</span> of a real number <span class="math inline">\(x\)</span> in a digital computer may introduce such input perturbation easily. The perturbation of output of a problem with respect to the input is called <em>conditioning</em>.</p>
+</section>
+<section class="slide level2">
+
+<p>Floating point representation <span class="math inline">\([x]\)</span> of a real number <span class="math inline">\(x\)</span> may introduce such input perturbation easily. The perturbation of output of a problem with respect to the input is called <em>conditioning</em>.</p>
+</section>
+<section class="slide level2">
+
 <ul>
-<li><p>Abstractly, a <em>problem</em> can be viewed as function <span class="math inline">\(f: \mathcal{X} \to \mathcal{Y}\)</span> where <span class="math inline">\(\mathcal{X}\)</span> is a normed vector space of data and <span class="math inline">\(\mathcal{Y}\)</span> is a normed vector space of solutions.</p>
+<li>Abstractly, a <em>problem</em> can be viewed as function <span class="math inline">\(f: \mathcal{X} \to \mathcal{Y}\)</span> where <span class="math inline">\(\mathcal{X}\)</span> is a normed vector space of data and <span class="math inline">\(\mathcal{Y}\)</span> is a normed vector space of solutions.
 <ul>
 <li>The problem of solving <span class="math inline">\(Ax=b\)</span> for fixed <span class="math inline">\(b\)</span> is <span class="math inline">\(f: A \mapsto A^{-1}b\)</span> with <span class="math inline">\(\mathcal{X}=\{M\in\mathbb{R}^{n\times n}: M \text{ is invertible} \}\)</span> and <span class="math inline">\(\mathcal{Y} = \mathbb{R}^n\)</span>.</li>
 <li>The combination of a problem <span class="math inline">\(f\)</span> with a given data <span class="math inline">\(x\)</span> is called a <em>problem instance</em>, or simply problem unless no confusion occurs.</li>
 </ul></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<ul>
 <li><p>A <em>well-conditioned</em> problem (instance) is one such that all small perturbations of <span class="math inline">\(x\)</span> lead to only small changes in <span class="math inline">\(f(x)\)</span>.</p></li>
 <li><p>An <em>ill-conditioned</em> problem is one such that some small perturbation of <span class="math inline">\(x\)</span> leads to a large change in <span class="math inline">\(f(x)\)</span>.</p></li>
 <li><p>The (relative) <em>condition number</em> <span class="math inline">\(\kappa=\kappa(\theta)\)</span> of a problem is defined by <span class="math display">\[
   \kappa = \lim_{\delta\to 0}\sup_{\|\delta \theta\|\le \delta}\frac{\|\delta f\|/\|f(\theta)\|}{\|\delta \theta\|/\|\theta\|}
   ,
-\]</span> where <span class="math inline">\(\delta f = f(\theta + \delta \theta) - f(\theta)\)</span>.</p></li>
-<li><p>For the problem of solving <span class="math inline">\(Ax=b\)</span> for fixed <span class="math inline">\(b\)</span>, <span class="math inline">\(f: A \mapsto A^{-1}b\)</span>, it can be shown that the condition number of <span class="math inline">\(f\)</span> is <span class="math display">\[
+  \]</span> where <span class="math inline">\(\delta f = f(\theta + \delta \theta) - f(\theta)\)</span>.</p></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<ul>
+<li>For the problem of solving <span class="math inline">\(Ax=b\)</span> for fixed <span class="math inline">\(b\)</span>, <span class="math inline">\(f: A \mapsto A^{-1}b\)</span>, it can be shown that the condition number of <span class="math inline">\(f\)</span> is <span class="math display">\[
   \kappa = \|A\|\|A^{-1}\| =: \kappa(A)
   ,
-\]</span> where <span class="math inline">\(\|A\|\)</span> is the matrix norm induced by vector norm <span class="math inline">\(\|\cdot\|\)</span>, i.e., <span class="math display">\[
+  \]</span> where <span class="math inline">\(\|A\|\)</span> is the matrix norm induced by vector norm <span class="math inline">\(\|\cdot\|\)</span>, i.e., <span class="math display">\[
   \|A\| = \sup_{x\neq 0} \frac{\|Ax\|}{\|x\|}.
-\]</span></p></li>
-<li><p>To see this, recall <span class="math inline">\(f(A) = A^{-1}b = x\)</span>. Since <span class="math inline">\(b = Ax\)</span> and the LHS is fixed, if a perturbation of the input <span class="math inline">\(A \to A + \delta A\)</span> yields a perturbation of the output <span class="math inline">\(x \to x + \delta x\)</span> or <span class="math inline">\(f \to f + \delta f\)</span>, then we have <span class="math display">\[
+  \]</span></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<ul>
+<li>To see this, recall <span class="math inline">\(f(A) = A^{-1}b = x\)</span>. Since <span class="math inline">\(b = Ax\)</span> and the LHS is fixed, if a perturbation of the input <span class="math inline">\(A \to A + \delta A\)</span> yields a perturbation of the output <span class="math inline">\(x \to x + \delta x\)</span> or <span class="math inline">\(f \to f + \delta f\)</span>, then we have <span class="math display">\[
   0 = (\delta A) x + A \delta x + (\delta A) \delta x
-\]</span> or <span class="math display">\[
+  \]</span> or <span class="math display">\[
   \delta x = -A^{-1}(\delta A)x + o(\Vert \delta A \Vert)
   .
-\]</span> That is, <span class="math inline">\(\delta f = f(A + \delta A) - f(A) = - A^{-1}(\delta A)A^{-1}b + o(\Vert \delta A \Vert)\)</span>. Then <span class="math display">\[
-\begin{aligned}
+  \]</span> That is, <span class="math inline">\(\delta f = f(A + \delta A) - f(A) = - A^{-1}(\delta A)A^{-1}b + o(\Vert \delta A \Vert)\)</span>.</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<ul>
+<li>Then <span class="math display">\[
+  \begin{aligned}
   \kappa &amp;= \lim_{\delta\to 0}\sup_{\|\delta A\|\le \delta}\frac{(\Vert A^{-1}(\delta A)A^{-1}b\Vert + o(\Vert \delta A \Vert)\Vert) / \Vert A^{-1}b \Vert}{\Vert \delta A \Vert / \Vert A \Vert}
-  =
+  \\
+  &amp;=
   \lim_{\delta\to 0}\sup_{\|\delta A\|\le \delta} \frac{\Vert A^{-1}(\delta A)A^{-1}b\Vert / \Vert A^{-1}b \Vert}{\Vert \delta A \Vert / \Vert A \Vert} + o(1)
   \\
   &amp;=
   \lim_{\delta\to 0}\sup_{\|\delta A\|\le \delta} \frac{\Vert A^{-1}(\delta A)A^{-1}b\Vert / \Vert A^{-1}b \Vert}{\Vert \delta A \Vert / \Vert A \Vert}
   .
-\end{aligned}
-\]</span> From the property of a matrix norm (https://en.wikipedia.org/wiki/Matrix_norm), <span class="math display">\[
+  \end{aligned}
+  \]</span></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<ul>
+<li><p>From the property of a matrix norm <span class="math inline">\(\|AB\| \leq \|A\|\|B\|\)</span>, <span class="math display">\[
   \frac{\Vert A^{-1}(\delta A)A^{-1}b\Vert / \Vert A^{-1}b \Vert}{\Vert \delta A \Vert / \Vert A \Vert}
   \le
   \frac{\Vert A^{-1} \Vert \Vert \delta A \Vert \Vert A^{-1}b\Vert / \Vert A^{-1}b \Vert}{\Vert \delta A \Vert / \Vert A \Vert}
-  = \Vert A^{-1} \Vert \Vert A \Vert
+%    = \Vert A^{-1} \Vert \Vert A \Vert
   ,
-\]</span> hence <span class="math inline">\(\kappa \le \Vert A^{-1} \Vert \Vert A \Vert\)</span>.<br>
-It can be shown that for any invertible <span class="math inline">\(A\)</span> and <span class="math inline">\(b\)</span>, there exits a perturbation <span class="math inline">\(\delta A\)</span> such that <span class="math display">\[
+  \]</span> hence <span class="math inline">\(\kappa \le \Vert A^{-1} \Vert \Vert A \Vert\)</span>.</p></li>
+<li><p>It can be shown that for any invertible <span class="math inline">\(A\)</span> and <span class="math inline">\(b\)</span>, there exits a perturbation <span class="math inline">\(\delta A\)</span> such that <span class="math display">\[
   \frac{\Vert A^{-1}(\delta A)A^{-1}b\Vert / \Vert A^{-1}b \Vert}{\Vert \delta A \Vert / \Vert A \Vert}
   = \Vert A^{-1} \Vert \Vert A \Vert
   .
-\]</span> It follows that <span class="math inline">\(\kappa \ge \Vert A^{-1} \Vert \Vert A \Vert\)</span>.</p></li>
-<li><p>If Euclidean norm is used, then <span class="math display">\[
+\]</span></p></li>
+<li><p>It follows that <span class="math inline">\(\kappa \ge \Vert A^{-1} \Vert \Vert A \Vert\)</span>.</p></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<ul>
+<li>If Euclidean norm is used, then <span class="math display">\[
 \kappa(A) = \sigma_{\max}(A)/\sigma_{\min}(A),
-\]</span> the ratio of the maximum and minimum singular values of <span class="math inline">\(A\)</span>.</p></li>
+\]</span> the ratio of the maximum and minimum singular values of <span class="math inline">\(A\)</span>.</li>
 </ul>
 <p>In the above problem, the condition number is matrix <span class="math inline">\(A\)</span> (w.r.t. Euclidean norm) is</p>
 <div class="cell" data-execution_count="40">
-<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb76-1"><a href="#cb76-1"></a><span class="im">using</span> <span class="bu">LinearAlgebra</span></span>
-<span id="cb76-2"><a href="#cb76-2"></a><span class="bu">LinearAlgebra</span>.<span class="fu">cond</span>(A)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb74-1"><a href="#cb74-1"></a><span class="im">using</span> <span class="bu">LinearAlgebra</span></span>
+<span id="cb74-2"><a href="#cb74-2"></a><span class="bu">LinearAlgebra</span>.<span class="fu">cond</span>(A)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="40">
 <pre><code>3611.5557231115513</code></pre>
 </div>
@@ -1441,14 +1602,10 @@ It can be shown that for any invertible <span class="math inline">\(A\)</span> a
 <li><p>Sections 1.5 and 2.2, <a href="https://doi.org/10.1137/1.9781611971446">Applied Numerical Linear Algebra</a> by James W. Demmel (1997).</p></li>
 <li><p><a href="https://www.itu.dk/~sestoft/bachelor/IEEE754_article.pdf">What every computer scientist should know about floating-point arithmetic</a> by David Goldberg (1991).</p></li>
 </ul>
-</section>
-<section id="acknowledgment" class="slide level2">
-<h2>Acknowledgment</h2>
-<p>Many parts of this lecture note is based on <a href="http://hua-zhou.github.io">Dr.&nbsp;Hua Zhou</a>’s 2019 Spring Statistical Computing course notes available at <a href="http://hua-zhou.github.io/teaching/biostatm280-2019spring/index.html" class="uri">http://hua-zhou.github.io/teaching/biostatm280-2019spring/index.html</a>.</p>
 <div class="footer footer-default">
 
 </div>
-</section></section>
+</section>
     </div>
   </div>
 
