@@ -195,6 +195,22 @@ Check more shortcuts in menu <code>Help</code> -&gt; <code>Keyboard Shortcuts</c
 </section>
 <section id="julia-package-system" class="level2">
 <h2 class="anchored" data-anchor-id="julia-package-system">Julia package system</h2>
+<div class="cell" data-tags="[]" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">versioninfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Julia Version 1.9.3
+Commit bed2cd540a1 (2023-08-24 14:43 UTC)
+Build Info:
+  Official https://julialang.org/ release
+Platform Info:
+  OS: macOS (x86_64-apple-darwin22.4.0)
+  CPU: 8 × Intel(R) Core(TM) i5-8279U CPU @ 2.40GHz
+  WORD_SIZE: 64
+  LIBM: libopenlibm
+  LLVM: libLLVM-14.0.6 (ORCJIT, skylake)
+  Threads: 2 on 8 virtual cores</code></pre>
+</div>
+</div>
 <ul>
 <li><p>Like R, the functionality of Julia can be extended by using packages.</p></li>
 <li><p>Each Julia package is a Git repository. Each Julia package name ends with <code>.jl</code>. E.g., <code>Distributions.jl</code> package lives at <a href="https://github.com/JuliaStats/Distributions.jl" class="uri">https://github.com/JuliaStats/Distributions.jl</a>.<br>
@@ -202,30 +218,30 @@ Google search with <code>PackageName.jl</code> usually leads to the package on g
 <li><p>The package ecosystem is rapidly maturing; a complete list of <strong>registered</strong> packages (which are required to have a certain level of testing and documentation) is at https://julialang.org/packages/</p></li>
 <li><p>For example, the package called <code>Distributions.jl</code> is added with</p></li>
 </ul>
-<div class="sourceCode" id="cb2"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># in Pkg mode</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>(<span class="pp">@v1</span><span class="fl">.9</span>) pkg<span class="op">&gt;</span> add Distributions</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># in Pkg mode</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>(<span class="pp">@v1</span><span class="fl">.9</span>) pkg<span class="op">&gt;</span> add Distributions</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>and “removed” (although not completely deleted) with</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># in Pkg mode</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>(<span class="pp">@v1</span><span class="fl">.9</span>) pkg<span class="op">&gt;</span> rm Distributions</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># in Pkg mode</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>(<span class="pp">@v1</span><span class="fl">.9</span>) pkg<span class="op">&gt;</span> rm Distributions</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li><p>The package manager provides a dependency solver that determines which packages are actually required to be installed.</p></li>
 <li><p><strong>Non-registered</strong> packages are added by cloning the relevant Git repository. E.g.,</p></li>
 </ul>
-<div class="sourceCode" id="cb4"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># in Pkg mode</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>(<span class="pp">@v1</span><span class="fl">.9</span>) pkg<span class="op">&gt;</span> add https<span class="op">://</span>github.com<span class="op">/</span>kose<span class="op">-</span>y<span class="op">/</span>ParProx.jl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># in Pkg mode</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>(<span class="pp">@v1</span><span class="fl">.9</span>) pkg<span class="op">&gt;</span> add https<span class="op">://</span>github.com<span class="op">/</span>kose<span class="op">-</span>y<span class="op">/</span>ParProx.jl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li>A package needs only be added once, at which point it is downloaded into your local <code>.julia/packages</code> directory in your home directory.</li>
 </ul>
 <p>Package dependencies are very important in reproducing results. In Julia they can be managed at each project, with `Project.toml’ and ‘Manifest.toml’ files (see <a href="https://bkamins.github.io/julialang/2020/05/10/julia-project-environments.html">here</a>). For example, this lecture note is a project whose environment has the following dependencies.</p>
-<div class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Pkg</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">Pkg</span>.<span class="fu">activate</span>(<span class="fu">pwd</span>())</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">Pkg</span>.<span class="fu">instantiate</span>()</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="bu">Pkg</span>.<span class="fu">dependencies</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Pkg</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">Pkg</span>.<span class="fu">activate</span>(<span class="fu">pwd</span>())</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="bu">Pkg</span>.<span class="fu">instantiate</span>()</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="bu">Pkg</span>.<span class="fu">dependencies</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>  Activating project at `~/Dropbox/class/M1399.000200/2023/M1300_000200-2023fall/lectures/02-juliaintro`</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="1">
+<div class="cell-output cell-output-display" data-execution_count="2">
 <pre><code>Dict{Base.UUID, Pkg.API.PackageInfo} with 216 entries:
   UUID("49dc2e85-a5d0-5ad3… =&gt; PackageInfo("Calculus", v"0.5.1", "f641eb0a4f00c…
   UUID("6c6a2e73-6563-6170… =&gt; PackageInfo("Scratch", v"1.2.0", "30449ee1223762…
@@ -258,11 +274,11 @@ Google search with <code>PackageName.jl</code> usually leads to the package on g
 <ul>
 <li>Directory of a specific package can be queried by <code>pathof()</code>:</li>
 </ul>
-<div class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Distributions</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">pathof</span>(Distributions)  <span class="co"># should look different in your machine</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="2">
+<div class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Distributions</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">pathof</span>(Distributions)  <span class="co"># should look different in your machine</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="3">
 <pre><code>"/Users/jhwon/.julia/packages/Distributions/Ufrz2/src/Distributions.jl"</code></pre>
 </div>
 </div>
@@ -272,11 +288,11 @@ Google search with <code>PackageName.jl</code> usually leads to the package on g
 <li><p><code>status</code> lists the status of all installed packages.</p></li>
 <li><p>Using functions in package.</p></li>
 </ul>
-<div class="sourceCode" id="cb10"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Distributions</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Distributions</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>This pulls all of the <em>exported</em> functions in the module into your local namespace, as you can check using the <code>whos()</code> command. An alternative is</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> <span class="bu">Distributions</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> <span class="bu">Distributions</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Now, the functions from the Distributions package are available only using</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>Distributions<span class="op">.&lt;</span>FUNNAME<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>Distributions<span class="op">.&lt;</span>FUNNAME<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>All functions, not only exported functions, are always available like this.</p>
 <section id="creating-your-own-environments" class="level3">
 <h3 class="anchored" data-anchor-id="creating-your-own-environments">Creating your own environments</h3>
@@ -285,18 +301,18 @@ Google search with <code>PackageName.jl</code> usually leads to the package on g
 <li><p>It is however easy to create other, independent, projects. This approach has the benefit of allowing you to check in a <code>Project.toml</code>, and even a <code>Manifest.toml</code> if you wish, into version control (e.g.&nbsp;git) alongside your code.</p></li>
 <li><p>In order to create a new project, create a directory for it and then activate that directory to make it the “active project”, which package operations manipulate:</p></li>
 </ul>
-<div class="sourceCode" id="cb13"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>(<span class="pp">@v1</span><span class="fl">.9</span>) pkg<span class="op">&gt;</span> activate MyProject</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>Activating <span class="kw">new</span> environment at <span class="ss">`~/MyProject/Project.toml`</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>(MyProject) pkg<span class="op">&gt;</span> st</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    Status <span class="ss">`~/MyProject/Project.toml`</span> (empty project)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>(<span class="pp">@v1</span><span class="fl">.9</span>) pkg<span class="op">&gt;</span> activate MyProject</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>Activating <span class="kw">new</span> environment at <span class="ss">`~/MyProject/Project.toml`</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>(MyProject) pkg<span class="op">&gt;</span> st</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    Status <span class="ss">`~/MyProject/Project.toml`</span> (empty project)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li><p>Note that the REPL prompt changes when the new project is activated. Until a package is added, there are no files in this environment and the directory to the environment might not even be created. Added packages and dependencies are stored in <code>~/MyProject/Project.toml</code> and <code>~/MyProject/Manifest.toml</code>.</p></li>
 <li><p>The above code (default mode in Julia REPL)</p></li>
 </ul>
-<div class="sourceCode" id="cb14"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Pkg</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="bu">Pkg</span>.<span class="fu">activate</span>(<span class="fu">pwd</span>())</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="bu">Pkg</span>.<span class="fu">instantiate</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Pkg</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="bu">Pkg</span>.<span class="fu">activate</span>(<span class="fu">pwd</span>())</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="bu">Pkg</span>.<span class="fu">instantiate</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>activates the <code>Project.toml</code> in the current working directory and sets a new environment; <code>instantiate</code> installs and precompiles any missing packages for the environment to be ready.</p>
 </section>
 </section>
@@ -307,7 +323,7 @@ Google search with <code>PackageName.jl</code> usually leads to the package on g
 <li><p>Install Quarto by following the instructions at <a href="https://quarto.org/docs/get-started/" class="uri">https://quarto.org/docs/get-started/</a></p></li>
 <li><p>This note is converted from the Jupyter notebook (<code>jupyter.ipynb</code>) to HTML by running</p></li>
 </ul>
-<div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>    <span class="ex">quarto</span> render jupyter.ipynb</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>    <span class="ex">quarto</span> render jupyter.ipynb</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>from the command line.</p>
 </section>
 
