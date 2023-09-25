@@ -1425,9 +1425,19 @@ Float32(1 / 2 ^ 23) = 1.1920929f-7</code></pre>
 <ul>
 <li>Rule 1: add small numbers together before adding larger ones<br>
 </li>
-<li>Rule 2: add numbers of like magnitude together (paring). When all numbers are of same sign and similar magnitude, add in pairs so each stage the summands are of similar magnitude<br>
-</li>
-<li>Rule 3: avoid substraction of two numbers that are nearly equal</li>
+<li>Rule 2: add numbers of like magnitude together (paring). When all numbers are of same sign and similar magnitude, add in pairs so each stage the summands are of similar magnitude</li>
+</ul></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<ul>
+<li>Rule 3: avoid substraction of two numbers that are nearly equal
+<ul>
+<li>Example: in solving quadratic equation <span class="math inline">\(ax^2 + bx + c = 0\)</span> with <span class="math inline">\(b &gt; 0\)</span> and <span class="math inline">\(b^2 - 4ac &gt; 0\)</span>, the roots are <span class="math display">\[
+      x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
+      .
+  \]</span> If <span class="math inline">\(b \approx \sqrt{b^2 - 4ac}\)</span>, then a scenario 2 occurs. A resolution is to compute only one root <span class="math inline">\(x_1 = \frac{-b - \sqrt{b^2 - 4ac}}{2a}\)</span> by the formula, and find the other root <span class="math inline">\(x_2\)</span> using the relation <span class="math inline">\(x_1x_2 = c/a\)</span>.</li>
 </ul></li>
 </ul>
 </section>
