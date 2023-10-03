@@ -544,7 +544,7 @@ Let <span class="math inline">\(n\)</span> be the problem size.
 <section class="slide level2">
 
 <ul>
-<li>For example, compare flops of the two mathematically equivalent expressions: <code>A * B * x</code> and <code>A * (B * x)</code> where <code>A</code> and <code>B</code> are matrices and <code>x</code> is a vector.</li>
+<li>For example, compare flops of the two mathematically equivalent expressions: <code>(A * B) * x</code> and <code>A * (B * x)</code> where <code>A</code> and <code>B</code> are matrices and <code>x</code> is a vector.</li>
 </ul>
 <div class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1"></a><span class="im">using</span> <span class="bu">BenchmarkTools</span>, <span class="bu">Random</span></span>
@@ -556,17 +556,17 @@ Let <span class="math inline">\(n\)</span> be the problem size.
 <span id="cb5-7"><a href="#cb5-7"></a>x <span class="op">=</span> <span class="fu">randn</span>(n)</span>
 <span id="cb5-8"><a href="#cb5-8"></a></span>
 <span id="cb5-9"><a href="#cb5-9"></a><span class="co"># complexity is n^3 + n^2 = O(n^3)</span></span>
-<span id="cb5-10"><a href="#cb5-10"></a><span class="pp">@benchmark</span> <span class="op">$</span>A <span class="op">*</span> <span class="op">$</span>B <span class="op">*</span> <span class="op">$</span>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-10"><a href="#cb5-10"></a><span class="pp">@benchmark</span> (<span class="op">$</span>A <span class="op">*</span> <span class="op">$</span>B) <span class="op">*</span> <span class="op">$</span>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
 <div class="ansi-escaped-output">
-<pre>BenchmarkTools.Trial: 10000 samples with 1 evaluation.
- Range <span class="ansi-bright-black-fg">(</span><span class="ansi-cyan-fg ansi-bold">min</span> … <span class="ansi-magenta-fg">max</span><span class="ansi-bright-black-fg">):  </span><span class="ansi-cyan-fg ansi-bold">281.573 μs</span> … <span class="ansi-magenta-fg"> 6.203 ms</span>  <span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>min … max<span class="ansi-bright-black-fg">): </span>0.00% … 92.71%
- Time  <span class="ansi-bright-black-fg">(</span><span class="ansi-blue-fg ansi-bold">median</span><span class="ansi-bright-black-fg">):     </span><span class="ansi-blue-fg ansi-bold">295.256 μs              </span><span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>median<span class="ansi-bright-black-fg">):    </span>0.00%
- Time  <span class="ansi-bright-black-fg">(</span><span class="ansi-green-fg ansi-bold">mean</span> ± <span class="ansi-green-fg">σ</span><span class="ansi-bright-black-fg">):   </span><span class="ansi-green-fg ansi-bold">317.068 μs</span> ± <span class="ansi-green-fg">72.979 μs</span>  <span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>mean ± σ<span class="ansi-bright-black-fg">):  </span>0.18% ±  0.93%
-  ▂▅▇█▇<span class="ansi-blue-fg">▅</span>▄▅▅▄▃▃<span class="ansi-green-fg">▃</span>▂▂▁▂▁▂▁▁▁▁▁▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▂▁▁▁▁▁▁▁▁ ▁          ▂
-  █████<span class="ansi-blue-fg">█</span>██████<span class="ansi-green-fg">█</span>████████████████████████████████████████▇▇▇▆▇▇▆ █
-  282 μs<span class="ansi-bright-black-fg">        </span><span class="ansi-bright-black-fg">Histogram: </span><span class="ansi-bright-black-fg ansi-bold">log(</span><span class="ansi-bright-black-fg">frequency</span><span class="ansi-bright-black-fg ansi-bold">)</span><span class="ansi-bright-black-fg"> by time</span>       452 μs <span class="ansi-bold">&lt;</span>
- Memory estimate<span class="ansi-bright-black-fg">: </span><span class="ansi-yellow-fg">15.88 KiB</span>, allocs estimate<span class="ansi-bright-black-fg">: </span><span class="ansi-yellow-fg">2</span>.</pre>
+<pre>BenchmarkTools.Trial: 264 samples with 1 evaluation.
+ Range <span class="ansi-bright-black-fg">(</span><span class="ansi-cyan-fg ansi-bold">min</span> … <span class="ansi-magenta-fg">max</span><span class="ansi-bright-black-fg">):  </span><span class="ansi-cyan-fg ansi-bold">14.006 ms</span> … <span class="ansi-magenta-fg">27.009 ms</span>  <span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>min … max<span class="ansi-bright-black-fg">): </span>0.00% … 14.02%
+ Time  <span class="ansi-bright-black-fg">(</span><span class="ansi-blue-fg ansi-bold">median</span><span class="ansi-bright-black-fg">):     </span><span class="ansi-blue-fg ansi-bold">19.228 ms              </span><span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>median<span class="ansi-bright-black-fg">):    </span>0.00%
+ Time  <span class="ansi-bright-black-fg">(</span><span class="ansi-green-fg ansi-bold">mean</span> ± <span class="ansi-green-fg">σ</span><span class="ansi-bright-black-fg">):   </span><span class="ansi-green-fg ansi-bold">18.943 ms</span> ± <span class="ansi-green-fg"> 2.760 ms</span>  <span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>mean ± σ<span class="ansi-bright-black-fg">):  </span>3.12% ±  6.24%
+        ▃ █▂▆ ▂          ▂▂<span class="ansi-green-fg"> </span><span class="ansi-blue-fg">▆</span>▄▄▄▄ ▃ ▄  ▂   ▂                   
+  ▃▄▅▆▄██▇██████▇▅▃▅▅▆▇▃▇██<span class="ansi-green-fg">█</span><span class="ansi-blue-fg">█</span>████▅█▆█▇▆█▇▃▆█▄▄▆▇▃▄▃▃▅▄▁▄▁▁▁▁▃ ▄
+  14 ms<span class="ansi-bright-black-fg">           Histogram: frequency by time</span>        25.7 ms <span class="ansi-bold">&lt;</span>
+ Memory estimate<span class="ansi-bright-black-fg">: </span><span class="ansi-yellow-fg">7.64 MiB</span>, allocs estimate<span class="ansi-bright-black-fg">: </span><span class="ansi-yellow-fg">3</span>.</pre>
 </div>
 </div>
 </div>
@@ -579,12 +579,12 @@ Let <span class="math inline">\(n\)</span> be the problem size.
 <div class="cell-output cell-output-display" data-execution_count="4">
 <div class="ansi-escaped-output">
 <pre>BenchmarkTools.Trial: 10000 samples with 1 evaluation.
- Range <span class="ansi-bright-black-fg">(</span><span class="ansi-cyan-fg ansi-bold">min</span> … <span class="ansi-magenta-fg">max</span><span class="ansi-bright-black-fg">):  </span><span class="ansi-cyan-fg ansi-bold">279.874 μs</span> … <span class="ansi-magenta-fg">  7.425 ms</span>  <span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>min … max<span class="ansi-bright-black-fg">): </span>0.00% … 95.06%
- Time  <span class="ansi-bright-black-fg">(</span><span class="ansi-blue-fg ansi-bold">median</span><span class="ansi-bright-black-fg">):     </span><span class="ansi-blue-fg ansi-bold">301.355 μs               </span><span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>median<span class="ansi-bright-black-fg">):    </span>0.00%
- Time  <span class="ansi-bright-black-fg">(</span><span class="ansi-green-fg ansi-bold">mean</span> ± <span class="ansi-green-fg">σ</span><span class="ansi-bright-black-fg">):   </span><span class="ansi-green-fg ansi-bold">339.551 μs</span> ± <span class="ansi-green-fg">104.068 μs</span>  <span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>mean ± σ<span class="ansi-bright-black-fg">):  </span>0.21% ±  0.95%
-  ▃██▅<span class="ansi-blue-fg">▅</span>▄▃▃▃▂▂<span class="ansi-green-fg">▂</span>▂▂▂▂▂▂▂▂▃▃▃▃▃▃▂▂▂▁▂▁▁▁                            ▂
-  ████<span class="ansi-blue-fg">█</span>██████<span class="ansi-green-fg">█</span>███████████████████████▇▇▇▇▇▇▆▆▆▆▅▅▅▄▆▅▆▅▅▄▅▅▄▅▅▅ █
-  280 μs<span class="ansi-bright-black-fg">        </span><span class="ansi-bright-black-fg">Histogram: </span><span class="ansi-bright-black-fg ansi-bold">log(</span><span class="ansi-bright-black-fg">frequency</span><span class="ansi-bright-black-fg ansi-bold">)</span><span class="ansi-bright-black-fg"> by time</span>        617 μs <span class="ansi-bold">&lt;</span>
+ Range <span class="ansi-bright-black-fg">(</span><span class="ansi-cyan-fg ansi-bold">min</span> … <span class="ansi-magenta-fg">max</span><span class="ansi-bright-black-fg">):  </span><span class="ansi-cyan-fg ansi-bold">282.345 μs</span> … <span class="ansi-magenta-fg"> 4.624 ms</span>  <span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>min … max<span class="ansi-bright-black-fg">): </span>0.00% … 91.03%
+ Time  <span class="ansi-bright-black-fg">(</span><span class="ansi-blue-fg ansi-bold">median</span><span class="ansi-bright-black-fg">):     </span><span class="ansi-blue-fg ansi-bold">336.286 μs              </span><span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>median<span class="ansi-bright-black-fg">):    </span>0.00%
+ Time  <span class="ansi-bright-black-fg">(</span><span class="ansi-green-fg ansi-bold">mean</span> ± <span class="ansi-green-fg">σ</span><span class="ansi-bright-black-fg">):   </span><span class="ansi-green-fg ansi-bold">355.533 μs</span> ± <span class="ansi-green-fg">77.099 μs</span>  <span class="ansi-bright-black-fg">┊</span> GC <span class="ansi-bright-black-fg">(</span>mean ± σ<span class="ansi-bright-black-fg">):  </span>0.12% ±  0.91%
+   ▆█▂          <span class="ansi-blue-fg"> </span>    <span class="ansi-green-fg"> </span>                                          
+  ▃███▆▇▆▅▄▄▃▃▄▃<span class="ansi-blue-fg">▃</span>▃▃▃▃<span class="ansi-green-fg">▃</span>▃▃▃▃▃▃▃▃▃▄▄▄▄▄▄▄▄▄▄▃▃▃▃▂▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁ ▂
+  282 μs<span class="ansi-bright-black-fg">          Histogram: frequency by time</span>          515 μs <span class="ansi-bold">&lt;</span>
  Memory estimate<span class="ansi-bright-black-fg">: </span><span class="ansi-yellow-fg">15.88 KiB</span>, allocs estimate<span class="ansi-bright-black-fg">: </span><span class="ansi-yellow-fg">2</span>.</pre>
 </div>
 </div>
@@ -614,12 +614,12 @@ Let <span class="math inline">\(n\)</span> be the problem size.
 <ul>
 <li>In Julia, <code>LinearAlgebra.peakflops()</code> computes the peak flop rate of the computer by using <code>gemm!</code> (double precision matrix-matrix multiplication).</li>
 </ul>
-<div class="cell" data-execution_count="6">
+<div class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1"></a><span class="im">using</span> <span class="bu">LinearAlgebra</span></span>
 <span id="cb7-2"><a href="#cb7-2"></a></span>
 <span id="cb7-3"><a href="#cb7-3"></a><span class="bu">LinearAlgebra</span>.<span class="fu">peakflops</span>(<span class="fl">2</span><span class="op">^</span><span class="fl">14</span>) <span class="co"># matrix size 2^14</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="6">
-<pre><code>1.0996508932420679e11</code></pre>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<pre><code>1.0529135405714091e11</code></pre>
 </div>
 </div>
 <p>which is about 110 GFLOPS DP.</p>
