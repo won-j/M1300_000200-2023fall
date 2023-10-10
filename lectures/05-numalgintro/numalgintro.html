@@ -1471,11 +1471,11 @@ will first transpose <code>A</code> then perform matrix multiplication, causing 
 <section class="slide level2">
 
 <ol start="2" type="1">
-<li><p><a href="https://docs.julialang.org/en/v1/base/arrays/#Broadcast-and-vectorization-1">Broadcasting</a> in Julia achieves vectorized code without creating intermediate arrays.</p>
+<li><a href="https://docs.julialang.org/en/v1/base/arrays/#Broadcast-and-vectorization-1">Broadcasting</a> in Julia achieves vectorized code without creating intermediate arrays.</li>
+</ol>
 <p>Suppose we want to calculate elementsize maximum of absolute values of two large arrays. In R, the command</p>
 <div class="sourceCode" id="cb63"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1"></a><span class="fu">max</span>(<span class="fu">abs</span>(X), <span class="fu">abs</span>(Y))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>will create two intermediate arrays and then one result array.</p></li>
-</ol>
+<p>will create two intermediate arrays and then one result array.</p>
 <div class="cell" data-execution_count="31">
 <div class="sourceCode cell-code" id="cb64"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb64-1"><a href="#cb64-1"></a><span class="im">using</span> <span class="bu">RCall</span></span>
 <span id="cb64-2"><a href="#cb64-2"></a><span class="bu">Random</span>.<span class="fu">seed!</span>(<span class="fl">123</span>)</span>
