@@ -785,7 +785,7 @@ Platform Info:
   \mathbf{X}\mathbf{R}_{1} \mathbf{R}_2 \cdots  \mathbf{R}_n = \mathbf{Q}_1
 \]</span> where <span class="math inline">\(\mathbf{R}_j\)</span> are a sequence of upper triangular matrices.</p></li>
 <li><p>Householder QR does <span class="math display">\[
-  \mathbf{H}_{p} \cdots \mathbf{H}_2 \mathbf{H}_1 \mathbf{X} = \begin{pmatrix} \mathbf{R}_1 \\ \mathbf{0} \end{pmatrix},
+  \mathbf{H}_{p} \cdots \mathbf{H}_2 \mathbf{H}_1 \mathbf{X} = \begin{bmatrix} \mathbf{R}_1 \\ \mathbf{0} \end{bmatrix},
 \]</span> where <span class="math inline">\(\mathbf{H}_j \in \mathbf{R}^{n \times n}\)</span> are a sequence of Householder transformation matrices.</p>
 <p>It yields the <strong>full QR</strong> where <span class="math inline">\(\mathbf{Q} = \mathbf{H}_1 \cdots \mathbf{H}_p \in \mathbb{R}^{n \times n}\)</span>. Recall that CGS/MGS only produces the <strong>reduced QR</strong> decomposition.</p></li>
 </ul>
@@ -809,8 +809,8 @@ Platform Info:
 
 <ul>
 <li><p>Now choose <span class="math inline">\(\mathbf{H}_1\)</span> so that <span class="math display">\[
-  \mathbf{H}_1 \mathbf{x}_1 = \begin{bmatrix} \|\mathbf{x}_{1}\|_2 \\ 0 \\ \vdots \\ 0 \end{bmatrix}.
-\]</span> That is, <span class="math inline">\(\mathbf{v} = \mathbf{x}_1\)</span> and <span class="math inline">\(\mathbf{w} = \|\mathbf{x}_1\|_2\mathbf{e}_1\)</span>.</p></li>
+  \mathbf{H}_1 \mathbf{x}_1 = \begin{bmatrix} \pm\|\mathbf{x}_{1}\|_2 \\ 0 \\ \vdots \\ 0 \end{bmatrix}.
+\]</span> That is, <span class="math inline">\(\mathbf{x} = \mathbf{x}_1\)</span> and <span class="math inline">\(\mathbf{w} = \pm\|\mathbf{x}_1\|_2\mathbf{e}_1\)</span>.</p></li>
 <li><p>Left-multiplying <span class="math inline">\(\mathbf{H}_1\)</span> zeros out the first column of <span class="math inline">\(\mathbf{X}\)</span> below (1, 1).</p></li>
 </ul>
 </section>
@@ -864,13 +864,16 @@ Platform Info:
 <span id="cb27-5"><a href="#cb27-5"></a>    <span class="cf">end</span></span>
 <span id="cb27-6"><a href="#cb27-6"></a><span class="cf">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
-<li><p>The process is done in place. Upper triangular part of <span class="math inline">\(\mathbf{X}\)</span> is overwritten by <span class="math inline">\(\mathbf{R}_1\)</span> and the essential Householder vectors (<span class="math inline">\(\tilde u_{j1}\)</span> is normalized to 1) are stored in <span class="math inline">\(\mathbf{X}[j:n,j]\)</span>.</p></li>
-<li><p>At the <span class="math inline">\(j\)</span>-th stage</p>
+<li>The process is done in place. Upper triangular part of <span class="math inline">\(\mathbf{X}\)</span> is overwritten by <span class="math inline">\(\mathbf{R}_1\)</span> and the essential Householder vectors (<span class="math inline">\(\tilde u_{j1}\)</span> is normalized to 1) are stored in <span class="math inline">\(\mathbf{X}[j:n,j]\)</span>.
+<ul>
+<li>Can ensure <span class="math inline">\(u_{j1} \neq 0\)</span> by a clever choice of the sign in determining vector <span class="math inline">\(\mathbf{w}\)</span> above (HW).</li>
+</ul></li>
+<li>At the <span class="math inline">\(j\)</span>-th stage
 <ol type="1">
 <li>computing the Householder vector <span class="math inline">\({\tilde u}_j\)</span> costs <span class="math inline">\(3(n-j+1)\)</span> flops</li>
 <li>applying the Householder transform <span class="math inline">\({\tilde H}_j\)</span> to the <span class="math inline">\(\mathbf{X}[j:n, j:p]\)</span> block costs <span class="math inline">\(4(n-j+1)(p-j+1)\)</span> flops</li>
 </ol></li>
-<li><p>In total we need <span class="math inline">\(\sum_{j=1}^p [3(n-j+1) + 4(n-j+1)(p-j+1)] \approx 2np^2 - \frac 23 p^3\)</span> flops.</p></li>
+<li>In total we need <span class="math inline">\(\sum_{j=1}^p [3(n-j+1) + 4(n-j+1)(p-j+1)] \approx 2np^2 - \frac 23 p^3\)</span> flops.</li>
 </ul>
 </section>
 <section class="slide level2">
