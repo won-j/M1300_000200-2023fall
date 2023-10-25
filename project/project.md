@@ -60,7 +60,7 @@ Tang, P., Wang, C., Sun, D., & Toh, K.-C. (2020). A Sparse Semismooth Newton Bas
 
 ## Algorithms for square-root lasso
 
-The square-root lasso has theoretical advantage over the plain lasso if easing tuning parameter selection by dispensing with the need to knowledge of noise variance. However, fitting a square-root lasso model is computationally more challenging due to the nondifferentiability of the loss function. Recent computational developments include:
+The square-root lasso has a theoretical advantage over the plain lasso in easing tuning parameter selection by dispensing with the need of knowing the noise variance. However, fitting a square-root lasso model is computationally more challenging due to the nondifferentiability of the loss function. Recent computational developments include:
 
 * Chu, H. T. M., Toh, K.-C., & Zhang, Y. (2022). On Regularized Square-root Regression Problems: Distributionally Robust Interpretation and Fast Computations. Journal of Machine Learning Research, 23, 1--39.
 
