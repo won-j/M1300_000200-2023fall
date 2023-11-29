@@ -1,0 +1,1411 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="gp_files/libs/clipboard/clipboard.min.js"></script>
+<script src="gp_files/libs/quarto-html/tabby.min.js"></script>
+<script src="gp_files/libs/quarto-html/popper.min.js"></script>
+<script src="gp_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="gp_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="gp_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="gp_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="gp_files/libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.3.450">
+
+  <meta name="author" content="Joong-Ho Won">
+  <title>Geometric Programming</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="gp_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="gp_files/libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+      }
+    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+    div.sourceCode
+      { color: #f8f8f2;  }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #f8f8f2; } /* Normal */
+    code span.al { color: #f07178; background-color: #2a0f15; font-weight: bold; } /* Alert */
+    code span.an { color: #d4d0ab; } /* Annotation */
+    code span.at { color: #00e0e0; } /* Attribute */
+    code span.bn { color: #d4d0ab; } /* BaseN */
+    code span.bu { color: #abe338; } /* BuiltIn */
+    code span.cf { color: #ffa07a; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #abe338; } /* Char */
+    code span.cn { color: #ffd700; } /* Constant */
+    code span.co { color: #f8f8f2; font-style: italic; } /* Comment */
+    code span.cv { color: #ffd700; } /* CommentVar */
+    code span.do { color: #f8f8f2; } /* Documentation */
+    code span.dt { color: #ffa07a; } /* DataType */
+    code span.dv { color: #d4d0ab; } /* DecVal */
+    code span.er { color: #f07178; text-decoration: underline; } /* Error */
+    code span.ex { color: #00e0e0; font-weight: bold; } /* Extension */
+    code span.fl { color: #d4d0ab; } /* Float */
+    code span.fu { color: #ffa07a; } /* Function */
+    code span.im { color: #abe338; } /* Import */
+    code span.in { color: #d4d0ab; } /* Information */
+    code span.kw { color: #ffa07a; font-weight: bold; } /* Keyword */
+    code span.op { color: #ffa07a; } /* Operator */
+    code span.ot { color: #00e0e0; } /* Other */
+    code span.pp { color: #dcc6e0; } /* Preprocessor */
+    code span.re { color: #00e0e0; background-color: #f8f8f2; } /* RegionMarker */
+    code span.sc { color: #abe338; } /* SpecialChar */
+    code span.ss { color: #abe338; } /* SpecialString */
+    code span.st { color: #abe338; } /* String */
+    code span.va { color: #00e0e0; } /* Variable */
+    code span.vs { color: #abe338; } /* VerbatimString */
+    code span.wa { color: #dcc6e0; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="gp_files/libs/revealjs/dist/theme/quarto.css">
+  <link href="gp_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="gp_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="gp_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="gp_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+
+  .callout {
+    margin-top: 1em;
+    margin-bottom: 1em;  
+    border-radius: .25rem;
+  }
+
+  .callout.callout-style-simple { 
+    padding: 0em 0.5em;
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+    display: flex;
+  }
+
+  .callout.callout-style-default {
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+  }
+
+  .callout .callout-body-container {
+    flex-grow: 1;
+  }
+
+  .callout.callout-style-simple .callout-body {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-style-default .callout-body {
+    font-size: 0.9rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-titled.callout-style-simple .callout-body {
+    margin-top: 0.2em;
+  }
+
+  .callout:not(.callout-titled) .callout-body {
+      display: flex;
+  }
+
+  .callout:not(.no-icon).callout-titled.callout-style-simple .callout-content {
+    padding-left: 1.6em;
+  }
+
+  .callout.callout-titled .callout-header {
+    padding-top: 0.2em;
+    margin-bottom: -0.2em;
+  }
+
+  .callout.callout-titled .callout-title  p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+    
+  .callout.callout-titled.callout-style-simple .callout-content  p {
+    margin-top: 0;
+  }
+
+  .callout.callout-titled.callout-style-default .callout-content  p {
+    margin-top: 0.7em;
+  }
+
+  .callout.callout-style-simple div.callout-title {
+    border-bottom: none;
+    font-size: .9rem;
+    font-weight: 600;
+    opacity: 75%;
+  }
+
+  .callout.callout-style-default  div.callout-title {
+    border-bottom: none;
+    font-weight: 600;
+    opacity: 85%;
+    font-size: 0.9rem;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-default div.callout-content {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-simple .callout-icon::before {
+    height: 1rem;
+    width: 1rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 1rem 1rem;
+  }
+
+  .callout.callout-style-default .callout-icon::before {
+    height: 0.9rem;
+    width: 0.9rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 0.9rem 0.9rem;
+  }
+
+  .callout-title {
+    display: flex
+  }
+    
+  .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  .callout.no-icon::before {
+    display: none !important;
+  }
+
+  .callout.callout-titled .callout-body > .callout-content > :last-child {
+    margin-bottom: 0.5rem;
+  }
+
+  .callout.callout-titled .callout-icon::before {
+    margin-top: .5rem;
+    padding-right: .5rem;
+  }
+
+  .callout:not(.callout-titled) .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  /* Callout Types */
+
+  div.callout-note {
+    border-left-color: #4582ec !important;
+  }
+
+  div.callout-note .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEU0lEQVRYCcVXTWhcVRQ+586kSUMMxkyaElstCto2SIhitS5Ek8xUKV2poatCcVHtUlFQk8mbaaziwpWgglJwVaquitBOfhQXFlqlzSJpFSpIYyXNjBNiTCck7x2/8/LeNDOZxDuEkgOXe++553zfefee+/OYLOXFk3+1LLrRdiO81yNqZ6K9cG0P3MeFaMIQjXssE8Z1JzLO9ls20MBZX7oG8w9GxB0goaPrW5aNMp1yOZIa7Wv6o2ykpLtmAPs/vrG14Z+6d4jpbSKuhdcSyq9wGMPXjonwmESXrriLzFGOdDBLB8Y6MNYBu0dRokSygMA/mrun8MGFN3behm6VVAwg4WR3i6FvYK1T7MHo9BK7ydH+1uurECoouk5MPRyVSBrBHMYwVobG2aOXM07sWrn5qgB60rc6mcwIDJtQrnrEr44kmy+UO9r0u9O5/YbkS9juQckLed3DyW2XV/qWBBB3ptvI8EUY3I9p/67OW+g967TNr3Sotn3IuVlfMLVnsBwH4fsnebJvyGm5GeIUA3jljERmrv49SizPYuq+z7c2H/jlGC+Ghhupn/hcapqmcudB9jwJ/3jvnvu6vu5lVzF1fXyZuZZ7U8nRmVzytvT+H3kilYvH09mLWrQdwFSsFEsxFVs5fK7A0g8gMZjbif4ACpKbjv7gNGaD8bUrlk8x+KRflttr22JEMRUbTUwwDQScyzPgedQHZT0xnx7ujw2jfVfExwYHwOsDTjLdJ2ebmeQIlJ7neo41s/DrsL3kl+W2lWvAga0tR3zueGr6GL78M3ifH0rGXrBC2aAR8uYcIA5gwV8zIE8onoh8u0Fca/ciF7j1uOzEnqcIm59sEXoGc0+z6+H45V1CvAvHcD7THztu669cnp+L0okAeIc6zjbM/24LgGM1gZk7jnRu1aQWoU9sfUOuhrmtaPIO3YY1KLLWZaEO5TKUbMY5zx8W9UJ6elpLwKXbsaZ4EFl7B4bMtDv0iRipKoDQT2sNQI9b1utXFdYisi+wzZ/ri/1m7QfDgEuvgUUEIJPq3DhX/5DWNqIXDOweC2wvIR90Oq3lDpdMIgD2r0dXvGdsEW5H6x6HLRJYU7C69VefO1x8Gde1ZFSJLfWS1jbCnhtOPxmpfv2LXOA2Xk2tvnwKKPFuZ/oRmwBwqRQDcKNeVQkYcOjtWVBuM/JuYw5b6isojIkYxyYAFn5K7ZBF10fea52y8QltAg6jnMqNHFBmGkQ1j+U43HMi2xMar1Nv0zGsf1s8nUsmUtPOOrbFIR8bHFDMB5zL13Gmr/kGlCkUzedTzzmzsaJXhYawnA3UmARpiYj5ooJZiUoxFRtK3X6pgNPv+IZVPcnwbOl6f+aBaO1CNvPW9n9LmCp01nuSaTRF2YxHqZ8DYQT6WsXT+RD6eUztwYLZ8rM+rcPxamv1VQzFUkzFXvkiVrySGQgJNvXHJAxiU3/NwiC03rSf05VBaPtu/Z7/B8Yn/w7eguloAAAAAElFTkSuQmCC');
+  }
+
+  div.callout-note.callout-style-default .callout-title {
+    background-color: #dae6fb
+  }
+
+  div.callout-important {
+    border-left-color: #d9534f !important;
+  }
+
+  div.callout-important .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEKklEQVRYCcVXTWhcVRS+575MJym48A+hSRFr00ySRQhURRfd2HYjk2SSTokuBCkU2o0LoSKKraKIBTcuFCoidGFD08nkBzdREbpQ1EDNIv8qSGMFUboImMSZd4/f9zJv8ibJMC8xJQfO3HPPPef7zrvvvnvviIkpC9nsw0UttFunbUhpFzFtarSd6WJkStVMw5xyVqYTvkwfzuf/5FgtkVoB0729j1rjXwThS7Vio+Mo6DNnvLfahoZ+i/o32lULuJ3NNiz7q6+pyAUkJaFF6JwaM2lUJlV0MlnQn5aTRbEu0SEqHUa0A4AdiGuB1kFXRfVyg5d87+Dg4DL6m2TLAub60ilj7A1Ec4odSAc8X95sHh7+ZRPCFo6Fnp7HfU/fBng/hi10CjCnWnJjsxvDNxWw0NfV6Rv5GgP3I3jGWXumdTD/3cbEOP2ZbOZp69yniG3FQ9z1jD7bnBu9Fc2tKGC2q+uAJOQHBDRiZX1x36o7fWBs7J9ownbtO+n0/qWkvW7UPIfc37WgT6ZGR++EOJyeQDSb9UB+DZ1G6DdLDzyS+b/kBCYGsYgJbSQHuThGKRcw5xdeQf8YdNHsc6ePXrlSYMBuSIAFTGAtQo+VuALo4BX83N190NWZWbynBjhOHsmNfFWLeL6v+ynsA58zDvvAC8j5PkbOcXCMg2PZFk3q8MjI7WAG/Dp9AwP7jdGBOOQkAvlFUB+irtm16I1Zw9YBcpGTGXYmk3kQIC/Cds55l+iMI3jqhjAuaoe+am2Jw5GT3Nbz3CkE12NavmzN5+erJW7046n/CH1RO/RVa8lBLozXk9uqykkGAyRXLWlLv5jyp4RFsG5vGVzpDLnIjTWgnRy2Rr+tDKvRc7Y8AyZq10jj8DqXdnIRNtFZb+t/ZRtXcDiVnzpqx8mPcDWxgARUqx0W1QB9MeUZiNrV4qP+Ehc+BpNgATsTX8ozYKL2NtFYAHc84fG7ndxUPr+AR/iQSns7uSUufAymwDOb2+NjK27lEFocm/EE2WpyIy/Hi66MWuMKJn8RvxIcj87IM5Vh9663ziW36kR0HNenXuxmfaD8JC7tfKbrhFr7LiZCrMjrzTeGx+PmkosrkNzW94ObzwocJ7A1HokLolY+AvkTiD/q1H0cN48c5EL8Crkttsa/AXQVDmutfyku0E7jShx49XqV3MFK8IryDhYVbj7Sj2P2eBxwcXoe8T8idsKKPRcnZw1b+slFTubwUwhktrfnAt7J++jwQtLZcm3sr9LQrjRzz6cfMv9aLvgmnAGvpoaGLxM4mAEaLV7iAzQ3oU0IvD5x9ix3yF2RAAuYAOO2f7PEFWCXZ4C9Pb2UsgDeVnFSpbFK7/IWu7TPTvBqzbGdCHOJQSxiEjt6IyZmxQyEJHv6xyQsYk//moVFsN2zP6fRImjfq7/n/wFDguUQFNEwugAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-important.callout-style-default .callout-title {
+    background-color: #f7dddc
+  }
+
+  div.callout-warning {
+    border-left-color: #f0ad4e !important;
+  }
+
+  div.callout-warning .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAETklEQVRYCeVWW2gcVRg+58yaTUnizqbipZeX4uWhBEniBaoUX1Ioze52t7sRq6APio9V9MEaoWlVsFasRq0gltaAPuxms8lu0gcviE/FFOstVbSIxgcv6SU7EZqmdc7v9+9mJtNks51NTUH84ed889/PP+cmxP+d5FIbMJmNbpREu4WUkiTtCicKny0l1pIKmBzovF2S+hIJHX8iEu3hZJ5lNZGqyRrGSIQpq15AzF28jgpeY6yk6GVdrfFqdrD6Iw+QlB8g0YS2g7dyQmXM/IDhBhT0UCiRf59lfqmmDvzRt6kByV/m4JjtzuaujMUM2c5Z2d6JdKrRb3K2q6mA+oYVz8JnDdKPmmNthzkAk/lN63sYPgevrguc72aZX/L9C6x09GYyxBgCX4NlvyGUHOKELlm5rXeR1kchuChJt4SSwyddZRXgvwMGvYo4QSlk3/zkHD8UHxwVJA6zjZZqP8v8kK8OWLnIZtLyCAJagYC4rTGW/9Pqj92N/c+LUaAj27movwbi19tk/whRCIE7Q9vyI6yvRpftAKVTdUjOW40X3h5OXsKCdmFcx0xlLJoSuQngnrJe7Kcjm4OMq9FlC7CMmScQANuNvjfP3PjGXDBaUQmbp296S5L4DrpbrHN1T87ZVEZVCzg1FF0Ft+dKrlLukI+/c9ENo+TvlTDbYFvuKPtQ9+l052rXrgKoWkDAFnvh0wTOmYn8R5f4k/jN/fZiCM1tQx9jQQ4ANhqG4hiL0qIFTGViG9DKB7GYzgubnpofgYRwO+DFjh0Zin2m4b/97EDkXkc+f6xYAPX0KK2I/7fUQuwzuwo/L3AkcjugPNixC8cHf0FyPjWlItmLxWw4Ou9YsQCr5fijMGoD/zpdRy95HRysyXA74MWOnscpO4j2y3HAVisw85hX5+AFBRSHt4ShfLFkIMXTqyKFc46xdzQM6XbAi702a7sy04J0+feReMFKp5q9esYLCqAZYw/k14E/xcLLsFElaornTuJB0svMuJINy8xkIYuL+xPAlWRceH6+HX7THJ0djLUom46zREu7tTkxwmf/FdOZ/sh6Q8qvEAiHpm4PJ4a/doJe0gH1t+aHRgCzOvBvJedEK5OFE5jpm4AGP2a8Dxe3gGJ/pAutug9Gp6he92CsSsWBaEcxGx0FHytmIpuqGkOpldqNYQK8cSoXvd+xLxXADw0kf6UkJNFtdo5MOgaLjiQOQHcn+A6h5NuL2s0qsC2LOM75PcF3yr5STuBSAcGG+meA14K/CI21HcS4LBT6tv0QAh8Dr5l93AhZzG5ZJ4VxAqdZUEl9z7WJ4aN+svMvwHHL21UKTd1mqvChH7/Za5xzXBBKrUcB0TQ+Ulgkfbi/H/YT5EptrGzsEK7tR1B7ln9BBwckYfMiuSqklSznIuoIIOM42MQO+QnduCoFCI0bpkzjCjddHPN/F+2Yu+sd9bKNpVwHhbS3LluK/0zgfwD0xYI5dXuzlQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-warning.callout-style-default .callout-title {
+    background-color: #fcefdc
+  }
+
+  div.callout-tip {
+    border-left-color: #02b875 !important;
+  }
+
+  div.callout-tip .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAADr0lEQVRYCe1XTWgTQRj9ZjZV8a9SPIkKgj8I1bMHsUWrqYLVg4Ue6v9BwZOxSYsIerFao7UiUryIqJcqgtpimhbBXoSCVxUFe9CTiogUrUp2Pt+3aUI2u5vdNh4dmMzOzHvvezuz8xNFM0mjnbXaNu1MvFWRXkXEyE6aYOYJpdW4IXuA4r0fo8qqSMDBU0v1HJUgVieAXxzCsdE/YJTdFcVIZQNMyhruOMJKXYFoLfIfIvVIMWdsrd+Rpd86ZmyzzjJmLStqRn0v8lzkb4rVIXvnpScOJuAn2ACC65FkPzEdEy4TPWRLJ2h7z4cArXzzaOdKlbOvKKX25Wl00jSnrwVxAg3o4dRxhO13RBSdNvH0xSARv3adTXbBdTf64IWO2vH0LT+cv4GR1DJt+DUItaQogeBX/chhbTBxEiZ6gftlDNXTrvT7co4ub5A6gp9HIcHvzTa46OS5fBeP87Qm0fQkr4FsYgVQ7Qg+ZayaDg9jhg1GkWj8RG6lkeSacrrHgDaxdoBiZPg+NXV/KifMuB6//JmYH4CntVEHy/keA6x4h4CU5oFy8GzrBS18cLJMXcljAKB6INjWsRcuZBWVaS3GDrqB7rdapVIeA+isQ57Eev9eCqzqOa81CY05VLd6SamW2wA2H3SiTbnbSxmzfp7WtKZkqy4mdyAlGx7ennghYf8voqp9cLSgKdqNfa6RdRsAAkPwRuJZNbpByn+RrJi1RXTwdi8RQF6ymDwGMAtZ6TVE+4uoKh+MYkcLsT0Hk8eAienbiGdjJHZTpmNjlbFJNKDVAp2fJlYju6IreQxQ08UJDNYdoLSl6AadO+fFuCQqVMB1NJwPm69T04Wv5WhfcWyfXQB+wXRs1pt+nCknRa0LVzSA/2B+a9+zQJadb7IyyV24YAxKp2Jqs3emZTuNnKxsah+uabKbMk7CbTgJx/zIgQYErIeTKRQ9yD9wxVof5YolPHqaWo7TD6tJlh7jQnK5z2n3+fGdggIOx2kaa2YI9QWarc5Ce1ipNWMKeSG4DysFF52KBmTNMmn5HqCFkwy34rDg05gDwgH3bBi+sgFhN/e8QvRn8kbamCOhgrZ9GJhFDgfcMHzFb6BAtjKpFhzTjwv1KCVuxHvCbsSiEz4CANnj84cwHdFXAbAOJ4LTSAawGWFn5tDhLMYz6nWeU2wJfIhmIJBefcd/A5FWQWGgrWzyORZ3Q6HuV+Jf0Bj+BTX69fm1zWgK7By1YTXchFDORywnfQ7GpzOo6S+qECrsx2ifVQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-tip.callout-style-default .callout-title {
+    background-color: #ccf1e3
+  }
+
+  div.callout-caution {
+    border-left-color: #fd7e14 !important;
+  }
+
+  div.callout-caution .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAACV0lEQVRYCdVWzWoUQRCuqp2ICBLJXgITZL1EfQDBW/bkzUMUD7klD+ATSHBEfAIfQO+iXsWDxJsHL96EHAwhgzlkg8nBg25XWb0zIb0zs9muYYWkoKeru+vn664fBqElyZNuyh167NXJ8Ut8McjbmEraKHkd7uAnAFku+VWdb3reSmRV8PKSLfZ0Gjn3a6Xlcq9YGb6tADjn+lUfTXtVmaZ1KwBIvFI11rRXlWlatwIAAv2asaa9mlB9wwygiDX26qaw1yYPzFXg2N1GgG0FMF8Oj+VIx7E/03lHx8UhvYyNZLN7BwSPgekXXLribw7w5/c8EF+DBK5idvDVYtEEwMeYefjjLAdEyQ3M9nfOkgnPTEkYU+sxMq0BxNR6jExrAI31H1rzvLEfRIdgcv1XEdj6QTQAS2wtstEALLG1yEZ3QhH6oDX7ExBSFEkFINXH98NTrme5IOaaA7kIfiu2L8A3qhH9zRbukdCqdsA98TdElyeMe5BI8Rs2xHRIsoTSSVFfCFCWGPn9XHb4cdobRIWABNf0add9jakDjQJpJ1bTXOJXnnRXHRf+dNL1ZV1MBRCXhMbaHqGI1JkKIL7+i8uffuP6wVQAzO7+qVEbF6NbS0LJureYcWXUUhH66nLR5rYmva+2tjRFtojkM2aD76HEGAD3tPtKM309FJg5j/K682ywcWJ3PASCcycH/22u+Bh7Aa0ehM2Fu4z0SAE81HF9RkB21c5bEn4Dzw+/qNOyXr3DCTQDMBOdhi4nAgiFDGCinIa2owCEChUwD8qzd03PG+qdW/4fDzjUMcE1ZpIAAAAASUVORK5CYII=');
+  }
+
+  div.callout-caution.callout-style-default .callout-title {
+    background-color: #ffe5d0
+  }
+
+  </style>
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+  <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+</head>
+<body class="quarto-dark">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Geometric Programming</h1>
+  <p class="subtitle">Advanced Statistical Computing</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Joong-Ho Won 
+</div>
+        <p class="quarto-title-affiliation">
+            Seoul National University
+          </p>
+    </div>
+</div>
+
+  <p class="date">November 2023</p>
+</section>
+<section class="slide level2">
+
+<div class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">versioninfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Julia Version 1.9.3
+Commit bed2cd540a1 (2023-08-24 14:43 UTC)
+Build Info:
+  Official https://julialang.org/ release
+Platform Info:
+  OS: macOS (x86_64-apple-darwin22.4.0)
+  CPU: 8 × Intel(R) Core(TM) i5-8279U CPU @ 2.40GHz
+  WORD_SIZE: 64
+  LIBM: libopenlibm
+  LLVM: libLLVM-14.0.6 (ORCJIT, skylake)
+  Threads: 2 on 8 virtual cores</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1"></a><span class="im">using</span> <span class="bu">Pkg</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="bu">Pkg</span>.<span class="fu">activate</span>(<span class="fu">pwd</span>())</span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="bu">Pkg</span>.<span class="fu">instantiate</span>()</span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="bu">Pkg</span>.<span class="fu">status</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Status `~/Dropbox/class/M1399.000200/2023/M1300_000200-2023fall/lectures/20-gp/Project.toml`
+  [1e616198] COSMO v0.8.8
+  [f65535da] Convex v0.15.4
+  [a93c6f00] DataFrames v1.6.1
+  [e2685f51] ECOS v1.1.1
+  [b8f27783] MathOptInterface v1.22.0
+  [91a5bcdd] Plots v1.39.0
+  [ce6b1742] RDatasets v0.7.7
+  [c946c3f1] SCS v2.0.0</code></pre>
+</div>
+</div>
+</section>
+<section id="monomials-and-posynomials" class="slide level2">
+<h2>Monomials and posynomials</h2>
+<ul>
+<li><p>A function <span class="math inline">\(f: \mathbb{R}^n \mapsto \mathbb{R}\)</span> with <span class="math inline">\(\text{dom} f = \mathbb{R}_{++}^n\)</span> defined as <span class="math display">\[\begin{eqnarray*}
+  f(\mathbf{x}) = c x_1^{a_1} x_2^{a_2} \cdots x_n^{a_n},
+\end{eqnarray*}\]</span> where <span class="math inline">\(c&gt;0\)</span> and <span class="math inline">\(a_i \in \mathbb{R}\)</span>, is called a <em>monomial</em>.</p></li>
+<li><p>A sum of monomials, i.e., <span class="math display">\[\begin{eqnarray*}
+  f(\mathbf{x}) = \sum_{k=1}^K c_k x_1^{a_{1k}} x_2^{a_{2k}} \cdots x_n^{a_{nk}},
+\end{eqnarray*}\]</span> where <span class="math inline">\(c_k &gt; 0\)</span>, is called a <em>posynomial</em>.</p></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<ul>
+<li><p><strong>Examples</strong></p>
+<ul>
+<li><span class="math inline">\(0.23\)</span>, <span class="math inline">\(2z\sqrt{x/y}\)</span>, <span class="math inline">\(3x^2y^{−.12}z\)</span> are monomials (hence also posynomials)</li>
+<li><span class="math inline">\(0.23 + x/y\)</span>, <span class="math inline">\(2(1 + xy)^3\)</span>, <span class="math inline">\(2x + 3y + 2z\)</span> are posynomials</li>
+<li><span class="math inline">\(2x + 3y−2z\)</span>, <span class="math inline">\(x^2 + \tan x\)</span> are <em>not</em> posynomials</li>
+</ul></li>
+<li><p>Monomials are closed under multiplication and division.</p></li>
+<li><p>Posynomials are closed under addition, multiplication, and positive scaling.</p>
+<ul>
+<li>If <span class="math inline">\(\gamma\)</span> is a nonnegative integer and <span class="math inline">\(f\)</span> is a posynomial, then <span class="math inline">\(f^{\gamma}\)</span> is a posynomial.</li>
+</ul></li>
+</ul>
+</section>
+<section id="gp" class="slide level2">
+<h2>GP</h2>
+<ul>
+<li><p>A <strong>geometric program</strong> is of form <span class="math display">\[\begin{eqnarray*}
+  &amp;\text{minimize}&amp; f_0(\mathbf{x}) \\
+  &amp;\text{subject to}&amp; f_i(\mathbf{x}) \le 1, \quad i=1,\ldots,m \\
+  &amp; &amp; h_i(\mathbf{x}) = 1, \quad i=1,\ldots,p
+\end{eqnarray*}\]</span> where <span class="math inline">\(f_0, \ldots, f_m\)</span> are posynomials and <span class="math inline">\(h_1, \ldots, h_p\)</span> are monomials. The constraint <span class="math inline">\(\mathbf{x} &gt; \mathbf{0}\)</span> is implicit.</p></li>
+<li><p>Q: <em>Is GP a convex optimization problem?</em></p></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<ul>
+<li>With change of variable <span class="math inline">\(y_i = \log x_i\)</span>, a monomial <span class="math display">\[\begin{eqnarray*}
+  f(\mathbf{x}) = c x_1^{a_1} x_2^{a_2} \cdots x_n^{a_n}
+\end{eqnarray*}\]</span> can be written as <span class="math display">\[\begin{eqnarray*}
+  f(\mathbf{x}) = f(e^{y_1}, \ldots, e^{y_n}) = c (e^{y_1})^{a_1} \cdots (e^{y_n})^{a_n} = e^{\mathbf{a}^T \mathbf{y} + b},
+\end{eqnarray*}\]</span> where <span class="math inline">\(b = \log c\)</span>. Similarly, we can write a posynomial as <span class="math display">\[\begin{eqnarray*}
+  f(\mathbf{x}) &amp;=&amp; \sum_{k=1}^K c_k x_1^{a_{1k}} x_2^{a_{2k}} \cdots x_n^{a_{nk}} \\
+  &amp;=&amp; \sum_{k=1}^K e^{\mathbf{a}_k^T \mathbf{y} + b_k},
+\end{eqnarray*}\]</span> where <span class="math inline">\(\mathbf{a}_k = (a_{1k}, \ldots, a_{nk})\)</span> and <span class="math inline">\(b_k = \ln c_k\)</span>.</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<ul>
+<li>The original GP can be expressed in terms of the new variable <span class="math inline">\(\mathbf{y}\)</span> <span class="math display">\[\begin{eqnarray*}
+  &amp;\text{minimize}&amp; \sum_{k=1}^{K_0} e^{\mathbf{a}_{0k}^T \mathbf{y} + b_{0k}} \\
+  &amp;\text{subject to}&amp; \sum_{k=1}^{K_i} e^{\mathbf{a}_{ik}^T \mathbf{y} + b_{ik}} \le 1, \quad i = 1,\ldots,m \\
+  &amp; &amp; e^{\mathbf{g}_i^T \mathbf{y} + h_i} = 1, \quad i=1,\ldots,p,
+\end{eqnarray*}\]</span> where <span class="math inline">\(\mathbf{a}_{ik}, \mathbf{g}_i \in \mathbb{R}^n\)</span>.</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<ul>
+<li><p>Taking log of both objective and constraint functions, we obtain the <em>geometric program in convex form</em> <span class="math display">\[\begin{eqnarray*}
+  &amp;\text{minimize}&amp; \log \left(\sum_{k=1}^{K_0} e^{\mathbf{a}_{0k}^T \mathbf{y} + b_{0k}}\right) \\
+  &amp;\text{subject to}&amp; \log \left(\sum_{k=1}^{K_i} e^{\mathbf{a}_{ik}^T \mathbf{y} + b_{ik}}\right) \le 0, \quad i = 1,\ldots,m \\
+  &amp; &amp; \mathbf{g}_i^T \mathbf{y} + h_i = 0, \quad i=1,\ldots,p.
+\end{eqnarray*}\]</span></p>
+<p><em>Why do we require monomials for equality constraints?</em></p></li>
+<li><p>If all <span class="math inline">\(f_i\)</span> are monomials, GP reduces to an LP.</p></li>
+</ul>
+</section>
+<section id="example-1-multinomial-probabilities-with-order-constraints" class="slide level2">
+<h2>Example 1: Multinomial probabilities with order constraints</h2>
+<ul>
+<li><p>Let a random variable <span class="math inline">\(X\)</span> has a multinomial distribution with parameters <span class="math inline">\(n\)</span> and <span class="math inline">\(\mathbf{p} = (p_1, \dotsc , p_r)\)</span> with order constraints <span class="math inline">\(p_1 \le \dotsb \le p_r\)</span>.</p></li>
+<li><p>Observed frequencies of the classes are <span class="math inline">\((n_1, \dotsc, n_r)\)</span>.</p></li>
+<li><p>The MLE is obtained by solving</p></li>
+</ul>
+<p><span class="math display">\[
+\begin{array}{ll}
+    \text{maximize} &amp; \prod_{k=1}^r p_k^{n_k} \\
+    \text{subject to} &amp; p_1 \le p_2 \le \dotsb \le p_r, \\
+                      &amp; p_1 + p_2 + \dotsb +p_r=1, \\
+                      &amp; p_1, \dotsc, p_r \ge 0.
+\end{array}
+\]</span></p>
+<p><strong>This is not a GP</strong> (why?).</p>
+</section>
+<section class="slide level2">
+
+<ul>
+<li>GP formulation:</li>
+</ul>
+<p><span class="math display">\[
+\begin{array}{ll}
+    \text{maximize} &amp; \prod_{k=1}^r p_k^{n_k} \\
+    \text{subject to} &amp; p_1 \le p_2 \le \dotsb \le p_r, \\
+                      &amp; \color{red}{p_1 + p_2 + \dotsb +p_r \le 1}, \\
+                      &amp; p_1, \dotsc, p_r \ge 0.
+\end{array}
+\]</span></p>
+<p>(why is this a GP? Why equivalence?)</p>
+<ul>
+<li>Constraints of the form <span class="math inline">\(p_i/p_{i+1} \le \alpha\)</span> for <span class="math inline">\(\alpha &gt;0\)</span> can be also considered.</li>
+</ul>
+</section>
+<section id="example-2-logistic-regression-as-gp" class="slide level2">
+<h2>Example 2: Logistic regression as GP</h2>
+<ul>
+<li>Given data <span class="math inline">\((\mathbf{x}_i, y_i)\)</span>, <span class="math inline">\(i=1,\ldots,n\)</span>, where <span class="math inline">\(y_i \in \{0, 1\}\)</span> and <span class="math inline">\(\mathbf{x}_i \in \mathbb{R}^p\)</span>, the likelihood of the logistic regression model is <span class="math display">\[
+\small
+\begin{eqnarray*}
+  &amp; &amp; \prod_{i=1}^n p_i^{y_i} (1 - p_i)^{1 - y_i} \\
+  &amp;=&amp; \prod_{i=1}^n \left( \frac{e^{\mathbf{x}_i^T \beta}}{1 + e^{\mathbf{x}_i^T \beta}} \right)^{y_i} \left( \frac{1}{1 + e^{\mathbf{x}_i^T \beta}} \right)^{1 - y_i} \\
+  &amp;=&amp; \prod_{i:y_i=1} e^{y_i\mathbf{x}_i^T \beta} \prod_{i=1}^n \left( \frac{1}{1 + e^{\mathbf{x}_i^T \beta}} \right).
+\end{eqnarray*}
+\]</span></li>
+</ul>
+<p>Then MLE solves <span class="math display">\[
+\small
+\begin{eqnarray*}
+    &amp;\text{minimize}&amp; \prod_{i:y_i=1} e^{-\mathbf{x}_i^T \beta} \prod_{i=1}^n \left( 1 + e^{\mathbf{x}_i^T \beta} \right).
+\end{eqnarray*}
+\]</span></p>
+</section>
+<section class="slide level2">
+
+<ul>
+<li>Let <span class="math inline">\(z_j = e^{\beta_j}\)</span>, <span class="math inline">\(j=1,\ldots,p\)</span>. The objective becomes <span class="math display">\[
+\small
+\begin{eqnarray*}
+  \prod_{i:y_i=1} \prod_{j=1}^p z_j^{-x_{ij}} \prod_{i=1}^n \left( 1 + \prod_{j=1}^p z_j^{x_{ij}} \right).
+\end{eqnarray*}
+\]</span> This leads to a GP <span class="math display">\[
+\small
+\begin{eqnarray*}
+  &amp;\text{minimize}&amp; \prod_{i:y_i=1} s_i \prod_{i=1}^n t_i \\
+  &amp;\text{subject to}&amp; \prod_{j=1}^p z_j^{-x_{ij}} \le s_i, \quad i = 1,\ldots,m \\
+  &amp; &amp; 1 + \prod_{j=1}^p z_j^{x_{ij}} \le t_i, \quad i = 1, \ldots, n,
+\end{eqnarray*}
+\]</span> in variables <span class="math inline">\(\mathbf{s} \in \mathbb{R}^{m}\)</span>, <span class="math inline">\(\mathbf{t} \in \mathbb{R}^n\)</span>, and <span class="math inline">\(\mathbf{z} \in \mathbb{R}^p\)</span>. Here <span class="math inline">\(m\)</span> is the number of observations with <span class="math inline">\(y_i=1\)</span>.</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<h3 id="regularized-logistic-regression-as-gp">Regularized logistic regression as GP</h3>
+<ul>
+<li>How to incorporate the lasso penalty? Let <span class="math inline">\(z_j^+ = e^{\beta_j^+}\)</span>, <span class="math inline">\(z_j^- = e^{\beta_j^-}\)</span>. Lasso penalty takes the form <span class="math inline">\(e^{\lambda |\beta_j|} = (z_j^+ z_j^-)^\lambda\)</span>.</li>
+<li>How can you incorporate the ridge penalty?</li>
+</ul>
+<h3 id="survival-analysis">Survival analysis</h3>
+<blockquote>
+<p>Lim, J., Kim, S.J. and Wang, X., 2009. <a href="https://doi.org/10.1198/jcgs.2009.06140">Estimating stochastically ordered survival functions via geometric programming</a>. Journal of Computational and Graphical Statistics, 18(4), pp.978-994.</p>
+</blockquote>
+</section>
+<section id="generalized-gp-ggp" class="slide level2">
+<h2>Generalized GP (GGP)</h2>
+<ul>
+<li>Function <span class="math inline">\(f\)</span> is a <strong>generalized posynomial</strong> if it can be formed using addition, multiplication, <em>positive real power</em>, and <em>maximum</em>, starting from posynomials (hence closed for these operations). For example,
+<ul>
+<li><span class="math inline">\(\max\{1 + x_1, 2x_1 + x_2^{0.2}x_3^{-3.9}\}\)</span></li>
+<li><span class="math inline">\((0.1x_1x_3^{−0.5} + x_2^{1.7}x_3^{0.7})^{1.5}\)</span></li>
+<li><span class="math inline">\(\max\{1 + x_1, 2x_1 + x_2^{0.2}x_3{−3.9})^{1.7} + x_2^{1.1}x_3^{3.7}\)</span></li>
+</ul></li>
+<li>A <strong>generalized geometric program</strong> is of form <span class="math display">\[\begin{eqnarray*}
+  &amp;\text{minimize}&amp; f_0(\mathbf{x}) \\
+  &amp;\text{subject to}&amp; f_i(\mathbf{x}) \le 1, \quad i=1,\ldots,m \\
+  &amp; &amp; h_i(\mathbf{x}) = 1, \quad i=1,\ldots,p
+\end{eqnarray*}\]</span> where <span class="math inline">\(f_0, \ldots, f_m\)</span> are <em>generalized posynomials</em> and <span class="math inline">\(h_1, \ldots, h_p\)</span> are monomials. The constraint <span class="math inline">\(\mathbf{x} &gt; \mathbf{0}\)</span> is implicit.</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<ul>
+<li>Any GP is a GGP; a GGP can be converted to GP. Hence they are equivalent. For example, GGP</li>
+</ul>
+<p><span class="math display">\[
+    \begin{array}{ll}
+    \text{minimize} &amp; \max\{x + z, 1 + (y + z)^{1/2} \} \\
+    \text{subject to} &amp; \max\{y, z^2\} + \max\{yz, 0.3\} \le 1, \\
+                      &amp; 3xy/z = 1
+    \end{array}
+\]</span></p>
+<p>is equivalent to GP</p>
+<p><span class="math display">\[
+    \begin{array}{ll}
+    \text{minimize} &amp; t_1 \\
+    \text{subject to} &amp;  x+z \le t_1, 1+t_2^{1/2}  \le t_1, \\
+                      &amp; y + z \le t_2, \\
+                      &amp; t_3 + t_4  \le 1, \\
+                      &amp; y \le t_3, z_2 \le t_3, \\
+                      &amp; yz \le t_4, 0.3 \le t_4, \\
+                      &amp; 3xy/z = 1.
+    \end{array}
+\]</span></p>
+</section>
+<section id="solvers" class="slide level2">
+<h2>Solvers</h2>
+<ul>
+<li><p>Mosek is capable of solving GP. <code>cvx</code> has a GP mode that recognizes and transforms GP problems.</p></li>
+<li><p>Unfortunately, <code>Convex.jl</code> does not directly suport GP. However, it supports more general <em>exponential cone representable</em> problems.</p></li>
+<li><p>Doubly unfortunately, Mosek does not support general exponential cone constraints. So we have to turn to either SCS, COSMO, or <a href="https://github.com/embotech/ecos">ECOS</a>.</p></li>
+</ul>
+</section>
+<section id="exponential-cone" class="slide level2">
+<h2>Exponential Cone</h2>
+<ul>
+<li><p>The exponential cone is defined as the set <span class="math inline">\(K_{\exp}=\{(x,y,t): ye^{x/y} \le t, y &gt; 0 \}\)</span>. Note this is the epigraph of the perspective of <span class="math inline">\(f(x)=e^{x}\)</span>. Since <span class="math inline">\(K_{\exp}\)</span> is not closed, we instead consider the closure: <span class="math display">\[
+\bar{K}_{\exp} = K_{\exp} \cup \{(x,0,z): x \le 0, z \ge 0\}.
+\]</span></p></li>
+<li><p>Exponential cone representability is defined in an obvious fashion.</p></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<ul>
+<li><p>The log-sum-exp function <span class="math inline">\(f(\mathbf{x})=\log(\sum_{i=1}^n e^{x_i})\)</span> is exponential cone representable: <span class="math display">\[
+\small
+  \begin{align}
+  &amp; \log(\sum_{i=1}^n e^{x_i}) \le t
+  \iff
+  \sum_{i=1}^n e^{x_i} \le e^t
+  \iff
+  \sum_{i=1}^n e^{x_i-t} \le 1 \\
+  \iff &amp;
+  e^{x_i-t} \le y_i, \forall i;~\sum_{i=1}^n y_i  \le 1\\
+  \iff &amp;
+  (x_i - t, 1, y_i) \in \bar{K}_{\exp}, \forall i; ~ \exists z\ge 0: (\sum_{i=1}^n y_i - 1, 0, z) \in \bar{K}_{\exp}
+  \end{align}
+\]</span></p></li>
+<li><p>GP constraints <span class="math inline">\(\log \left(\sum_{k=1}^{K_i} e^{\mathbf{a}_{ik}^T \mathbf{y} + b_{ik}}\right) \le 0\)</span> are expressed in log-sum-exp composited with an affine map.</p></li>
+</ul>
+</section>
+<section id="code-example" class="slide level2">
+<h2>Code example</h2>
+<h3 id="multinomial-mle-with-order-constraints">Multinomial MLE with order constraints</h3>
+<ul>
+<li><p>Data: <span class="math inline">\(n_1, n_2, n_3 = (4, 2, 374)\)</span> (n=380).</p></li>
+<li><p>Constraints: <span class="math inline">\(p_1 \le p_2 \le p_3\)</span>.</p></li>
+</ul>
+<div class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1"></a><span class="im">using</span> <span class="bu">Convex</span>, <span class="bu">MathOptInterface</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="kw">const</span> MOI <span class="op">=</span> MathOptInterface</span>
+<span id="cb5-3"><a href="#cb5-3"></a></span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="co">## Use SCS solver</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="co"># using SCS</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="co"># solver = SCS.Optimizer()</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="co"># MOI.set(solver, MOI.RawOptimizerAttribute("verbose"), 1)</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a></span>
+<span id="cb5-9"><a href="#cb5-9"></a><span class="co">## Use COSMO solver</span></span>
+<span id="cb5-10"><a href="#cb5-10"></a><span class="co"># using COSMO</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a><span class="co"># solver = COSMO.Optimizer()</span></span>
+<span id="cb5-12"><a href="#cb5-12"></a><span class="co"># MOI.set(solver, MOI.RawOptimizerAttribute("max_iter"), 5000)</span></span>
+<span id="cb5-13"><a href="#cb5-13"></a></span>
+<span id="cb5-14"><a href="#cb5-14"></a><span class="co"># Use ECOS solver</span></span>
+<span id="cb5-15"><a href="#cb5-15"></a><span class="im">using</span> <span class="bu">ECOS</span></span>
+<span id="cb5-16"><a href="#cb5-16"></a>solver <span class="op">=</span> ECOS.<span class="fu">Optimizer</span>()</span>
+<span id="cb5-17"><a href="#cb5-17"></a>MOI.<span class="fu">set</span>(solver, MOI.<span class="fu">RawOptimizerAttribute</span>(<span class="st">"verbose"</span>), <span class="cn">true</span>)</span>
+<span id="cb5-18"><a href="#cb5-18"></a></span>
+<span id="cb5-19"><a href="#cb5-19"></a>n<span class="op">=</span>[<span class="fl">4</span>, <span class="fl">2</span>, <span class="fl">374</span>]  <span class="co"># trinomial with n=380</span></span>
+<span id="cb5-20"><a href="#cb5-20"></a></span>
+<span id="cb5-21"><a href="#cb5-21"></a>x <span class="op">=</span> <span class="fu">Variable</span>(<span class="fu">length</span>(n))  <span class="co"># x = log(p)</span></span>
+<span id="cb5-22"><a href="#cb5-22"></a>problem <span class="op">=</span> <span class="fu">maximize</span>(<span class="fu">dot</span>(n, x))</span>
+<span id="cb5-23"><a href="#cb5-23"></a><span class="cf">for</span> i<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fu">length</span>(n)<span class="op">-</span><span class="fl">1</span></span>
+<span id="cb5-24"><a href="#cb5-24"></a>    problem.constraints <span class="op">+=</span> x[i] <span class="op">-</span> x[i<span class="op">+</span><span class="fl">1</span>] <span class="op">&lt;=</span> <span class="fl">0</span></span>
+<span id="cb5-25"><a href="#cb5-25"></a><span class="cf">end</span></span>
+<span id="cb5-26"><a href="#cb5-26"></a>problem.constraints <span class="op">+=</span> <span class="fu">logsumexp</span>(x) <span class="op">&lt;=</span> <span class="fl">0</span></span>
+<span id="cb5-27"><a href="#cb5-27"></a>    </span>
+<span id="cb5-28"><a href="#cb5-28"></a><span class="co"># Solve the problem</span></span>
+<span id="cb5-29"><a href="#cb5-29"></a><span class="pp">@time</span> <span class="fu">solve!</span>(problem, solver)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  0.006431 seconds (7.17 k allocations: 358.500 KiB)
+
+ECOS 2.0.8 - (C) embotech GmbH, Zurich Switzerland, 2012-15. Web: www.embotech.com/ECOS
+
+It     pcost       dcost      gap   pres   dres    k/t    mu     step   sigma     IR    |   BT
+ 0  +0.000e+00  -1.910e+00  +1e+01  7e-01  7e-01  1e+00  1e+00    ---    ---    0  0  - |  -  - 
+ 1  -9.937e+00  -8.408e+00  +3e+00  5e-01  8e-01  4e+00  2e-01  0.7926  2e-02   2  1  2 |  0  0
+ 2  -5.120e+01  -3.728e+01  +7e-01  6e-01  8e-01  2e+01  5e-02  0.7833  5e-02   1  1  1 |  2  1
+ 3  -2.176e+02  -1.567e+02  +1e-01  6e-01  7e-01  6e+01  1e-02  0.7833  1e-02   2  1  2 |  1  1
+ 4  -2.998e+02  -2.211e+02  +8e-02  6e-01  6e-01  8e+01  6e-03  0.5013  1e-01   1  1  1 |  2  3
+ 5  -3.175e+02  -2.426e+02  +5e-02  7e-01  5e-01  8e+01  4e-03  0.5013  2e-01   2  1  1 |  3  3
+ 6  -2.350e+02  -1.957e+02  +2e-02  6e-01  3e-01  4e+01  1e-03  0.9791  4e-01   1  1  1 |  5  0
+ 7  -1.219e+02  -1.036e+02  +4e-03  2e-01  8e-02  2e+01  3e-04  0.7833  4e-02   1  1  1 |  1  1
+ 8  -2.498e+01  -1.373e+01  +1e-03  1e-01  4e-02  1e+01  1e-04  0.7833  1e-01   1  1  1 |  3  1
+ 9  +1.584e+01  +1.910e+01  +3e-04  3e-02  1e-02  3e+00  2e-05  0.9791  2e-01   1  1  1 |  4  0
+10  +2.285e+01  +2.584e+01  +1e-04  3e-02  8e-03  3e+00  1e-05  0.9791  6e-01   1  1  1 |  8  0
+11  +2.859e+01  +2.984e+01  +5e-05  1e-02  3e-03  1e+00  4e-06  0.6266  6e-02   2  1  1 |  2  2
+12  +3.249e+01  +3.294e+01  +2e-05  4e-03  1e-03  5e-01  1e-06  0.9791  3e-01   1  1  1 |  5  0
+13  +3.424e+01  +3.440e+01  +4e-06  1e-03  4e-04  2e-01  3e-07  0.7833  1e-01   2  1  1 |  3  1
+14  +3.474e+01  +3.479e+01  +1e-06  4e-04  1e-04  5e-02  1e-07  0.9791  3e-01   2  0  0 |  5  0
+15  +3.495e+01  +3.496e+01  +3e-07  1e-04  3e-05  1e-02  2e-08  0.7833  9e-03   2  0  0 |  1  1
+16  +3.499e+01  +3.499e+01  +7e-08  2e-05  7e-06  3e-03  5e-09  0.7833  1e-02   1  0  0 |  1  1
+17  +3.500e+01  +3.500e+01  +3e-08  9e-06  3e-06  1e-03  2e-09  0.6266  5e-02   1  0  0 |  2  2
+18  +3.500e+01  +3.500e+01  +6e-09  2e-06  7e-07  2e-04  5e-10  0.7833  9e-03   2  0  0 |  1  1
+19  +3.500e+01  +3.500e+01  +2e-09  8e-07  3e-07  1e-04  2e-10  0.6266  5e-02   2  0  0 |  2  2
+20  +3.500e+01  +3.500e+01  +6e-10  2e-07  6e-08  2e-05  4e-11  0.7833  9e-03   2  0  0 |  1  1
+21  +3.500e+01  +3.500e+01  +2e-10  7e-08  2e-08  9e-06  2e-11  0.6266  5e-02   2  0  0 |  2  2
+22  +3.500e+01  +3.500e+01  +5e-11  2e-08  6e-09  2e-06  4e-12  0.7833  9e-03   0  0  0 |  1  1
+23  +3.500e+01  +3.500e+01  +2e-11  6e-09  2e-09  8e-07  2e-12  0.6266  5e-02   0  0  0 |  2  2
+
+OPTIMAL (within feastol=6.5e-09, reltol=5.7e-13, abstol=2.0e-11).
+Runtime: 0.000301 seconds.
+</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">exp</span>.(x.value)  <span class="co"># recover trinomial probabilities</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<pre><code>3×1 Matrix{Float64}:
+ 0.00789473078831494
+ 0.007894736202882328
+ 0.9842105440627644</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">sum</span>(<span class="fu">exp</span>.(x.value))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<pre><code>1.0000000110539617</code></pre>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="logistic-regression">Logistic regression</h3>
+<div class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb11-1"><a href="#cb11-1"></a><span class="co">### https://github.com/JuliaOpt/Convex.jl/blob/master/docs/examples_literate/general_examples/logistic_regression.jl</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a></span>
+<span id="cb11-3"><a href="#cb11-3"></a><span class="im">using</span> <span class="bu">DataFrames</span></span>
+<span id="cb11-4"><a href="#cb11-4"></a><span class="im">using</span> <span class="bu">RDatasets</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a></span>
+<span id="cb11-6"><a href="#cb11-6"></a>iris <span class="op">=</span> <span class="fu">dataset</span>(<span class="st">"datasets"</span>, <span class="st">"iris"</span>)</span>
+<span id="cb11-7"><a href="#cb11-7"></a><span class="co">## outcome variable: +1 for versicolor, -1 otherwise</span></span>
+<span id="cb11-8"><a href="#cb11-8"></a>Y <span class="op">=</span> [species <span class="op">==</span> <span class="st">"versicolor"</span> ? <span class="fl">1.0</span> <span class="op">:</span> <span class="op">-</span><span class="fl">1.0</span> for species <span class="kw">in</span> iris.Species]</span>
+<span id="cb11-9"><a href="#cb11-9"></a><span class="co">## create data matrix with one column for each feature (first column corresponds to offset)</span></span>
+<span id="cb11-10"><a href="#cb11-10"></a>X <span class="op">=</span> <span class="fu">hcat</span>(<span class="fu">ones</span>(<span class="fu">size</span>(iris, <span class="fl">1</span>)), iris.SepalLength, iris.SepalWidth, iris.PetalLength, iris.PetalWidth);</span>
+<span id="cb11-11"><a href="#cb11-11"></a></span>
+<span id="cb11-12"><a href="#cb11-12"></a><span class="im">using</span> <span class="bu">ECOS</span></span>
+<span id="cb11-13"><a href="#cb11-13"></a>solver <span class="op">=</span> ECOS.<span class="fu">Optimizer</span>()</span>
+<span id="cb11-14"><a href="#cb11-14"></a>MOI.<span class="fu">set</span>(solver, MOI.<span class="fu">RawOptimizerAttribute</span>(<span class="st">"verbose"</span>), <span class="cn">true</span>)</span>
+<span id="cb11-15"><a href="#cb11-15"></a></span>
+<span id="cb11-16"><a href="#cb11-16"></a><span class="co">## solve the logistic regression problem</span></span>
+<span id="cb11-17"><a href="#cb11-17"></a>n, p <span class="op">=</span> <span class="fu">size</span>(X)</span>
+<span id="cb11-18"><a href="#cb11-18"></a>beta <span class="op">=</span> <span class="fu">Variable</span>(p)</span>
+<span id="cb11-19"><a href="#cb11-19"></a>problem <span class="op">=</span> <span class="fu">minimize</span>(<span class="fu">logisticloss</span>(<span class="op">-</span>Y<span class="op">.*</span>(X<span class="op">*</span>beta)))</span>
+<span id="cb11-20"><a href="#cb11-20"></a></span>
+<span id="cb11-21"><a href="#cb11-21"></a><span class="fu">solve!</span>(problem, solver)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ECOS 2.0.8 - (C) embotech GmbH, Zurich Switzerland, 2012-15. Web: www.embotech.com/ECOS
+
+It     pcost       dcost      gap   pres   dres    k/t    mu     step   sigma     IR    |   BT
+ 0  +0.000e+00  -2.236e+02  +1e+03  6e-01  2e+00  1e+00  1e+00    ---    ---    0  0  - |  -  - 
+ 1  -4.981e+00  -1.187e+02  +5e+02  3e-01  1e+00  5e-01  4e-01  0.6266  1e-01   2  1  1 |  3  2
+ 2  +2.098e+01  -4.162e+01  +2e+02  2e-01  6e-01  3e-01  2e-01  0.6266  2e-01   2  1  1 |  4  2
+ 3  +4.578e+01  +1.822e+01  +9e+01  6e-02  2e-01  1e-01  8e-02  0.6266  5e-02   2  1  1 |  2  2
+ 4  +6.577e+01  +5.882e+01  +2e+01  1e-02  6e-02  4e-02  2e-02  0.7833  1e-02   2  1  1 |  1  1
+ 5  +7.113e+01  +6.945e+01  +4e+00  3e-03  1e-02  9e-03  4e-03  0.7833  1e-02   1  1  1 |  1  1
+ 6  +7.193e+01  +7.124e+01  +2e+00  1e-03  6e-03  4e-03  2e-03  0.6266  6e-02   2  1  1 |  2  2
+ 7  +7.223e+01  +7.187e+01  +9e-01  7e-04  3e-03  2e-03  8e-04  0.9791  5e-01   1  1  1 |  7  0
+ 8  +7.240e+01  +7.223e+01  +4e-01  3e-04  1e-03  1e-03  4e-04  0.6266  1e-01   1  1  1 |  3  2
+ 9  +7.244e+01  +7.232e+01  +3e-01  2e-04  1e-03  7e-04  3e-04  0.9791  7e-01   2  1  1 | 10  0
+10  +7.253e+01  +7.253e+01  +8e-03  7e-06  3e-05  2e-05  8e-06  0.9791  9e-03   1  1  1 |  1  0
+11  +7.253e+01  +7.253e+01  +8e-03  6e-06  3e-05  2e-05  7e-06  0.1643  6e-01   2  1  1 |  8  8
+12  +7.253e+01  +7.253e+01  +2e-03  1e-06  6e-06  4e-06  2e-06  0.7833  9e-03   1  1  1 |  1  1
+13  +7.253e+01  +7.253e+01  +7e-04  6e-07  2e-06  2e-06  7e-07  0.6266  5e-02   2  1  0 |  2  2
+14  +7.253e+01  +7.253e+01  +2e-04  1e-07  6e-07  4e-07  2e-07  0.7833  9e-03   2  0  1 |  1  1
+15  +7.253e+01  +7.253e+01  +6e-05  5e-08  2e-07  2e-07  6e-08  0.6266  5e-02   2  0  0 |  2  2
+16  +7.253e+01  +7.253e+01  +1e-05  1e-08  5e-08  4e-08  1e-08  0.7833  9e-03   1  0  0 |  1  1
+17  +7.253e+01  +7.253e+01  +6e-06  5e-09  2e-08  1e-08  5e-09  0.6266  5e-02   1  0  0 |  2  2
+18  +7.253e+01  +7.253e+01  +1e-06  1e-09  5e-09  3e-09  1e-09  0.7833  9e-03   1  0  0 |  1  1
+19  +7.253e+01  +7.253e+01  +5e-07  4e-10  2e-09  1e-09  5e-10  0.6266  5e-02   1  0  0 |  2  2
+
+OPTIMAL (within feastol=1.8e-09, reltol=7.1e-09, abstol=5.1e-07).
+Runtime: 0.007241 seconds.
+</code></pre>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb13-1"><a href="#cb13-1"></a><span class="im">using</span> <span class="bu">Plots</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="fu">logistic</span>(x<span class="op">::</span><span class="dt">Real</span>) <span class="op">=</span> <span class="fu">inv</span>(<span class="fu">exp</span>(<span class="op">-</span>x) <span class="op">+</span> <span class="fu">one</span>(x))</span>
+<span id="cb13-3"><a href="#cb13-3"></a>perm <span class="op">=</span> <span class="fu">sortperm</span>(<span class="fu">vec</span>(X<span class="op">*</span>beta.value))</span>
+<span id="cb13-4"><a href="#cb13-4"></a><span class="fu">plot</span>(<span class="fl">1</span><span class="op">:</span>n, (Y[perm] <span class="op">.+</span> <span class="fl">1</span>)<span class="op">/</span><span class="fl">2</span>, st<span class="op">=:</span>scatter)</span>
+<span id="cb13-5"><a href="#cb13-5"></a><span class="fu">plot!</span>(<span class="fl">1</span><span class="op">:</span>n, <span class="fu">logistic</span>.(X<span class="op">*</span>beta.value)[perm])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<!--?xml version="1.0" encoding="utf-8"?-->
+<svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="600" height="400" viewbox="0 0 2400 1600">
+<defs>
+  <clippath id="clip150">
+    <rect x="0" y="0" width="2400" height="1600"></rect>
+  </clippath>
+</defs>
+<path clip-path="url(#clip150)" d="M0 1600 L2400 1600 L2400 0 L0 0  Z" fill="#ffffff" fill-rule="evenodd" fill-opacity="1"></path>
+<defs>
+  <clippath id="clip151">
+    <rect x="480" y="0" width="1681" height="1600"></rect>
+  </clippath>
+</defs>
+<path clip-path="url(#clip150)" d="M186.274 1486.45 L2352.76 1486.45 L2352.76 47.2441 L186.274 47.2441  Z" fill="#ffffff" fill-rule="evenodd" fill-opacity="1"></path>
+<defs>
+  <clippath id="clip152">
+    <rect x="186" y="47" width="2167" height="1440"></rect>
+  </clippath>
+</defs>
+<polyline clip-path="url(#clip152)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none" points="233.872,1486.45 233.872,47.2441 "></polyline>
+<polyline clip-path="url(#clip152)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none" points="919.728,1486.45 919.728,47.2441 "></polyline>
+<polyline clip-path="url(#clip152)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none" points="1605.58,1486.45 1605.58,47.2441 "></polyline>
+<polyline clip-path="url(#clip152)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none" points="2291.44,1486.45 2291.44,47.2441 "></polyline>
+<polyline clip-path="url(#clip150)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="186.274,1486.45 2352.76,1486.45 "></polyline>
+<polyline clip-path="url(#clip150)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="233.872,1486.45 233.872,1467.55 "></polyline>
+<polyline clip-path="url(#clip150)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="919.728,1486.45 919.728,1467.55 "></polyline>
+<polyline clip-path="url(#clip150)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="1605.58,1486.45 1605.58,1467.55 "></polyline>
+<polyline clip-path="url(#clip150)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="2291.44,1486.45 2291.44,1467.55 "></polyline>
+<path clip-path="url(#clip150)" d="M233.872 1517.37 Q230.261 1517.37 228.433 1520.93 Q226.627 1524.47 226.627 1531.6 Q226.627 1538.71 228.433 1542.27 Q230.261 1545.82 233.872 1545.82 Q237.507 1545.82 239.312 1542.27 Q241.141 1538.71 241.141 1531.6 Q241.141 1524.47 239.312 1520.93 Q237.507 1517.37 233.872 1517.37 M233.872 1513.66 Q239.683 1513.66 242.738 1518.27 Q245.817 1522.85 245.817 1531.6 Q245.817 1540.33 242.738 1544.94 Q239.683 1549.52 233.872 1549.52 Q228.062 1549.52 224.984 1544.94 Q221.928 1540.33 221.928 1531.6 Q221.928 1522.85 224.984 1518.27 Q228.062 1513.66 233.872 1513.66 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip150)" d="M894.428 1514.29 L912.784 1514.29 L912.784 1518.22 L898.71 1518.22 L898.71 1526.7 Q899.729 1526.35 900.747 1526.19 Q901.766 1526 902.784 1526 Q908.571 1526 911.951 1529.17 Q915.33 1532.34 915.33 1537.76 Q915.33 1543.34 911.858 1546.44 Q908.386 1549.52 902.066 1549.52 Q899.891 1549.52 897.622 1549.15 Q895.377 1548.78 892.969 1548.04 L892.969 1543.34 Q895.053 1544.47 897.275 1545.03 Q899.497 1545.58 901.974 1545.58 Q905.978 1545.58 908.316 1543.48 Q910.654 1541.37 910.654 1537.76 Q910.654 1534.15 908.316 1532.04 Q905.978 1529.94 901.974 1529.94 Q900.099 1529.94 898.224 1530.35 Q896.372 1530.77 894.428 1531.65 L894.428 1514.29 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip150)" d="M934.543 1517.37 Q930.932 1517.37 929.103 1520.93 Q927.298 1524.47 927.298 1531.6 Q927.298 1538.71 929.103 1542.27 Q930.932 1545.82 934.543 1545.82 Q938.177 1545.82 939.983 1542.27 Q941.812 1538.71 941.812 1531.6 Q941.812 1524.47 939.983 1520.93 Q938.177 1517.37 934.543 1517.37 M934.543 1513.66 Q940.353 1513.66 943.409 1518.27 Q946.488 1522.85 946.488 1531.6 Q946.488 1540.33 943.409 1544.94 Q940.353 1549.52 934.543 1549.52 Q928.733 1549.52 925.654 1544.94 Q922.599 1540.33 922.599 1531.6 Q922.599 1522.85 925.654 1518.27 Q928.733 1513.66 934.543 1513.66 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip150)" d="M1565.19 1544.91 L1572.83 1544.91 L1572.83 1518.55 L1564.52 1520.21 L1564.52 1515.95 L1572.78 1514.29 L1577.46 1514.29 L1577.46 1544.91 L1585.1 1544.91 L1585.1 1548.85 L1565.19 1548.85 L1565.19 1544.91 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip150)" d="M1604.54 1517.37 Q1600.93 1517.37 1599.1 1520.93 Q1597.3 1524.47 1597.3 1531.6 Q1597.3 1538.71 1599.1 1542.27 Q1600.93 1545.82 1604.54 1545.82 Q1608.18 1545.82 1609.98 1542.27 Q1611.81 1538.71 1611.81 1531.6 Q1611.81 1524.47 1609.98 1520.93 Q1608.18 1517.37 1604.54 1517.37 M1604.54 1513.66 Q1610.35 1513.66 1613.41 1518.27 Q1616.49 1522.85 1616.49 1531.6 Q1616.49 1540.33 1613.41 1544.94 Q1610.35 1549.52 1604.54 1549.52 Q1598.73 1549.52 1595.65 1544.94 Q1592.6 1540.33 1592.6 1531.6 Q1592.6 1522.85 1595.65 1518.27 Q1598.73 1513.66 1604.54 1513.66 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip150)" d="M1634.7 1517.37 Q1631.09 1517.37 1629.26 1520.93 Q1627.46 1524.47 1627.46 1531.6 Q1627.46 1538.71 1629.26 1542.27 Q1631.09 1545.82 1634.7 1545.82 Q1638.34 1545.82 1640.14 1542.27 Q1641.97 1538.71 1641.97 1531.6 Q1641.97 1524.47 1640.14 1520.93 Q1638.34 1517.37 1634.7 1517.37 M1634.7 1513.66 Q1640.51 1513.66 1643.57 1518.27 Q1646.65 1522.85 1646.65 1531.6 Q1646.65 1540.33 1643.57 1544.94 Q1640.51 1549.52 1634.7 1549.52 Q1628.89 1549.52 1625.82 1544.94 Q1622.76 1540.33 1622.76 1531.6 Q1622.76 1522.85 1625.82 1518.27 Q1628.89 1513.66 1634.7 1513.66 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip150)" d="M2251.05 1544.91 L2258.69 1544.91 L2258.69 1518.55 L2250.38 1520.21 L2250.38 1515.95 L2258.64 1514.29 L2263.32 1514.29 L2263.32 1544.91 L2270.95 1544.91 L2270.95 1548.85 L2251.05 1548.85 L2251.05 1544.91 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip150)" d="M2280.45 1514.29 L2298.8 1514.29 L2298.8 1518.22 L2284.73 1518.22 L2284.73 1526.7 Q2285.75 1526.35 2286.76 1526.19 Q2287.78 1526 2288.8 1526 Q2294.59 1526 2297.97 1529.17 Q2301.35 1532.34 2301.35 1537.76 Q2301.35 1543.34 2297.88 1546.44 Q2294.4 1549.52 2288.08 1549.52 Q2285.91 1549.52 2283.64 1549.15 Q2281.39 1548.78 2278.99 1548.04 L2278.99 1543.34 Q2281.07 1544.47 2283.29 1545.03 Q2285.51 1545.58 2287.99 1545.58 Q2292 1545.58 2294.33 1543.48 Q2296.67 1541.37 2296.67 1537.76 Q2296.67 1534.15 2294.33 1532.04 Q2292 1529.94 2287.99 1529.94 Q2286.12 1529.94 2284.24 1530.35 Q2282.39 1530.77 2280.45 1531.65 L2280.45 1514.29 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip150)" d="M2320.56 1517.37 Q2316.95 1517.37 2315.12 1520.93 Q2313.32 1524.47 2313.32 1531.6 Q2313.32 1538.71 2315.12 1542.27 Q2316.95 1545.82 2320.56 1545.82 Q2324.19 1545.82 2326 1542.27 Q2327.83 1538.71 2327.83 1531.6 Q2327.83 1524.47 2326 1520.93 Q2324.19 1517.37 2320.56 1517.37 M2320.56 1513.66 Q2326.37 1513.66 2329.43 1518.27 Q2332.5 1522.85 2332.5 1531.6 Q2332.5 1540.33 2329.43 1544.94 Q2326.37 1549.52 2320.56 1549.52 Q2314.75 1549.52 2311.67 1544.94 Q2308.62 1540.33 2308.62 1531.6 Q2308.62 1522.85 2311.67 1518.27 Q2314.75 1513.66 2320.56 1513.66 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><polyline clip-path="url(#clip152)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none" points="186.274,1445.72 2352.76,1445.72 "></polyline>
+<polyline clip-path="url(#clip152)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none" points="186.274,1106.28 2352.76,1106.28 "></polyline>
+<polyline clip-path="url(#clip152)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none" points="186.274,766.846 2352.76,766.846 "></polyline>
+<polyline clip-path="url(#clip152)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none" points="186.274,427.411 2352.76,427.411 "></polyline>
+<polyline clip-path="url(#clip152)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none" points="186.274,87.9763 2352.76,87.9763 "></polyline>
+<polyline clip-path="url(#clip150)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="186.274,1486.45 186.274,47.2441 "></polyline>
+<polyline clip-path="url(#clip150)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="186.274,1445.72 205.172,1445.72 "></polyline>
+<polyline clip-path="url(#clip150)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="186.274,1106.28 205.172,1106.28 "></polyline>
+<polyline clip-path="url(#clip150)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="186.274,766.846 205.172,766.846 "></polyline>
+<polyline clip-path="url(#clip150)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="186.274,427.411 205.172,427.411 "></polyline>
+<polyline clip-path="url(#clip150)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="186.274,87.9763 205.172,87.9763 "></polyline>
+<path clip-path="url(#clip150)" d="M62.9365 1431.51 Q59.3254 1431.51 57.4967 1435.08 Q55.6912 1438.62 55.6912 1445.75 Q55.6912 1452.86 57.4967 1456.42 Q59.3254 1459.96 62.9365 1459.96 Q66.5707 1459.96 68.3763 1456.42 Q70.205 1452.86 70.205 1445.75 Q70.205 1438.62 68.3763 1435.08 Q66.5707 1431.51 62.9365 1431.51 M62.9365 1427.81 Q68.7467 1427.81 71.8022 1432.42 Q74.8809 1437 74.8809 1445.75 Q74.8809 1454.48 71.8022 1459.08 Q68.7467 1463.67 62.9365 1463.67 Q57.1264 1463.67 54.0477 1459.08 Q50.9921 1454.48 50.9921 1445.75 Q50.9921 1437 54.0477 1432.42 Q57.1264 1427.81 62.9365 1427.81 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip150)" d="M83.0984 1457.12 L87.9827 1457.12 L87.9827 1463 L83.0984 1463 L83.0984 1457.12 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip150)" d="M108.168 1431.51 Q104.557 1431.51 102.728 1435.08 Q100.922 1438.62 100.922 1445.75 Q100.922 1452.86 102.728 1456.42 Q104.557 1459.96 108.168 1459.96 Q111.802 1459.96 113.608 1456.42 Q115.436 1452.86 115.436 1445.75 Q115.436 1438.62 113.608 1435.08 Q111.802 1431.51 108.168 1431.51 M108.168 1427.81 Q113.978 1427.81 117.033 1432.42 Q120.112 1437 120.112 1445.75 Q120.112 1454.48 117.033 1459.08 Q113.978 1463.67 108.168 1463.67 Q102.358 1463.67 99.2789 1459.08 Q96.2234 1454.48 96.2234 1445.75 Q96.2234 1437 99.2789 1432.42 Q102.358 1427.81 108.168 1427.81 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip150)" d="M138.33 1431.51 Q134.719 1431.51 132.89 1435.08 Q131.084 1438.62 131.084 1445.75 Q131.084 1452.86 132.89 1456.42 Q134.719 1459.96 138.33 1459.96 Q141.964 1459.96 143.769 1456.42 Q145.598 1452.86 145.598 1445.75 Q145.598 1438.62 143.769 1435.08 Q141.964 1431.51 138.33 1431.51 M138.33 1427.81 Q144.14 1427.81 147.195 1432.42 Q150.274 1437 150.274 1445.75 Q150.274 1454.48 147.195 1459.08 Q144.14 1463.67 138.33 1463.67 Q132.519 1463.67 129.441 1459.08 Q126.385 1454.48 126.385 1445.75 Q126.385 1437 129.441 1432.42 Q132.519 1427.81 138.33 1427.81 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip150)" d="M63.9319 1092.08 Q60.3208 1092.08 58.4921 1095.64 Q56.6865 1099.19 56.6865 1106.32 Q56.6865 1113.42 58.4921 1116.99 Q60.3208 1120.53 63.9319 1120.53 Q67.5661 1120.53 69.3717 1116.99 Q71.2004 1113.42 71.2004 1106.32 Q71.2004 1099.19 69.3717 1095.64 Q67.5661 1092.08 63.9319 1092.08 M63.9319 1088.38 Q69.742 1088.38 72.7976 1092.98 Q75.8763 1097.57 75.8763 1106.32 Q75.8763 1115.04 72.7976 1119.65 Q69.742 1124.23 63.9319 1124.23 Q58.1217 1124.23 55.043 1119.65 Q51.9875 1115.04 51.9875 1106.32 Q51.9875 1097.57 55.043 1092.98 Q58.1217 1088.38 63.9319 1088.38 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip150)" d="M84.0938 1117.68 L88.978 1117.68 L88.978 1123.56 L84.0938 1123.56 L84.0938 1117.68 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip150)" d="M103.191 1119.63 L119.51 1119.63 L119.51 1123.56 L97.566 1123.56 L97.566 1119.63 Q100.228 1116.87 104.811 1112.24 Q109.418 1107.59 110.598 1106.25 Q112.844 1103.72 113.723 1101.99 Q114.626 1100.23 114.626 1098.54 Q114.626 1095.78 112.682 1094.05 Q110.76 1092.31 107.658 1092.31 Q105.459 1092.31 103.006 1093.07 Q100.575 1093.84 97.7974 1095.39 L97.7974 1090.67 Q100.621 1089.53 103.075 1088.95 Q105.529 1088.38 107.566 1088.38 Q112.936 1088.38 116.131 1091.06 Q119.325 1093.75 119.325 1098.24 Q119.325 1100.37 118.515 1102.29 Q117.728 1104.19 115.621 1106.78 Q115.043 1107.45 111.941 1110.67 Q108.839 1113.86 103.191 1119.63 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip150)" d="M129.371 1089 L147.728 1089 L147.728 1092.94 L133.654 1092.94 L133.654 1101.41 Q134.672 1101.06 135.691 1100.9 Q136.709 1100.71 137.728 1100.71 Q143.515 1100.71 146.894 1103.89 Q150.274 1107.06 150.274 1112.47 Q150.274 1118.05 146.802 1121.15 Q143.33 1124.23 137.01 1124.23 Q134.834 1124.23 132.566 1123.86 Q130.32 1123.49 127.913 1122.75 L127.913 1118.05 Q129.996 1119.19 132.219 1119.74 Q134.441 1120.3 136.918 1120.3 Q140.922 1120.3 143.26 1118.19 Q145.598 1116.08 145.598 1112.47 Q145.598 1108.86 143.26 1106.76 Q140.922 1104.65 136.918 1104.65 Q135.043 1104.65 133.168 1105.07 Q131.316 1105.48 129.371 1106.36 L129.371 1089 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip150)" d="M62.9365 752.645 Q59.3254 752.645 57.4967 756.209 Q55.6912 759.751 55.6912 766.881 Q55.6912 773.987 57.4967 777.552 Q59.3254 781.094 62.9365 781.094 Q66.5707 781.094 68.3763 777.552 Q70.205 773.987 70.205 766.881 Q70.205 759.751 68.3763 756.209 Q66.5707 752.645 62.9365 752.645 M62.9365 748.941 Q68.7467 748.941 71.8022 753.547 Q74.8809 758.131 74.8809 766.881 Q74.8809 775.608 71.8022 780.214 Q68.7467 784.797 62.9365 784.797 Q57.1264 784.797 54.0477 780.214 Q50.9921 775.608 50.9921 766.881 Q50.9921 758.131 54.0477 753.547 Q57.1264 748.941 62.9365 748.941 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip150)" d="M83.0984 778.246 L87.9827 778.246 L87.9827 784.126 L83.0984 784.126 L83.0984 778.246 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip150)" d="M98.2141 749.566 L116.57 749.566 L116.57 753.501 L102.496 753.501 L102.496 761.973 Q103.515 761.626 104.534 761.464 Q105.552 761.279 106.571 761.279 Q112.358 761.279 115.737 764.45 Q119.117 767.621 119.117 773.038 Q119.117 778.617 115.645 781.719 Q112.172 784.797 105.853 784.797 Q103.677 784.797 101.409 784.427 Q99.1632 784.057 96.7558 783.316 L96.7558 778.617 Q98.8391 779.751 101.061 780.307 Q103.284 780.862 105.76 780.862 Q109.765 780.862 112.103 778.756 Q114.441 776.649 114.441 773.038 Q114.441 769.427 112.103 767.321 Q109.765 765.214 105.76 765.214 Q103.885 765.214 102.01 765.631 Q100.159 766.047 98.2141 766.927 L98.2141 749.566 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip150)" d="M138.33 752.645 Q134.719 752.645 132.89 756.209 Q131.084 759.751 131.084 766.881 Q131.084 773.987 132.89 777.552 Q134.719 781.094 138.33 781.094 Q141.964 781.094 143.769 777.552 Q145.598 773.987 145.598 766.881 Q145.598 759.751 143.769 756.209 Q141.964 752.645 138.33 752.645 M138.33 748.941 Q144.14 748.941 147.195 753.547 Q150.274 758.131 150.274 766.881 Q150.274 775.608 147.195 780.214 Q144.14 784.797 138.33 784.797 Q132.519 784.797 129.441 780.214 Q126.385 775.608 126.385 766.881 Q126.385 758.131 129.441 753.547 Q132.519 748.941 138.33 748.941 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip150)" d="M63.9319 413.21 Q60.3208 413.21 58.4921 416.775 Q56.6865 420.316 56.6865 427.446 Q56.6865 434.552 58.4921 438.117 Q60.3208 441.659 63.9319 441.659 Q67.5661 441.659 69.3717 438.117 Q71.2004 434.552 71.2004 427.446 Q71.2004 420.316 69.3717 416.775 Q67.5661 413.21 63.9319 413.21 M63.9319 409.506 Q69.742 409.506 72.7976 414.113 Q75.8763 418.696 75.8763 427.446 Q75.8763 436.173 72.7976 440.779 Q69.742 445.362 63.9319 445.362 Q58.1217 445.362 55.043 440.779 Q51.9875 436.173 51.9875 427.446 Q51.9875 418.696 55.043 414.113 Q58.1217 409.506 63.9319 409.506 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip150)" d="M84.0938 438.812 L88.978 438.812 L88.978 444.691 L84.0938 444.691 L84.0938 438.812 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip150)" d="M97.9826 410.131 L120.205 410.131 L120.205 412.122 L107.658 444.691 L102.774 444.691 L114.58 414.066 L97.9826 414.066 L97.9826 410.131 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip150)" d="M129.371 410.131 L147.728 410.131 L147.728 414.066 L133.654 414.066 L133.654 422.538 Q134.672 422.191 135.691 422.029 Q136.709 421.844 137.728 421.844 Q143.515 421.844 146.894 425.015 Q150.274 428.187 150.274 433.603 Q150.274 439.182 146.802 442.284 Q143.33 445.362 137.01 445.362 Q134.834 445.362 132.566 444.992 Q130.32 444.622 127.913 443.881 L127.913 439.182 Q129.996 440.316 132.219 440.872 Q134.441 441.427 136.918 441.427 Q140.922 441.427 143.26 439.321 Q145.598 437.214 145.598 433.603 Q145.598 429.992 143.26 427.886 Q140.922 425.779 136.918 425.779 Q135.043 425.779 133.168 426.196 Q131.316 426.613 129.371 427.492 L129.371 410.131 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip150)" d="M53.7467 101.321 L61.3856 101.321 L61.3856 74.9555 L53.0754 76.6222 L53.0754 72.3629 L61.3393 70.6963 L66.0152 70.6963 L66.0152 101.321 L73.654 101.321 L73.654 105.256 L53.7467 105.256 L53.7467 101.321 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip150)" d="M83.0984 99.3767 L87.9827 99.3767 L87.9827 105.256 L83.0984 105.256 L83.0984 99.3767 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip150)" d="M108.168 73.775 Q104.557 73.775 102.728 77.3398 Q100.922 80.8814 100.922 88.011 Q100.922 95.1174 102.728 98.6822 Q104.557 102.224 108.168 102.224 Q111.802 102.224 113.608 98.6822 Q115.436 95.1174 115.436 88.011 Q115.436 80.8814 113.608 77.3398 Q111.802 73.775 108.168 73.775 M108.168 70.0713 Q113.978 70.0713 117.033 74.6777 Q120.112 79.261 120.112 88.011 Q120.112 96.7378 117.033 101.344 Q113.978 105.928 108.168 105.928 Q102.358 105.928 99.2789 101.344 Q96.2234 96.7378 96.2234 88.011 Q96.2234 79.261 99.2789 74.6777 Q102.358 70.0713 108.168 70.0713 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip150)" d="M138.33 73.775 Q134.719 73.775 132.89 77.3398 Q131.084 80.8814 131.084 88.011 Q131.084 95.1174 132.89 98.6822 Q134.719 102.224 138.33 102.224 Q141.964 102.224 143.769 98.6822 Q145.598 95.1174 145.598 88.011 Q145.598 80.8814 143.769 77.3398 Q141.964 73.775 138.33 73.775 M138.33 70.0713 Q144.14 70.0713 147.195 74.6777 Q150.274 79.261 150.274 88.011 Q150.274 96.7378 147.195 101.344 Q144.14 105.928 138.33 105.928 Q132.519 105.928 129.441 101.344 Q126.385 96.7378 126.385 88.011 Q126.385 79.261 129.441 74.6777 Q132.519 70.0713 138.33 70.0713 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><circle clip-path="url(#clip152)" cx="247.59" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="261.307" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="275.024" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="288.741" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="302.458" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="316.175" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="329.892" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="343.609" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="357.326" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="371.044" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="384.761" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="398.478" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="412.195" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="425.912" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="439.629" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="453.346" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="467.063" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="480.781" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="494.498" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="508.215" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="521.932" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="535.649" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="549.366" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="563.083" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="576.8" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="590.518" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="604.235" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="617.952" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="631.669" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="645.386" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="659.103" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="672.82" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="686.537" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="700.254" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="713.972" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="727.689" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="741.406" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="755.123" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="768.84" cy="87.9763" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="782.557" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="796.274" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="809.991" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="823.709" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="837.426" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="851.143" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="864.86" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="878.577" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="892.294" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="906.011" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="919.728" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="933.446" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="947.163" cy="87.9763" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="960.88" cy="87.9763" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="974.597" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="988.314" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1002.03" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1015.75" cy="87.9763" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1029.47" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1043.18" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1056.9" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1070.62" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1084.33" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1098.05" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1111.77" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1125.49" cy="87.9763" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1139.2" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1152.92" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1166.64" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1180.35" cy="87.9763" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1194.07" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1207.79" cy="87.9763" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1221.51" cy="87.9763" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1235.22" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1248.94" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1262.66" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1276.37" cy="87.9763" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1290.09" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1303.81" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1317.52" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1331.24" cy="87.9763" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1344.96" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1358.68" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1372.39" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1386.11" cy="87.9763" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1399.83" cy="87.9763" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1413.54" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1427.26" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1440.98" cy="87.9763" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1454.7" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1468.41" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1482.13" cy="87.9763" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1495.85" cy="87.9763" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1509.56" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1523.28" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1537" cy="87.9763" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1550.72" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1564.43" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1578.15" cy="87.9763" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1591.87" cy="87.9763" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1605.58" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1619.3" cy="87.9763" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1633.02" cy="87.9763" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1646.74" cy="87.9763" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1660.45" cy="87.9763" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1674.17" cy="87.9763" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1687.89" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1701.6" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1715.32" cy="87.9763" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1729.04" cy="87.9763" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1742.76" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1756.47" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1770.19" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1783.91" cy="87.9763" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1797.62" cy="87.9763" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1811.34" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1825.06" cy="87.9763" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1838.78" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1852.49" cy="87.9763" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1866.21" cy="87.9763" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1879.93" cy="87.9763" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1893.64" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1907.36" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1921.08" cy="87.9763" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1934.8" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1948.51" cy="87.9763" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1962.23" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1975.95" cy="87.9763" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="1989.66" cy="87.9763" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="2003.38" cy="87.9763" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="2017.1" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="2030.82" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="2044.53" cy="87.9763" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="2058.25" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="2071.97" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="2085.68" cy="87.9763" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="2099.4" cy="87.9763" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="2113.12" cy="87.9763" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="2126.83" cy="87.9763" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="2140.55" cy="87.9763" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="2154.27" cy="87.9763" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="2167.99" cy="87.9763" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="2181.7" cy="87.9763" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="2195.42" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="2209.14" cy="87.9763" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="2222.85" cy="87.9763" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="2236.57" cy="87.9763" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="2250.29" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="2264.01" cy="1445.72" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="2277.72" cy="87.9763" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<circle clip-path="url(#clip152)" cx="2291.44" cy="87.9763" r="14.4" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3.2"></circle>
+<polyline clip-path="url(#clip152)" style="stroke:#e26f46; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="247.59,1440 261.307,1429.78 275.024,1426.75 288.741,1425.86 302.458,1413.94 316.175,1412.01 329.892,1401.37 343.609,1400.26 357.326,1400.18 371.044,1394.9 384.761,1392.61 398.478,1388.03 412.195,1384.9 425.912,1380.53 439.629,1378.42 453.346,1378.33 467.063,1378.03 480.781,1373.48 494.498,1371.78 508.215,1365.05 521.932,1358.14 535.649,1356.56 549.366,1354.65 563.083,1352.44 576.8,1351.46 590.518,1349.07 604.235,1338.84 617.952,1337.73 631.669,1330.43 645.386,1329.23 659.103,1326 672.82,1325.34 686.537,1318.64 700.254,1317.13 713.972,1316.59 727.689,1315.83 741.406,1312.02 755.123,1306.07 768.84,1302.27 782.557,1300.5 796.274,1287.04 809.991,1279.01 823.709,1275.39 837.426,1265.76 851.143,1260.18 864.86,1259.77 878.577,1252.05 892.294,1249.33 906.011,1249.22 919.728,1246.65 933.446,1240.33 947.163,1238.4 960.88,1230.1 974.597,1212.21 988.314,1197.63 1002.03,1180.51 1015.75,1176.47 1029.47,1170.02 1043.18,1162.13 1056.9,1152.44 1070.62,1149.75 1084.33,1127.39 1098.05,1126.3 1111.77,1125.98 1125.49,1108.93 1139.2,1106.45 1152.92,1101.09 1166.64,1099.48 1180.35,1092.3 1194.07,1081.82 1207.79,1081.52 1221.51,1077.43 1235.22,1065.9 1248.94,1063.98 1262.66,1061.59 1276.37,1061.07 1290.09,1059.49 1303.81,1053 1317.52,1035.53 1331.24,1027.7 1344.96,1024.92 1358.68,1018.41 1372.39,1013.15 1386.11,1007.23 1399.83,999.555 1413.54,992.742 1427.26,985.714 1440.98,977.371 1454.7,976.082 1468.41,973.167 1482.13,968.059 1495.85,962.204 1509.56,941.921 1523.28,933.212 1537,920.232 1550.72,919.084 1564.43,894.962 1578.15,886.035 1591.87,869.862 1605.58,861.991 1619.3,856.282 1633.02,843.388 1646.74,842.777 1660.45,839.865 1674.17,839.402 1687.89,825.957 1701.6,825.957 1715.32,824.91 1729.04,792.748 1742.76,786.892 1756.47,780.559 1770.19,766.825 1783.91,759.888 1797.62,747.773 1811.34,740.358 1825.06,739.707 1838.78,722.551 1852.49,701.242 1866.21,667.274 1879.93,646.212 1893.64,641.675 1907.36,634.161 1921.08,616.914 1934.8,611.205 1948.51,591.585 1962.23,589.645 1975.95,567.561 1989.66,566.03 2003.38,544.431 2017.1,533.535 2030.82,522.897 2044.53,482.799 2058.25,482.636 2071.97,479.436 2085.68,449.861 2099.4,447.509 2113.12,432.146 2126.83,424.354 2140.55,401.303 2154.27,392.786 2167.99,389.658 2181.7,384.215 2195.42,364.997 2209.14,356.689 2222.85,346.22 2236.57,322.03 2250.29,239.103 2264.01,229.049 2277.72,219.782 2291.44,203.205 "></polyline>
+<path clip-path="url(#clip150)" d="M258.49 250.738 L527.569 250.738 L527.569 95.2176 L258.49 95.2176  Z" fill="#ffffff" fill-rule="evenodd" fill-opacity="1"></path>
+<polyline clip-path="url(#clip150)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="258.49,250.738 527.569,250.738 527.569,95.2176 258.49,95.2176 258.49,250.738 "></polyline>
+<circle clip-path="url(#clip150)" cx="354.778" cy="147.058" r="20.48" fill="#009af9" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="4.55111"></circle>
+<path clip-path="url(#clip150)" d="M464.909 166.745 Q463.103 171.375 461.39 172.787 Q459.677 174.199 456.807 174.199 L453.404 174.199 L453.404 170.634 L455.904 170.634 Q457.663 170.634 458.636 169.8 Q459.608 168.967 460.788 165.865 L461.552 163.921 L451.066 138.412 L455.58 138.412 L463.682 158.689 L471.784 138.412 L476.298 138.412 L464.909 166.745 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip150)" d="M483.589 160.402 L491.228 160.402 L491.228 134.037 L482.918 135.703 L482.918 131.444 L491.182 129.778 L495.858 129.778 L495.858 160.402 L503.497 160.402 L503.497 164.338 L483.589 164.338 L483.589 160.402 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><polyline clip-path="url(#clip150)" style="stroke:#e26f46; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="282.562,198.898 426.994,198.898 "></polyline>
+<path clip-path="url(#clip150)" d="M464.909 218.585 Q463.103 223.215 461.39 224.627 Q459.677 226.039 456.807 226.039 L453.404 226.039 L453.404 222.474 L455.904 222.474 Q457.663 222.474 458.636 221.64 Q459.608 220.807 460.788 217.705 L461.552 215.761 L451.066 190.252 L455.58 190.252 L463.682 210.529 L471.784 190.252 L476.298 190.252 L464.909 218.585 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip150)" d="M486.807 212.242 L503.126 212.242 L503.126 216.178 L481.182 216.178 L481.182 212.242 Q483.844 209.488 488.427 204.858 Q493.034 200.205 494.214 198.863 Q496.46 196.34 497.339 194.604 Q498.242 192.844 498.242 191.155 Q498.242 188.4 496.297 186.664 Q494.376 184.928 491.274 184.928 Q489.075 184.928 486.622 185.692 Q484.191 186.455 481.413 188.006 L481.413 183.284 Q484.237 182.15 486.691 181.571 Q489.145 180.993 491.182 180.993 Q496.552 180.993 499.747 183.678 Q502.941 186.363 502.941 190.854 Q502.941 192.983 502.131 194.905 Q501.344 196.803 499.237 199.395 Q498.659 200.067 495.557 203.284 Q492.455 206.479 486.807 212.242 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path></svg>
+</div>
+</div>
+</section>
+<section id="references" class="slide level2">
+<h2>References</h2>
+<blockquote>
+<p>Boyd, S., Kim, S.J., Vandenberghe, L. and Hassibi, A., 2007. <a href="https://doi.org/10.1007/s11081-007-9001-7">A tutorial on geometric programming</a>. Optimization and Engineering, 8(1), p.67.</p>
+</blockquote>
+<blockquote>
+<p>Glineur, F., 2000. <a href="http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.31.9181">An extended conic formulation for geometric optimization</a>. Foundation of Computing and Decision Sciences, 25(3), p.161.</p>
+</blockquote>
+<blockquote>
+<p>Chandrasekaran, V. and Shah, P., 2017. <a href="https://doi.org/10.1007/s10107-016-0998-2">Relative entropy optimization and its applications</a>. Mathematical Programming, 161(1-2), pp.1-32.</p>
+</blockquote>
+<div class="footer footer-default">
+
+</div>
+</section>
+    </div>
+  </div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="gp_files/libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="gp_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="gp_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="gp_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="gp_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="gp_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="gp_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="gp_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="gp_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="gp_files/libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'smaller': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: false,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const isCodeAnnotation = (el) => {
+        for (const clz of el.classList) {
+          if (clz.startsWith('code-annotation-')) {                     
+            return true;
+          }
+        }
+        return false;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button', {
+        text: function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+      });
+      clipboard.on('success', function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copied!");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
+        setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      });
+      function tippyHover(el, contentFn) {
+        const config = {
+          allowHTML: true,
+          content: contentFn,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start'
+        };
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          return note.innerHTML;
+        });
+      }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
+          });
+        }
+      }
+    });
+    </script>
+    
+
+</body></html>
